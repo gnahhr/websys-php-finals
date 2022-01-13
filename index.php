@@ -103,8 +103,6 @@
     </main>
 
     <!-- FOOTER -->
-    <footer>
-        <p>&copy; 2022</p>
-    </footer>
+    <?php include "./pages/footer.php"; ?>
 </body>
 </html>
