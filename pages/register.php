@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +32,7 @@
     
     <main>
         <div class="login-form">
-            <form action="#" method="post">
+            <form action="../connect/registerRouter.php" method="POST">
                 <label for="firstName">First Name</label>
                 <input type="text" name="firstName" id="firstName" required> <br>
                 <label for="lastName">Last Name</label>
