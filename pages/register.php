@@ -32,6 +32,7 @@
     
     <main>
         <div class="login-form">
+            <!-- "../connect/registerRouter.php" -->
             <form action="../connect/registerRouter.php" method="POST">
                 <label for="firstName">First Name</label>
                 <input type="text" name="firstName" id="firstName" required> <br>
