@@ -126,6 +126,72 @@ main .login-form form input[type=submit]:hover {
     background-color: rgba(143, 68, 38, .80);
 }
 
+/* Table-order-history */
+
+.table-rec {
+    background-color: var(--dark-box);
+    text-align: center;
+    padding: 1rem;
+    border-radius: 25px;
+    margin: 1rem 2rem;
+    width: 70vw;
+    min-height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.table-rec table {
+    border-collapse: collapse;
+}
+
+.table-rec table thead tr th:nth-child(n):not(:last-child),
+.table-rec table tbody tr td:nth-child(n):not(:last-child){
+    border-right: 1px solid var(--text-color);
+}
+
+.table-rec table thead tr th,
+.table-rec table tbody tr td {
+    text-align: center;
+    padding: .75rem;
+    margin: .75rem;
+}
+
+/* table cart */
+
+
+.table-rec-cart {
+    background-color: #FFDAB9;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 25px;
+    margin: 1rem 2rem;
+    width: 70vw;
+    min-height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.table-rec-cart table {
+    border-collapse: collapse;
+}
+
+.table-rec-cart table thead tr th:nth-child(n):not(:last-child),
+.table-rec-cart table tbody tr td:nth-child(n):not(:last-child){
+    border-right: 1px solid var(--main-color);
+}
+
+.table-rec-cart table thead tr th,
+.table-rec-cart table tbody tr td {
+    color:#556052;
+    text-align: center;
+    padding: .75rem;
+    margin: .75rem;
+}
+
+
+
 /* FOOTER */
 
 footer {
