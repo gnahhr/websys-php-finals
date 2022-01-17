@@ -83,22 +83,29 @@
                 <h1>INVENTORY - PRODUCT NAME</h1>
                 <h2>ADD PRODUCT</h2>
                 
-                <form action="#" method="post">
+                <form action="../connect/inputProduct.php" method="POST" enctype="multipart/form-data">
                     <div class="inv-pic">
                         <div class="inv-content">
-                            <img src="../img/users/blank.png" alt="user pic">
-                            <button class="change-btn btn">Add Photo</button>
+                            <label for="productImage">Product Image</label> <br>
+                            <input type="file" name="productImage" id="productImage"> <br>
                         </div>
                     </div>
 
                     <label for="prodName">Product Name</label> <br>
                     <input type="text" name="prodName" id="prodName"> <br>
+
                     <label for="prodPrice">Price</label> <br>
                     <input type="number" name="prodPrice" id="prodPrice"><br>
+
+                    <label for="prodQuantity">Quantity</label> <br>
+                    <input type="number" name="prodQuantity" id="prodQuantity"><br>
+
                     <label for="prodSupplier">Supplier</label> <br>
                     <input type="text" name="prodSupplier" id="prodSupplier"> <br>
+
                     <label for="prodDesc">Description</label> <br>
                     <input type="text" name="prodDesc" id="prodDesc"><br>
+
                     <label for="prodExpDate">Expiry Date</label> <br>
                     <input type="date" name="prodExpDate" id="prodExpDate"><br>
                     
