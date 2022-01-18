@@ -20,11 +20,14 @@
         $validPassword = password_verify($password, $user['password']);
         if ($validPassword){
             // $_SESSION['userInfo'] = $username;
-            $statement = $pdo -> prepare ("INSERT INTO userLog (id, username, dateTime) VALUES(:id, :username,:logDateAndTime)");
-            $statement -> bindValue(':id', $user['id']);
-            $statement -> bindValue(':username', $user['username']);
-            $statement -> bindValue(':logDateAndTime',$dateTime);
-            $statement -> execute();
+            $statement = $pdo -> prepare ("INSERT INTO userLog (id, username, action, dateTime) VALUES(:id, :username,:action ,:logDateAndTime)");
+            $statement -> execute([
+                'id' => $user['id'],
+                'username' => $user['username'],
+                'action' => 'Logged in',
+                'logDateAndTime' => $dateTime
+            ]);
+            
             header("Location: ../index.php");
             exit();
         }
