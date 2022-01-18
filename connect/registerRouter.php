@@ -27,14 +27,22 @@
 
     else{
         $statement = $pdo -> prepare ("INSERT INTO userInfo (firstName,lastName, email, address, username, password) VALUES(:firstName, :lastName, :email, :address, :username, :password)");
+        $statement->execute([
+            'firstName' => $firstName,
+            'lastName' => $lastName,
+            'email' => $email,
+            'address' => $address,
+            'username' => $username,
+            'password' => $password
+        ]);
 
-        $statement -> bindValue(':firstName', $firstName);
-        $statement -> bindValue(':lastName', $lastName);
-        $statement -> bindValue(':email', $email);
-        $statement -> bindValue(':address', $address);
-        $statement -> bindValue(':username', $username);
-        $statement -> bindValue(':password', $password);
-        $statement ->execute();
+        // $statement -> bindValue(':firstName', $firstName);
+        // $statement -> bindValue(':lastName', $lastName);
+        // $statement -> bindValue(':email', $email);
+        // $statement -> bindValue(':address', $address);
+        // $statement -> bindValue(':username', $username);
+        // $statement -> bindValue(':password', $password);
+        // $statement ->execute();
 
         header("Location: ../pages/login.php");
         exit();
