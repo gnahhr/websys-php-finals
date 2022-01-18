@@ -1,0 +1,162 @@
+:root {
+    --main-color: #556052;
+    --text-color: #FFDAB9;
+    --dark-box: rgba(0,0,0,0.25);
+}
+
+* {
+    color: var(--text-color);
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: var(--main-color);
+}
+
+/* Header */
+header {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background: var(--dark-box);
+    background-size: cover;
+}
+
+header .logo-name {
+    display: flex;
+    margin-left: 1rem;
+}
+
+header .logo-name .logo-head img{
+    height: 4rem;
+}
+
+header .logo-name .name-head {
+    flex-direction: column;
+    align-self: center;
+    font-size: 1.5rem;
+}
+
+header nav {
+    margin-left: auto;
+    margin-right: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+header nav ul{
+    display: flex;
+    list-style-type: none;
+}
+
+header nav ul li{
+    padding: .5rem;
+}
+header nav ul li a{
+    font-family: 'Roboto', sans-serif;
+    text-decoration: none;
+}
+
+/* FORM */
+
+main {
+    margin-top: 2rem;
+}
+
+main .shop-main form {
+    padding: 1rem;
+}
+
+main .shop-main form input[type=text] {
+    background-color: #556052;
+    color:#FFDAB9;
+    padding: .30rem .15rem;
+    border: none;
+    margin-top: .15rem;
+    border-radius: 25px;
+    text-indent: 1.5rem;
+    height: 1.25rem;
+    font-size: 1.1rem;
+}
+
+main .shop-main form input[type=submit] {
+    background-color: #556052;
+    color:#FFDAB9;
+    padding: .25rem .50rem;
+    border: none;
+    border-radius: 25px;
+    margin: auto;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+main form input[type=submit]:hover {
+    background-color: rgba(65, 78, 61, 1);
+}
+
+main .shop-main {
+    background-color: var(--text-color);
+    color: var(--main-color);
+    width: 100%;
+    min-height: 70vh;
+    padding-bottom: 5vh;
+}
+
+main .shop-main .shop-items {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+main .shop-main .shop-items .shop-item {
+    background-color: rgba(184, 158, 136, 0.19);
+    padding: 2rem;
+    border-radius: 25px;
+    margin: 2rem;
+}
+
+main .shop-main .shop-items .shop-item img{
+    width: 150px;
+    border-radius: 25px;
+}
+
+main .shop-main .shop-items .shop-item h2 {
+    color: var(--main-color);
+    text-align: center;
+}
+
+main .shop-main .shop-items .shop-item button {
+    color: var(--text-color);
+    background-color: var(--main-color);
+    padding: .5rem 1rem;
+    display: block;
+    margin: .5rem auto 0;
+    border: none;
+    border-radius: 25px;
+}
+
+main .shop-main .pages {
+    position: absolute;
+    right: 0;
+    margin-right: 2rem;
+}
+
+main .shop-main .pages a{
+    color: var(--text-color);
+    background-color: var(--main-color);
+    padding: .5rem;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+/* FOOTER */
+
+footer {
+    display: flex;
+    justify-content: center;
+    margin: .5rem;
+}
