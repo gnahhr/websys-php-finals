@@ -123,7 +123,7 @@
                                     <td><?php echo $products['supplierName'] ?></td>
                                     <td><?php echo $products['expirationDate'] ?></td>
                                     <td>
-                                        <a href="#" class="view-btn btn">Edit</a>
+                                        <a href="admin-dashboard-edit-prod.php?id=<?php echo $products['productID']?>" class="view-btn btn">Edit</a>
                                         <a href="#" class="delete-btn btn">Delete</a>
                                     </td>
                                 </tr>

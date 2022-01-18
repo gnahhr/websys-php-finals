@@ -1,3 +1,19 @@
+<?php
+    $pdo = new PDO('mysql:host=localhost;port=3306;dbname=escafe','root','');
+    $pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $id = $_GET['id'];
+
+    $statement = $pdo -> prepare ("SELECT * FROM products WHERE productID = :id ");
+    $statement ->bindValue(':id',$id);
+    $statement -> execute();
+    $product = $statement -> fetchAll(PDO::FETCH_ASSOC);
+    echo '<pre>';
+    var_dump($product);
+    echo '</pre>';
+    echo $product["productName"];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -83,16 +99,16 @@
                 <h1>INVENTORY - PRODUCT NAME</h1>
                 <h2>EDIT</h2>
                 
-                <form action="#" method="post">
+                <form action="../connect/editProduct.php" method="POST" enctype="multipart/form-data">
                     <div class="inv-pic">
                         <div class="inv-content">
-                            <img src="../img/users/blank.png" alt="user pic">
+                            <img src=<?php echo '../connect/'.$product['productImage']?> alt="user pic">
                             <button class="change-btn btn">Change Photo</button>
                         </div>
                     </div>
 
                     <label for="prodName">Product Name</label> <br>
-                    <input type="text" name="prodName" id="prodName"> <br>
+                    <input type="text" name="prodName" value="asd" id="prodName" ><br>
                     <label for="prodPrice">Price</label> <br>
                     <input type="number" name="prodPrice" id="prodPrice"><br>
                     <label for="prodSupplier">Supplier</label> <br>
