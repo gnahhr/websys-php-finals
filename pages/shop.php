@@ -15,20 +15,7 @@
 <body>
 
     <!-- HEADER -->
-    <header>
-        <div class="logo-name">
-            <div class="logo-head"><img src="../img/index/logo.png" alt="logo"></div>
-            <div class="name-head"><p>escafé<p></div>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#">Login</a></li>
-                <li><a href="#">Register</a></li>
-                <li><a href="#">Shop</a></li>
-                <li><a href="#">Cart</a></li>
-            </ul>
-        </nav>
-    </header>
+    <?php include 'user-header.php' ?>
     
     <main>
         <div class="shop-main">

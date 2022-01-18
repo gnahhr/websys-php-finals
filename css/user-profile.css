@@ -126,6 +126,25 @@ main .login-form form input[type=submit]:hover {
     background-color: rgba(143, 68, 38, .80);
 }
 
+
+main .login-form form .user-img{
+    margin: 1.25rem 1rem;
+}
+
+main .login-form form .user-img .user-img-content{
+    display: flex;
+}
+
+main .login-form form .user-img .user-img-content img{
+    width: 150px;
+    border-radius: 100%;
+}
+
+main .login-form form .user-img .user-img-content input[type=file]{
+    align-self: center;
+}
+
+
 /* Table-order-history */
 
 .table-rec {
@@ -201,11 +220,36 @@ main .login-form form input[type=submit]:hover {
     border-radius: 10px;
     background-color:#265BC0 ;
     color: var(--text-color);
+    border: none;
 }
 
-/* cart button*/
+.btn, input[type=file] {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    color:var(--text-color);
+    border-radius: 5px;
+    padding: .25rem .5rem;
+    margin: 0 .25rem;
+    border: none;
+}
 
+.edit-btn {
+    background-color: rgba(38, 91, 192, 0.69);
+}
 
+.delete-btn {
+    background-color: rgba(192, 38, 38, 0.69);
+}
+
+.view-btn {
+    background-color: rgba(42, 108, 32, 0.7);
+}
+
+.change-btn {
+    background-color: rgba(143, 68, 38, 0.5);
+}
 
 /* FOOTER */
 

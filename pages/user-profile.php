@@ -14,24 +14,20 @@
 </head>
 <body>
 
-    <!-- HEADER -->
-    <header>
-        <div class="logo-name">
-            <div class="logo-head"><img src="../img/index/logo.png" alt="logo"></div>
-            <div class="name-head"><p>escafé<p></div>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#">Login</a></li>
-                <li><a href="#">Register</a></li>
-            </ul>
-        </nav>
-    </header>
-
+    <?php include 'user-header.php' ?>
     
     <main>
         <div class="login-form">
         <form action="../connect/editUser.php" method="post">
+
+            <div class="user-img">
+                <div class="user-img-content">
+                    <img src="../img/users/blank.png" alt="Profile Pic">
+                    <input type="file" name="userPic" id="userPic" class="btn change-btn"> <br>
+                </div>
+            </div>
+
+
             <label for="firstName">First name:</label><br>
             <input type="text" id="firstName" name="firstName"><br>
 
@@ -51,8 +47,8 @@
             <input type="text" id="password" name="password"><br>
 
             <div class="user-btn1">       
-            <button type="submit"class="user-btn">edit</button>
-            <!-- <button class="user-btn">save</button> -->
+            <button type="submit"class="user-btn">Edit</button>
+            
             </div>       
 
         </form>
