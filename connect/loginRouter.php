@@ -25,7 +25,7 @@
             $statement -> bindValue(':username', $user['username']);
             $statement -> bindValue(':logDateAndTime',$dateTime);
             $statement -> execute();
-            header("Location: ../index.php");
+            header("Location: ../user-profile.php");
             exit();
         }
         

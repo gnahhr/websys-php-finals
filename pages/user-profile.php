@@ -31,12 +31,12 @@
     
     <main>
         <div class="login-form">
-        <form>
-            <label for="fname">First name:</label><br>
-            <input type="text" id="fname" name="fname"><br>
+        <form action="../connect/editUser.php" method="post">
+            <label for="firstName">First name:</label><br>
+            <input type="text" id="firstName" name="firstName"><br>
 
-            <label for="lname">Last name:</label><br>
-            <input type="text" id="lname" name="lname"><br>
+            <label for="lastName">Last name:</label><br>
+            <input type="text" id="lastName" name="lastName"><br>
 
             <label for="email">E-mail:</label><br>
             <input type="text" id="email" name="email"><br>
@@ -51,8 +51,8 @@
             <input type="text" id="password" name="password"><br>
 
             <div class="user-btn1">       
-            <button class="user-btn">edit</button>
-            <button class="user-btn">save</button>
+            <button type="submit"class="user-btn">edit</button>
+            <!-- <button class="user-btn">save</button> -->
             </div>       
 
         </form>

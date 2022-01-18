@@ -1,3 +1,15 @@
+<?php
+    $pdo = new PDO('mysql:host=localhost;port=3306;dbname=escafe','root','');
+    $pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $statement = $pdo -> prepare ("SELECT * FROM products ORDER BY expirationDate DESC");
+    $statement -> execute();
+    $products = $statement -> fetchAll(PDO::FETCH_ASSOC);
+    // echo '<pre>';
+    // var_dump($productsHolder);
+    // echo '</pre>';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,33 +100,33 @@
                         <thead>
                             <tr>
                                 <th>PRODUCT ID</th>
-                                <th>BARCODE</th>
-                                <th>NAME</th>
+                                <th>PRODUCT IMAGE</th>
+                                <th>PRODUCT NAME</th>
+                                <th>PRODUCT PRICE</th>
                                 <th>QTY</th>
-                                <th>EXPIRY DATE</th>
                                 <th>SUPPLIER</th>
-                                <th>ACTIONS</th>
+                                <th>PRODUCT DESCRIPTION</th>
+                                <th>EXPIRY DATE</th>
                             </tr>
                         </thead>
                         <tbody>
-                           <tr>
-                               <td>42069</td>
-                               <td>BARCODE</td>
-                               <td>Arabica</td>
-                               <td>69</td>
-                               <td>January 23, 2022</td>
-                               <td>FloraTech</td>
-                               <td><a href="#" class="view-btn btn">View</a><a href="#" class="delete-btn btn">Delete</a></td>
-                           </tr>
-                           <tr>
-                               <td>42070</td>
-                               <td>BARCODE</td>
-                               <td>Robusca</td>
-                               <td>42</td>
-                               <td>January 13, 2022</td>
-                               <td>CoBeans Inc.</td>
-                               <td><a href="#" class="view-btn btn">View</a><a href="#" class="delete-btn btn">Delete</a></td>
-                           </tr>
+
+                            <?php foreach($products as $products){ ?>
+                                <tr>
+                                    <th><?php echo $products['productID'] ?></th>
+                                    <td>
+                                        <img src=<?php echo '../connect/'.$products['productImage']?> alt not>
+                                    </td>
+                                    <td><?php echo $products['productName'] ?></td>
+                                    <td><?php echo $products['productPrice'] ?></td>
+                                    <td><?php echo $products['quantity'] ?></td>
+                                    <td><?php echo $products['supplierName'] ?></td>
+                                    <td><?php echo $products['productDescription'] ?></td>
+                                    <td><?php echo $products['expirationDate'] ?></td>
+                                    <td><a href="#" class="view-btn btn">View</a><a href="#" class="delete-btn btn">Delete</a></td>
+                                </tr>
+                            <?php }?>
+                            
                         </tbody>
                     </table>
                 </div>
