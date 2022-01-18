@@ -115,7 +115,7 @@
                                 <tr>
                                     <th><?php echo $products['productID'] ?></th>
                                     <td>
-                                        <img src=<?php echo '../connect/'.$products['productImage']?> alt not>
+                                        <img src=<?php echo '../connect/'.$products['productImage']?>>
                                     </td>
                                     <td><?php echo $products['productName'] ?></td>
                                     <td><?php echo $products['productPrice'] ?></td>
