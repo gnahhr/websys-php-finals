@@ -18,31 +18,34 @@
     <?php include 'user-header.php' ?>
     
     <main>
-    <h1> Shopping Cart </h1>
-
-        <div class="table-rec-cart">
-        <table>
-            <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Total Price</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                </tr>
-            </tbody>
-        </table>
-        </div>
-
-        <div class="cart-btn1">
-            <button class="cart-btn"> Check out </button>
+        <h1> Shopping Cart </h1>
+        <div class="shopping-cart">
+            <div class="table-rec-cart">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Total Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1232131321</td>
+                        <td>asdasdad</td>
+                        <td>3zxc</td>
+                        <td>asdasd</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+            
+            <div class="cart-checkout-btn">
+                <p>Total Item & Price: <span>0 (0 Items)</span></p>
+                <button class="cart-btn"> Check out </button>
+            </div>
+            
         </div>
     </main>
 
