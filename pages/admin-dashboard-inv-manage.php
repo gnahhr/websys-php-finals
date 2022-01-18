@@ -105,8 +105,8 @@
                                 <th>PRODUCT PRICE</th>
                                 <th>QTY</th>
                                 <th>SUPPLIER</th>
-                                <th>PRODUCT DESCRIPTION</th>
                                 <th>EXPIRY DATE</th>
+                                <th>ACTIONS</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -121,7 +121,6 @@
                                     <td><?php echo $products['productPrice'] ?></td>
                                     <td><?php echo $products['quantity'] ?></td>
                                     <td><?php echo $products['supplierName'] ?></td>
-                                    <td><?php echo $products['productDescription'] ?></td>
                                     <td><?php echo $products['expirationDate'] ?></td>
                                     <td>
                                         <a href="#" class="view-btn btn">Edit</a>
