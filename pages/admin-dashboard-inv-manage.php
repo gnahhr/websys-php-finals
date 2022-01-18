@@ -105,8 +105,8 @@
                                 <th>PRODUCT PRICE</th>
                                 <th>QTY</th>
                                 <th>SUPPLIER</th>
-                                <th>PRODUCT DESCRIPTION</th>
                                 <th>EXPIRY DATE</th>
+                                <th>ACTIONS</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -115,15 +115,14 @@
                                 <tr>
                                     <th><?php echo $products['productID'] ?></th>
                                     <td>
-                                        <img src=<?php echo '../connect/'.$products['productImage']?> alt not>
+                                        <img class="prod-image" src=<?php echo '../connect/'.$products['productImage']?> alt not>
                                     </td>
                                     <td><?php echo $products['productName'] ?></td>
                                     <td><?php echo $products['productPrice'] ?></td>
                                     <td><?php echo $products['quantity'] ?></td>
                                     <td><?php echo $products['supplierName'] ?></td>
-                                    <td><?php echo $products['productDescription'] ?></td>
                                     <td><?php echo $products['expirationDate'] ?></td>
-                                    <td><a href="#" class="view-btn btn">View</a><a href="#" class="delete-btn btn">Delete</a></td>
+                                    <td><a href="#" class="edit-btn btn">Edit</a><a href="#" class="delete-btn btn">Delete</a></td>
                                 </tr>
                             <?php }?>
                             

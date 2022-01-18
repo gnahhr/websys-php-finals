@@ -341,6 +341,10 @@ main .main-wrapper .dashboard-sub form input[type=date] {
     margin: 1rem 30vw;
 }
 
+.prod-image {
+    width: 150px;
+}
+
 /* FOOTER */
 
 footer {
