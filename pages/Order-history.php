@@ -31,6 +31,8 @@
     
     <main>
 
+    <h1> Ordering History </h1>
+
         <div class="table-rec">
         <table>
             <thead>
@@ -41,7 +43,7 @@
                 <th>Total Price </th>
                 <th>Status </th>
                 <th>Actions </th>
-            </tr>
+                </tr>
             </thead>
             <tbody>
             <tr>

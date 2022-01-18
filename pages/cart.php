@@ -31,6 +31,8 @@
     
     <main>
 
+    <h1> Shopping Cart </h1>
+
         <div class="table-rec-cart">
         <table>
             <thead>
@@ -50,6 +52,10 @@
                 </tr>
             </tbody>
         </table>
+        </div>
+
+        <div class="cart-btn1">
+            <button class="cart-btn"> Check out </button>
         </div>
     </main>
 

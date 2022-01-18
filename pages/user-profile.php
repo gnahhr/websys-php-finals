@@ -49,6 +49,12 @@
 
             <label for="password">Password:</label><br>
             <input type="text" id="password" name="password"><br>
+
+            <div class="user-btn1">       
+            <button class="user-btn">edit</button>
+            <button class="user-btn">save</button>
+            </div>       
+
         </form>
         </div>
     </main>

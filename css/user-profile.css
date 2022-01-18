@@ -190,6 +190,21 @@ main .login-form form input[type=submit]:hover {
     margin: .75rem;
 }
 
+/* user button */
+
+.user-btn1 {
+    text-align: center;
+}
+.user-btn {
+    font-size: 20px;
+    padding:10px;
+    border-radius: 10px;
+    background-color:#265BC0 ;
+    color: var(--text-color);
+}
+
+/* cart button*/
+
 
 
 /* FOOTER */
