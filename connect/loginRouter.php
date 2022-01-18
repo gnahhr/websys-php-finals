@@ -1,39 +1,55 @@
 <?php
-    $pdo = new PDO('mysql:host=localhost;port=3306;dbname=escafe','root','');
-    $pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    session_start();
+    require_once './config.php';
     
     $username = $_POST['username'];
     $password = $_POST['password'];
     $dateTime = date('Y-m-d H:i:s');
 
-    $statement = $pdo -> prepare("SELECT username,password,id FROM userInfo WHERE username = :checker");
-    $statement -> bindValue(':checker',$username);
-    $statement -> execute();
-
-    $user = $statement -> fetch(PDO::FETCH_ASSOC);
-
-    if ($user === false) 
-        header("Location: ../pages/login.php");
+    $statement = $pdo -> prepare("SELECT * FROM userInfo WHERE username = :checker");
     
+    $statement -> execute([
+        'checker'=> $username,
+    ]);
 
-    else {
-        $validPassword = password_verify($password, $user['password']);
-        if ($validPassword){
-            // $_SESSION['userInfo'] = $username;
-            $statement = $pdo -> prepare ("INSERT INTO userLog (id, username, dateTime) VALUES(:id, :username,:logDateAndTime)");
-            $statement -> bindValue(':id', $user['id']);
-            $statement -> bindValue(':username', $user['username']);
-            $statement -> bindValue(':logDateAndTime',$dateTime);
-            $statement -> execute();
-            header("Location: ../user-profile.php");
-            exit();
-        }
-        
-        else{
+    $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+    if ($user === false) {
+        $_SESSION['message'] = "User not found.";
         header("Location: ../pages/login.php");
-        exit();
+    } 
+    else {
+        // Get data for SESSION
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['password'] = $user['password'];
+        $_SESSION['firstName'] = $user['firstName'];
+        $_SESSION['lastName'] = $user['lastName'];
+        $_SESSION['email'] = $user['email'];
+        $_SESSION['address'] = $user['address'];
+        $_SESSION['access'] = $user['accessLevel'];
+        $_SESSION['image'] = $user['profilePic'];
+
+        $validPassword = password_verify($password, $user['password']);
+        
+        if ($validPassword){
+            if($user['accessLevel'] === "admin") {
+                header("Location: ../pages/admin-dashboard.php");
+            }
+            else if ($user['accessLevel'] === 'user'){
+                header("Location: ../pages/index.php");
+            }
+
+            $statement = $pdo -> prepare ("INSERT INTO userLog (id, username, action, dateTime) VALUES(:id, :username, :action,:logDateAndTime)");
+            $statement -> execute([
+                'id' => $user['id'],
+                'username' => $user['username'],
+                'action' => 'Logged in',
+                'logDateAndTime' => $dateTime,
+            ]);
+        }
+        else{
+            $_SESSION['message'] = "Wrong password.";
+            header("Location: ../pages/login.php");
         }
     }
-
-
 ?>

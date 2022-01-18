@@ -1,3 +1,11 @@
+<?php
+    session_start();
+
+    if (isset($_SESSION['access']) && ($_SESSION['access'] === 'user')){
+        header("Location: ../pages/index.php");
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -4,12 +4,35 @@
         <div class="logo-head"><img src="../img/index/logo.png" alt="logo"></div>
         <div class="name-head"><p>escafé<p></div>
     </div>
+
+
     <nav>
-        <ul>
-            <li><a href="./login.php">Login</a></li>
-            <li><a href="./register.php">Register</a></li>
-            <li><a href="./shop.php">Shop</a></li>
-            <li><a href="./cart.php">Cart</a></li>
-        </ul>
+        <?php if (isset($_SESSION['username'])): ?>
+            <ul>
+                <li><a href="./index.php">Home</a></li>
+                <li><a href="./shop.php">Shop</a></li>
+                <li><a href="./cart.php">Cart</a></li>
+            </ul>
+
+            <div class="user">  
+                <div class="user-text">
+                    <p>Hi, <?php echo $_SESSION['username'] ?> </p>
+                    <a href="../connect/logout.php">Logout</a>
+                </div>
+                <div class="user-image">
+                    <img src="../img/users/blank.png" alt="user profile">
+                </div>
+            </div>
+        
+
+        <?php else: ?>
+            <ul>
+                <li><a href="./index.php">Home</a></li>
+                <li><a href="./login.php">Login</a></li>
+                <li><a href="./register.php">Register</a></li>
+                <li><a href="./shop.php">Shop</a></li>
+                <li><a href="./cart.php">Cart</a></li>
+            </ul>
+        <?php endif; ?>
     </nav>
 </header>
