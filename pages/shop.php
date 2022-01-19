@@ -1,5 +1,14 @@
 <?php
     include '../connect/session.php';
+    require_once '../connect/config.php';
+
+    $statement = $pdo -> prepare("SELECT * FROM products");
+    $statement ->execute();
+    $products = $statement -> fetchAll(PDO::FETCH_ASSOC);
+
+    // echo '<pre>';
+    // echo var_dump($products);
+    // echo '</pre>';
 ?>
 
 <!DOCTYPE html>
@@ -29,23 +38,23 @@
             </form>
             <div class="shop-items">
                 <div class="shop-item">
-                    <img src="../img/users/blank.png" alt="item1">
-                    <h2>Item 1</h2>
+                    <img src=<?php echo '../connect/'.$products[0]['productImage'] ?> alt="item1">
+                    <h2><?php echo $products[0]['productName'] ?></h2>
                     <button type="submit">Add to Cart</button>
                 </div>
                 <div class="shop-item">
-                    <img src="../img/users/blank.png" alt="item1">
-                    <h2>Item 2</h2>
+                    <img src=<?php echo '../connect/'.$products[1]['productImage'] ?> alt="item1">
+                    <h2><?php echo $products[1]['productName'] ?></h2>
                     <button type="submit">Add to Cart</button>
                 </div>
                 <div class="shop-item">
-                    <img src="../img/users/blank.png" alt="item1">
-                    <h2>Item 3</h2>
+                    <img src=<?php echo '../connect/'.$products[2]['productImage'] ?> alt="item1">
+                    <h2><?php echo $products[2]['productName'] ?></h2>
                     <button type="submit">Add to Cart</button>
                 </div>
                 <div class="shop-item">
-                    <img src="../img/users/blank.png" alt="item1">
-                    <h2>Item 4</h2>
+                    <img src=<?php echo '../connect/'.$products[3]['productImage'] ?> alt="item1">
+                    <h2><?php echo $products[3]['productName'] ?></h2>
                     <button type="submit">Add to Cart</button>
                 </div>
             </div>
