@@ -28,7 +28,7 @@
         $productImage = $_FILES['productImage'] ?? null;
         $imagePath='';
         if($productImage){
-            $imagePath = 'images/'.randomString(8).'/'.$productName.'.png';
+            $imagePath = 'images/'.$productImage['name'];
             mkdir(dirname($imagePath));
     
             move_uploaded_file($productImage['tmp_name'],$imagePath);
@@ -45,16 +45,19 @@
         $statement -> bindValue(':expirationDate', $expirationDate);
         $statement ->execute();
         }
+
+        header("Location: ../pages\admin-dashboard-inv-manage.php");
+        exit();
         
-        function randomString($n){
-            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            $str = '';
+    //     function randomString($n){
+    //         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    //         $str = '';
     
-            for($i = 0; $i < $n; $i++){
-                $index = rand(0, strlen($characters)-1);
-                $str .= $characters[$index];
-            }
+    //         for($i = 0; $i < $n; $i++){
+    //             $index = rand(0, strlen($characters)-1);
+    //             $str .= $characters[$index];
+    //         }
     
-            return $str;
-    }
+    //         return $str;
+    // }
 ?>

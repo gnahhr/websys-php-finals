@@ -1,3 +1,85 @@
 <?php
-    echo "edit this fucking product";
+    $pdo = new PDO('mysql:host=localhost;port=3306;dbname=escafe','root','');
+    $pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $id = $_GET['id'];
+    $statement = $pdo -> prepare ("SELECT * FROM products WHERE productID = :id");
+    $statement -> bindValue(':id', $id);
+    $statement -> execute();
+    $product = $statement -> fetchAll(PDO::FETCH_ASSOC);
+
+    $productName = $_POST['prodName'];
+    $productPrice = $_POST['prodPrice'];
+    $quantity = $_POST['prodQuantity'];
+    $supplierName = $_POST['prodSupplier'];
+    $productDescription	= $_POST['prodDesc'];
+    $expirationDate	= $_POST['prodExpDate'];
+
+    $checkerProdName= $pdo -> prepare("SELECT productName FROM products WHERE NOT productName = :checker");
+    $checkerProdName -> bindValue(':checker',$productName);
+    $checkerProdName -> execute();
+
+    echo '<pre>';
+    echo var_dump($product);
+    echo '</pre>';
+
+    if($checkerProdName -> rowCount() > 0 ) {
+        echo "Existing";
+        header('Location: ../pages\admin-dashboard-edit-prod.php?id='.$id);
+        exit();
+    }
+
+    else{
+ 
+        if(!is_dir('images')){
+            mkdir('images');
+        }
+    
+        $productImage = $_FILES['productImage'] ?? null; 
+        $imagePath=$product[0]['productImage'];
+
+      
+        if($productImage && $productImage['tmp_name']){
+            if($product['productImage']){
+                unlink($product['productImage']);
+            }
+            $imagePath = 'images/'.$productImage['name'];
+            mkdir(dirname($imagePath));
+    
+            move_uploaded_file($productImage['tmp_name'],$imagePath);
+        }
+    
+        $statement = $pdo -> prepare ("UPDATE products SET productImage = :productImage,
+         productName = :productName, 
+         productPrice = :productPrice, 
+         quantity = :quantity ,
+         supplierName = :supplierName, 
+         productDescription = :productDescription, 
+         expirationDate = :expirationDate WHERE productID = :id");
+    
+        $statement -> bindValue(':productImage', $imagePath);
+        $statement -> bindValue(':productName', $productName);
+        $statement -> bindValue(':productPrice', $productPrice);
+        $statement -> bindValue(':quantity', $quantity);
+        $statement -> bindValue(':supplierName', $supplierName);
+        $statement -> bindValue(':productDescription', $productDescription);
+        $statement -> bindValue(':expirationDate', $expirationDate);
+        $statement -> bindValue(':id', $id);
+        $statement ->execute();
+
+        header("Location: ../pages/admin-dashboard-inv-manage.php");
+        exit();
+        }
+        
+    //     function randomString($n){
+    //         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    //         $str = '';
+    
+    //         for($i = 0; $i < $n; $i++){
+    //             $index = rand(0, strlen($characters)-1);
+    //             $str .= $characters[$index];
+    //         }
+    
+    //         return $str;
+    // }
 ?>

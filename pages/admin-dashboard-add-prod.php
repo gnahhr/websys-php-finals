@@ -87,27 +87,27 @@
                     <div class="inv-pic">
                         <div class="inv-content">
                             <label for="productImage">Product Image</label> <br>
-                            <input type="file" name="productImage" id="productImage"> <br>
+                            <input type="file" name="productImage" id="productImage" required> <br>
                         </div>
                     </div>
 
                     <label for="prodName">Product Name</label> <br>
-                    <input type="text" name="prodName" id="prodName"> <br>
+                    <input type="text" name="prodName" id="prodName" required> <br>
 
                     <label for="prodPrice">Price</label> <br>
-                    <input type="number" name="prodPrice" id="prodPrice"><br>
+                    <input type="number" name="prodPrice" id="prodPrice" required><br>
 
                     <label for="prodQuantity">Quantity</label> <br>
-                    <input type="number" name="prodQuantity" id="prodQuantity"><br>
+                    <input type="number" name="prodQuantity" id="prodQuantity" required><br>
 
                     <label for="prodSupplier">Supplier</label> <br>
-                    <input type="text" name="prodSupplier" id="prodSupplier"> <br>
+                    <input type="text" name="prodSupplier" id="prodSupplier" required>  <br>
 
                     <label for="prodDesc">Description</label> <br>
-                    <input type="text" name="prodDesc" id="prodDesc"><br>
+                    <input type="text" name="prodDesc" id="prodDesc" required><br>
 
                     <label for="prodExpDate">Expiry Date</label> <br>
-                    <input type="date" name="prodExpDate" id="prodExpDate"><br>
+                    <input type="date" name="prodExpDate" id="prodExpDate" required><br>
                     
                     <div class="action-buttons">
                         <input type="submit" value="Confirm" class="view-btn btn">

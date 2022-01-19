@@ -1,5 +1,6 @@
 <?php
     include '../connect/session.php';
+    echo 'pra'
 ?>
 
 <!DOCTYPE html>
