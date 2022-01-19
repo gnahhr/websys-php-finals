@@ -8,10 +8,10 @@
     $statement ->bindValue(':id',$id);
     $statement -> execute();
     $product = $statement -> fetchAll(PDO::FETCH_ASSOC);
-    echo '<pre>';
-    var_dump($product);
-    echo '</pre>';
-    echo $product["productName"];
+    // echo '<pre>';
+    // var_dump($product);
+    // echo '</pre>';
+    // echo $product[0]["productName"];
 ?>
 
 <!DOCTYPE html>
@@ -102,21 +102,23 @@
                 <form action="../connect/editProduct.php" method="POST" enctype="multipart/form-data">
                     <div class="inv-pic">
                         <div class="inv-content">
-                            <img src=<?php echo '../connect/'.$product['productImage']?> alt="user pic">
+                            <img src=<?php echo '../connect/'.$product[0]['productImage']?> alt="user pic">
                             <button class="change-btn btn">Change Photo</button>
                         </div>
                     </div>
 
                     <label for="prodName">Product Name</label> <br>
-                    <input type="text" name="prodName" value="asd" id="prodName" ><br>
+                    <input type="text" name="prodName" value=<?php echo $product[0]['productName']?> id="prodName" ><br>
                     <label for="prodPrice">Price</label> <br>
-                    <input type="number" name="prodPrice" id="prodPrice"><br>
+                    <input type="number" name="prodPrice" value=<?php echo $product[0]['productPrice']?> id="prodPrice"><br>
+                    <label for="quantity">Qty</label> <br>
+                    <input type="number" name="quantity" value=<?php echo $product[0]['quantity']?> id="quantity"><br>
                     <label for="prodSupplier">Supplier</label> <br>
-                    <input type="text" name="prodSupplier" id="prodSupplier"> <br>
+                    <input type="text" name="prodSupplier" value=<?php echo $product[0]['supplierName']?> id="prodSupplier"> <br>
                     <label for="prodDesc">Description</label> <br>
-                    <input type="text" name="prodDesc" id="prodDesc"><br>
+                    <input type="text" name="prodDesc" value=<?php echo $product[0]['productDescription']?> id="prodDesc"><br>
                     <label for="prodExpDate">Expiry Date</label> <br>
-                    <input type="date" name="prodExpDate" id="prodExpDate"><br>
+                    <input type="date" name="prodExpDate" value=<?php echo $product[0]['expirationDate']?> id="prodExpDate"><br>
                     
                     <div class="action-buttons">
                         <input type="submit" value="Confirm" class="view-btn btn">
