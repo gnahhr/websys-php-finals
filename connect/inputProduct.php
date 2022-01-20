@@ -1,7 +1,7 @@
 <?php
     $pdo = new PDO('mysql:host=localhost;port=3306;dbname=escafe','root','');
     $pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+    //refer nalang sa mga comments ko sa editProduct, basta ang importang, We love Shen Xiaoting <3.
     $productName = $_POST['prodName'];
     $productPrice = $_POST['prodPrice'];
     $quantity = $_POST['prodQuantity'];

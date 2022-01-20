@@ -2,6 +2,7 @@
     $pdo = new PDO('mysql:host=localhost;port=3306;dbname=escafe','root','');
     $pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+    //get the id of current prodcut passed by the edi button
     $id = $_GET['id'];
     $statement = $pdo -> prepare ("SELECT * FROM products WHERE productID = :id");
     $statement -> bindValue(':id', $id);
@@ -15,14 +16,17 @@
     $productDescription	= $_POST['prodDesc'];
     $expirationDate	= $_POST['prodExpDate'];
 
+    //select all product name excepet the current product name
     $checkerProdName= $pdo -> prepare("SELECT productName FROM products WHERE NOT productName = :checker");
     $checkerProdName -> bindValue(':checker',$productName);
     $checkerProdName -> execute();
 
-    echo '<pre>';
-    echo var_dump($product);
-    echo '</pre>';
+    // echo '<pre>';
+    // echo var_dump($product);
+    // echo '</pre>';
 
+    //refresh current page kapag yung bagong product name may kapareho, nyeta naubusan ako ng ingles HHAHAHA
+    //Shen Xioating <3
     if($checkerProdName -> rowCount() > 0 ) {
         echo "Existing";
         header('Location: ../pages\admin-dashboard-edit-prod.php?id='.$id);
@@ -30,22 +34,25 @@
     }
 
     else{
- 
+
+        //create images folder if the folder does not exist. Bongga diba?
         if(!is_dir('images')){
             mkdir('images');
         }
-    
+
+        //basically if the current pic is not replaced, value that is passed from the form is null so $imagepath will retain the current $productImage value. Follow Shen Xiaoting for a better life.
         $productImage = $_FILES['productImage'] ?? null; 
         $imagePath=$product[0]['productImage'];
 
-      
+        //this function will only run if there is a new image.
         if($productImage && $productImage['tmp_name']){
+            //delete previous image
             if($product['productImage']){
                 unlink($product['productImage']);
             }
+            //input shit.
             $imagePath = 'images/'.$productImage['name'];
             mkdir(dirname($imagePath));
-    
             move_uploaded_file($productImage['tmp_name'],$imagePath);
         }
     
@@ -70,6 +77,7 @@
         header("Location: ../pages/admin-dashboard-inv-manage.php");
         exit();
         }
+        //I love Shen Xiaoting, sana ikaw din.
         
     //     function randomString($n){
     //         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
