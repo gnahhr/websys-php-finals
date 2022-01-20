@@ -1,6 +1,11 @@
 <?php
-    include '../connect/session.php';
-    echo 'pra'
+    include '../connect/config.php';
+
+    $id = $_GET['id'];
+    $statement = $pdo -> prepare ("SELECT * FROM userInfo WHERE id = :id");
+    $statement -> bindValue(':id', $id);
+    $statement -> execute();
+    $user = $statement -> fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -34,22 +39,23 @@
 
 
             <label for="firstName">First name:</label><br>
-            <input type="text" id="firstName" name="firstName"><br>
+            <input type="text" id="firstName" name="firstName" value=<?php echo $user[0]['firstName']?> required><br>
 
             <label for="lastName">Last name:</label><br>
-            <input type="text" id="lastName" name="lastName"><br>
+            <input type="text" id="lastName" name="lastName" value=<?php echo $user[0]['lastName']?>  required><br>
 
             <label for="email">E-mail:</label><br>
-            <input type="text" id="email" name="email"><br>
+            <input type="text" id="email" name="email" value=<?php echo $user[0]['email']?> required><br>
 
             <label for="address">Address:</label><br>
-            <input type="text" id="address" name="address"><br>
+            <input type="text" id="address" name="address" value=<?php echo $user[0]['address']?>  required><br>
 
             <label for="username">Username:</label><br>
-            <input type="text" id="username" name="username"><br>
+            <input type="text" id="username" name="username" value=<?php echo $user[0]['username']?> required><br>
 
-            <label for="password">Password:</label><br>
-            <input type="text" id="password" name="password"><br>
+            <!-- pending... change this to change password button -->
+            <!-- <label for="password">Password:</label><br>
+            <input type="text" id="password" name="password" value= required><br> -->
 
             <div class="user-btn1">       
             <button type="submit"class="user-btn">Edit</button>

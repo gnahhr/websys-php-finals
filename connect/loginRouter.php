@@ -35,8 +35,10 @@
             if($user['accessLevel'] === "admin") {
                 header("Location: ../pages/admin-dashboard.php");
             }
+
+            // pass on user id for indentification on user profile
             else if ($user['accessLevel'] === 'user'){
-                header("Location: ../pages/index.php");
+                header('Location: ../pages/index.php?id='.$user['id']);
             }
 
             $statement = $pdo -> prepare ("INSERT INTO userLog (id, username, action, dateTime) VALUES(:id, :username, :action,:logDateAndTime)");
