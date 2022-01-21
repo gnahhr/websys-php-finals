@@ -1,6 +1,5 @@
 <?php
-    $pdo = new PDO('mysql:host=localhost;port=3306;dbname=escafe','root','');
-    $pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    require_once './config.php';
 
     //get the id of current prodcut passed by the edi button
     $id = $_GET['id'];
@@ -17,10 +16,11 @@
     $expirationDate	= $_POST['prodExpDate'];
 
     //select all product name excepet the current product name
-    $checkerProdName= $pdo -> prepare("SELECT productName FROM products WHERE productName = :checker AND productID != :id");
-    $checkerProdName -> bindValue(':checker',$productName);
-    $checkerProdName -> bindValue(':id',$id);
-    $checkerProdName -> execute();
+    $checkerProdName = $pdo -> prepare("SELECT productName FROM products WHERE productName = :checker AND productID != :id");
+    $checkerProdName -> execute([
+        ':checker' => $productName,
+        ':id' => $id
+    ]);
 
   //refresh current page kapag yung bagong product name may kapareho, nyeta naubusan ako ng ingles HHAHAHA
     //Shen Xioating <3
@@ -60,16 +60,17 @@
          supplierName = :supplierName, 
          productDescription = :productDescription, 
          expirationDate = :expirationDate WHERE productID = :id");
-    
-        // $statement -> bindValue(':productImage', $imagePath);
-        // $statement -> bindValue(':productName', $productName);
-        // $statement -> bindValue(':productPrice', $productPrice);
-        // $statement -> bindValue(':quantity', $quantity);
-        // $statement -> bindValue(':supplierName', $supplierName);
-        // $statement -> bindValue(':productDescription', $productDescription);
-        // $statement -> bindValue(':expirationDate', $expirationDate);
-        // $statement -> bindValue(':id', $id);
-        // $statement ->execute();
+
+        $statement -> execute([
+            ':productImage' => $imagePath,
+            ':productName' => $productName,
+            ':productPrice' => $productPrice,
+            ':quantity' => $quantity,
+            ':supplierName' => $supplierName,
+            ':productDescription' => $productDescription,
+            ':expirationDate' => $expirationDate,
+            ':id' => $id
+        ]);
 
         header("Location: ../pages/admin-dashboard-inv-manage.php");
         exit();

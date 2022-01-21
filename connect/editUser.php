@@ -1,7 +1,6 @@
 <?php
     session_start();
-    $pdo = new PDO('mysql:host=localhost;port=3306;dbname=escafe','root','');
-    $pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    require_once './config.php';
     
     $id = $_GET['id'];
     $statement = $pdo -> prepare ("SELECT * FROM userInfo WHERE id = :id");
@@ -18,21 +17,23 @@
     
 
     $checkerEmail= $pdo -> prepare("SELECT email FROM userInfo WHERE email = :email AND id != :id");
-    $checkerEmail -> bindValue(':email',$email);
-    $checkerEmail -> bindValue(':id',$id);
-    $checkerEmail -> execute();
+    $checkerEmail -> execute([
+        ':email' => $email,
+        ':id' => $id
+    ]);
 
     $checkerUsername= $pdo -> prepare("SELECT username FROM userInfo WHERE username = :username AND id != :id");
-    $checkerUsername -> bindValue(':username',$username);
-    $checkerUsername -> bindValue(':id',$id);
-    $checkerUsername -> execute();
+    $checkerUsername -> execute([
+        ':username' => $username,
+        ':id' => $id
+    ]);
 
     if($checkerEmail -> rowCount() > 0 || $checkerUsername -> rowCount() > 0) {
         header('Location: ../pages/user-profile.php');
         exit();
     }
 
-    else{
+    else {
         //create images folder if the folder does not exist. Bongga diba?
         if(!is_dir('images')){
             mkdir('images');
@@ -55,32 +56,29 @@
         }
     
         $statement = $pdo -> prepare ("UPDATE userInfo SET profilePic = :profilePic,
-         firstName = :firstName, 
-         lastName = :lastName, 
-         email = :email ,
-         address = :address, 
-         username = :username WHERE id = :id");
-    
-        $statement -> bindValue(':profilePic', $imagePath);
-        $statement -> bindValue(':firstName', $firstName);
-        $statement -> bindValue(':lastName', $lastName);
-        $statement -> bindValue(':email', $email);
-        $statement -> bindValue(':address', $address);
-        $statement -> bindValue(':username', $username);
-        $statement -> bindValue(':id', $id);
-        $statement ->execute();
+        firstName = :firstName, 
+        lastName = :lastName, 
+        email = :email ,
+        address = :address, 
+        username = :username WHERE id = :id");
+        
+        $statement -> execute([
+            ':profilePic' => $imagePath,
+            ':firstName' => $firstName,
+            ':lastName' => $lastName,
+            ':email' => $email,
+            ':address' => $address,
+            ':username' => $username,
+            ':id' => $id
+        ]);
 
         $_SESSION['profilePic'] = $imagePath;
         $_SESSION['username'] = $username;
-        //$_SESSION['password'] = $user['password'];
         $_SESSION['firstName'] = $firstName;
         $_SESSION['lastName'] = $lastName;
         $_SESSION['email'] = $email;
         $_SESSION['address'] = $address;
-        //$_SESSION['access'] = $user['accessLevel'];
-        var_dump($_SESSION['lastName']);
+
         header("Location: ../pages/user-profile.php");
-        // exit();
-        }
-    
+    }
 ?>

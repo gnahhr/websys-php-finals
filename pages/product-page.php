@@ -10,37 +10,6 @@
     // echo '<pre>';
     // echo var_dump($products[0]['productImage']);
     // echo '</pre>';
-
-    if (isset($_POST['quantity'])){
-        if(isset($_SESSION['orders']) && !checkDupes($product['productID'], $_SESSION['orders'])){
-            array_push($_SESSION['orders'], array(
-                'productID' => $product['productID'],
-                'productName' => $product['productName'],
-                'quantity' => $_POST['quantity'],
-                'totalPrice' => $_POST['quantity'] * $product['productPrice']
-            ));
-        } else {
-            foreach ($_SESSION['orders'] as $sessProduct) {
-                if ($sessProduct['productID'] == $_GET['productID']) {
-                    $totalQty = $sessProduct['quantity'] + $_POST['quantity'];
-                    $sessProduct['quantity'] = $totalQty;
-                }
-            }
-            $sessProduct['quantity'] = $totalQty;
-            Header("Location: ./shop.php");
-        }
-    }
-
-    function checkDupes($productID, $prodArray) {
-        foreach ($prodArray as $product) {
-            if ($product['productID'] === $productID) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
 ?>
 
 <!DOCTYPE html>
@@ -79,7 +48,7 @@
                     <p><?php echo $product['quantity']?></p>
                 </div>
                 
-                <form method="POST" action="product-page.php?productID=<?php echo $product['productID']?>">
+                <form action="../connect/addToCart.php?productID=<?php echo $_GET['productID']?>" method="POST" enctype="multipart/form-data">
                     <label for="quantity">Quantity: </label>
                     <input type="number" name="quantity" id="quantity" min="1" max="<?php echo $product['quantity']?>" required> <br>
                     <input type="submit" value="Add to Cart">

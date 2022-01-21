@@ -8,6 +8,7 @@
     $lastName = $_SESSION['lastName'];
     $email = $_SESSION['email'];
     $address = $_SESSION['address'];
+    $username = $_SESSION['username'];
 
     $statement = $pdo -> prepare ("SELECT * FROM userInfo WHERE username = :username");
     $statement -> execute([':username' => $username]);

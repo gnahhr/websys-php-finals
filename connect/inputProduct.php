@@ -1,6 +1,6 @@
 <?php
-    $pdo = new PDO('mysql:host=localhost;port=3306;dbname=escafe','root','');
-    $pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    require_once './config.php';
+
     //refer nalang sa mga comments ko sa editProduct, basta ang importang, We love Shen Xiaoting <3.
     $productName = $_POST['prodName'];
     $productPrice = $_POST['prodPrice'];
@@ -10,8 +10,9 @@
     $expirationDate	= $_POST['prodExpDate'];
 
     $checkerProdName = $pdo -> prepare("SELECT productName FROM products WHERE productName = :checker");
-    $checkerProdName -> bindValue(':checker',$productName);
-    $checkerProdName -> execute();
+    $checkerProdName -> execute([
+        ':checker' => $productName
+    ]);
 
     if($checkerProdName -> rowCount() > 0 ) {
         echo "Existing";
@@ -35,15 +36,16 @@
         }
     
         $statement = $pdo -> prepare ("INSERT INTO products (productImage,productName, productPrice, quantity, supplierName, productDescription, expirationDate) VALUES(:productImage, :productName, :productPrice, :quantity, :supplierName, :productDescription, :expirationDate)");
-    
-        $statement -> bindValue(':productImage', $imagePath);
-        $statement -> bindValue(':productName', $productName);
-        $statement -> bindValue(':productPrice', $productPrice);
-        $statement -> bindValue(':quantity', $quantity);
-        $statement -> bindValue(':supplierName', $supplierName);
-        $statement -> bindValue(':productDescription', $productDescription);
-        $statement -> bindValue(':expirationDate', $expirationDate);
-        $statement ->execute();
+        
+        $statement -> execute([
+            ':productImage' => $imagePath,
+            ':productName' => $productName,
+            ':productPrice' => $productPrice,
+            ':quantity' => $quantity,
+            ':supplierName' => $supplierName,
+            ':productDescription' => $productDescription,
+            ':expirationDate' => $expirationDate
+        ]);
         }
 
         header("Location: ../pages\admin-dashboard-inv-manage.php");

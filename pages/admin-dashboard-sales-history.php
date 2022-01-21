@@ -1,4 +1,11 @@
-<?php include '../connect/session.php'; ?>
+<?php
+    include '../connect/session.php';
+    require_once '../connect/config.php';
+
+    $statement = $pdo -> prepare ("SELECT * FROM saleshistory");
+    $statement -> execute();
+    $sales = $statement -> fetchAll();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +19,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poor+Story&family=Roboto:wght@300&family=Satisfy&display=swap" rel="stylesheet">
     
-    <title>Escafe - Admin Dashboard</title>
+    <title>Escafe - Sales History</title>
 </head>
 <body>
 
@@ -57,25 +64,22 @@
                                 <th>ORDER ID</th>
                                 <th>USERNAME</th>
                                 <th>PRODUCTS</th>
+                                <th>QUANTITY</th>
                                 <th>TOTAL PRICE</th>
                                 <th>DATE</th>
                             </tr>
                         </thead>
                         <tbody>
-                           <tr>
-                               <td>42069</td>
-                               <td>BARCODE</td>
-                               <td>Arabica</td>
-                               <td>69</td>
-                               <td>January 23, 2022</td>
-                           </tr>
-                           <tr>
-                               <td>42070</td>
-                               <td>BARCODE</td>
-                               <td>Robusca</td>
-                               <td>42</td>
-                               <td>January 13, 2022</td>
-                           </tr>
+                            <?php foreach ($sales as $sale): ?>
+                                <tr>
+                                    <td><?php echo $sale['productID'] ?></td>
+                                    <td><?php echo $sale['buyerUsername'] ?></td>
+                                    <td><?php echo $sale['productName'] ?></td>
+                                    <td><?php echo $sale['quantity'] ?></td>
+                                    <td><?php echo $sale['totalPrice'] ?></td>
+                                    <td><?php echo $sale['dateBought'] ?></td>
+                                </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>

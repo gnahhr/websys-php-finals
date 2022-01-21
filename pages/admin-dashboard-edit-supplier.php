@@ -1,4 +1,14 @@
-<?php include '../connect/session.php'; ?>
+<?php
+
+    include '../connect/session.php';
+    require_once '../connect/config.php';
+
+    $statement = $pdo -> prepare("SELECT * FROM supplier WHERE supplierID = :id");
+    $statement -> execute([
+        ':id' => $_GET['supplierID']
+    ]);
+    $supplier = $statement -> fetch(0);
+?>
 
 
 <!DOCTYPE html>
@@ -13,7 +23,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poor+Story&family=Roboto:wght@300&family=Satisfy&display=swap" rel="stylesheet">
     
-    <title>Escafe - Admin Dashboard</title>
+    <title>Escafe - Edit Supplier</title>
 </head>
 <body>
 
@@ -37,20 +47,20 @@
                 <h1>INVENTORY</h1>
                 <h2>EDIT SUPPLIER</h2>
                 
-                <form action="#" method="post">
+                <form action="../connect/editSupplier.php?supplierID=<?php echo $supplier['supplierID'] ?>" method="post">
 
-                    <label for="supName">Supplier Name</label> <br>
-                    <input type="text" name="supName" id="supName"> <br>
-                    <label for="itemSup">Item Supplied</label> <br>
-                    <input type="text" name="itemSup" id="itemSup"><br>
-                    <label for="supLoc">Location</label> <br>
-                    <input type="text" name="supLoc" id="supLoc"> <br>
-                    <label for="conNum">Contact Number</label> <br>
-                    <input type="text" name="conNum" id="conNum"><br>
+                    <label for="supplierName">Supplier Name</label> <br>
+                    <input type="text" name="supplierName" id="supplierName" value="<?php echo $supplier['supplierName']; ?>"> <br>
+                    <label for="itemSupplied">Item Supplied</label> <br>
+                    <input type="text" name="itemSupplied" id="itemSupplied" value="<?php echo $supplier['itemSupplied']; ?>"><br>
+                    <label for="location">Location</label> <br>
+                    <input type="text" name="location" id="location" value="<?php echo $supplier['location']; ?>"> <br>
+                    <label for="contactNumber">Contact Number</label> <br>
+                    <input type="text" name="contactNumber" id="contactNumber" value="<?php echo $supplier['contactNumber']; ?>"><br>
                     
                     <div class="action-buttons">
                         <input type="submit" value="Confirm" class="view-btn btn">
-                        <a href="#" class="delete-btn btn">Cancel</a>
+                        <a href="./admin-dashboard-inv-supplier.php" class="delete-btn btn">Cancel</a>
                     </div>
                 </form>
                 

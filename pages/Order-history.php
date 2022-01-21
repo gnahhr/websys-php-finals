@@ -2,9 +2,9 @@
     include '../connect/session.php';
     require_once '../connect/config.php';
 
-    $statement = $pdo -> prepare("SELECT * FROM salesHistory WHERE buyerUsername = :username");
+    $statement = $pdo -> prepare("SELECT * FROM salesHistory WHERE buyerID = :id ORDER BY dateBought DESC");
     $statement -> execute([
-        'username' => $_SESSION['username']
+        'id' => $_SESSION['id']
     ]);
 
     $orders = $statement -> fetchAll();
@@ -25,10 +25,8 @@
     <title>Escafe - Order History</title>
 </head>
 <body>
-
     <!-- HEADER -->
     <?php include 'user-header.php' ?>
-
     
     <main>
 
@@ -55,14 +53,15 @@
                         <td><?php echo $order['totalPrice'] ?></td>
                         <td><?php echo $order['status'] ?></td>
                         <td>
-
                         <?php if ($order['status'] === 'Shipping'): ?>    
-                            <a href="#" class="btn view-btn">Complete</a><a href="#" class="btn delete-btn">Return</a></td>
+                            <a href="../connect/userUpdateOrder.php?action=Complete&orderID=<?php echo $order['orderID']; ?>" class="btn view-btn">Complete</a>
+                            <a href="../connect/userUpdateOrder.php?action=Returning&orderID=<?php echo $order['orderID']; ?>" class="btn delete-btn">Return</a>
                         <?php elseif ($order['status'] === 'Complete'): ?>
-                            <a href="#" class="btn view-btn">Order Again</a></td>
-                        <?php elseif ($order['status'] === 'Returned'): ?>
-                            <a href="#" class="btn view-btn" disabled>Wait for action</a></td>
+                            <a href="./shop.php" class="btn view-btn">Order Again</a>
+                        <?php elseif ($order['status'] === 'Returned' || $order['status'] === 'Returning'): ?>
+                            <a href="#" class="btn view-btn" disabled>Wait for action</a>
                         <?php endif; ?>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

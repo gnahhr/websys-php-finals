@@ -37,7 +37,7 @@
             'password' => $password,
             'userLevel' => "user"
         ]);
-
+        
         // $statement -> bindValue(':firstName', $firstName);
         // $statement -> bindValue(':lastName', $lastName);
         // $statement -> bindValue(':email', $email);

@@ -250,9 +250,9 @@ main .main-wrapper .dashboard-sub form input[type=date] {
     background-color: var(--link-dark-box);
     border: none;
     border-radius: 5px;
-    padding: .25rem .5rem;
+    padding: .5rem .5rem;
     margin: .25rem 0;
-    width: 100%;
+    width: 80%;
 }
 
 main .main-wrapper .dashboard-sub form input[type=date] {

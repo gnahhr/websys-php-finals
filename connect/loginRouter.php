@@ -9,7 +9,7 @@
     $statement = $pdo -> prepare("SELECT * FROM userInfo WHERE username = :checker");
     
     $statement -> execute([
-        'checker'=> $username,
+        'checker' => $username,
     ]);
 
     $user = $statement->fetch(PDO::FETCH_ASSOC);
@@ -29,8 +29,7 @@
         $_SESSION['email'] = $user['email'];
         $_SESSION['address'] = $user['address'];
         $_SESSION['access'] = $user['accessLevel'];
-        $_SESSION['image'] = $user['profilePic'];
-
+        
         $validPassword = password_verify($password, $user['password']);
         
         if ($validPassword){
@@ -40,7 +39,7 @@
 
             // pass on user id for indentification on user profile
             else if ($user['accessLevel'] === 'user'){
-                header('Location: ../pages/user-profile.php');
+                header('Location: ../pages/shop.php');
             }
 
             $statement = $pdo -> prepare ("INSERT INTO userLog (id, username, action, dateTime) VALUES(:id, :username, :action,:logDateAndTime)");

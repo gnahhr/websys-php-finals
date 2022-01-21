@@ -28,8 +28,8 @@
     <!-- MAIN CONTENTS -->
     <main>
         <div class="main-wrapper">
-        <div class="user">  
-            <div class="user-text">
+            <div class="user">  
+                <div class="user-text">
                     <p>Hi, <?php echo $_SESSION['username']?></p>
                     <a href="../connect/logout.php">Logout</a>
                 </div>
@@ -130,68 +130,24 @@
                 <!-- ORDERS -->
                 <h2>ORDERS</h2>
                 <div class="main-orders">
-                    <div class="preparing">
-                        <h3>PREPARING</h3>
-                        <div class="table-round">
-                            <table>
-                                <tr>
-                                    <th>Item</th>
-                                    <th>Qty</th>
-                                    <th>Action</th>
-                                </tr>
-                                <tr>
-                                    <td>Something 1</td>
-                                    <td>4</td>
-                                    <td><button>Done</button><button>Cancel</button></td>
-                                </tr>
-                                <tr>
-                                    <td>Something 2</td>
-                                    <td>20</td>
-                                    <td><button>Done</button><button>Cancel</button></td>
-                                </tr>
-                                <tr>
-                                    <td>Something 3</td>
-                                    <td>60</td>
-                                    <td><button>Done</button><button>Cancel</button></td>
-                                </tr>
-                                <tr>
-                                    <td>Something 4</td>
-                                    <td>9</td>
-                                    <td><button>Done</button><button>Cancel</button></td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
     
                     <div class="on-return">
-                        <h3>ON-RETURN</h3>
+                        <h3>REQUEST ON RETURNS</h3>
                         <div class="table-round">
                             <table>
-                                <tr>
-                                    <th>Item</th>
-                                    <th>Reason</th>
-                                    <th>ETA</th>
-                                </tr>
-                                <tr>
-                                    <td>Something 1</td>
-                                    <td>Ewan</td>
-                                    <td>January 20, 2022</td>
-                                </tr>
-                                <tr>
-                                    <td>Something 2</td>
-                                    <td>Ewan</td>
-                                    <td>January 20, 2022</td>
-                                </tr>
-                                <tr>
-                                    <td>Something 3</td>
-                                    <td>Ewan</td>
-                                    <td>January 20, 2022</td>
-                                </tr>
-                                <tr>
-                                    <td>Something 4</td>
-                                    <td>Ewan</td>
-                                    <td>January 20, 2022</td>
-                                </tr>
+                                <thead>
+                                    <tr>
+                                        <th>Item</th>
+                                        <th>Reason</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- FOREACH LOOP OF SALES HIST WITH RETURNING STATUS -->
+                                    <tr>
+
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                     </div>

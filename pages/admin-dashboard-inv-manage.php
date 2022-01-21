@@ -22,7 +22,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poor+Story&family=Roboto:wght@300&family=Satisfy&display=swap" rel="stylesheet">
     
-    <title>Escafe - Admin Dashboard</title>
+    <title>Escafe - Inventory Management</title>
 </head>
 <body>
 
@@ -75,7 +75,7 @@
                                     <td><?php echo $products['expirationDate'] ?></td>
                                     <td>
                                         <a href="admin-dashboard-edit-prod.php?id=<?php echo $products['productID']?>" class="edit-btn btn">Edit</a>
-                                        <a href="#" class="delete-btn btn">Delete</a>
+                                        <a href="../connect/deleteProduct.php?id=<?php echo $products['productID']?>" class="delete-btn btn">Delete</a>
                                     </td>
                                 </tr>
                             <?php }?>
@@ -84,7 +84,7 @@
                     </table>
                 </div>
 
-                <a href="#" class="view-btn btn add-prod">Add Product</a>
+                <a href="./admin-dashboard-add-prod.php" class="view-btn btn add-prod">Add Product</a>
             </div>
         </div>
     </main>

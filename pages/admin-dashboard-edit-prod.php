@@ -26,12 +26,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poor+Story&family=Roboto:wght@300&family=Satisfy&display=swap" rel="stylesheet">
     
-    <title>Escafe - Admin Dashboard</title>
+    <title>Escafe - Edit Product</title>
 </head>
 <body>
 
     <!-- HEADER -->
-    <?php include 'header.php'; ?>
+    <?php include 'admin-header.php'; ?>
 
     <!-- MAIN CONTENTS -->
     <main>
@@ -71,14 +71,14 @@
                     <input type="text" name="prodSupplier" value=<?php echo $product[0]['supplierName']?> id="prodSupplier" required> <br>
 
                     <label for="prodDesc">Description</label> <br>
-                    <input type="text" name="prodDesc" value=<?php echo $product[0]['productDescription']?> id="prodDesc" required><br>
+                    <input type="text" name="prodDesc" value="<?php echo $product[0]['productDescription']?>" id="prodDesc" required><br>
                     
                     <label for="prodExpDate">Expiry Date</label> <br>
                     <input type="date" name="prodExpDate" value=<?php echo $product[0]['expirationDate']?> id="prodExpDate" required><br>
                     
                     <div class="action-buttons">
                         <input type="submit" value="Confirm" class="view-btn btn">
-                        <a href="#" class="delete-btn btn">Cancel</a>
+                        <a href="./admin-dashboard-inv-manage.php" class="delete-btn btn">Cancel</a>
                     </div>
                 </form>
                 

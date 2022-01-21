@@ -1,5 +1,8 @@
 <?php
     include '../connect/session.php';
+    $totalItems = 0;
+    $totalPrice = 0;
+    $initialArray = 0;
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +17,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poor+Story&family=Roboto:wght@300&family=Satisfy&display=swap" rel="stylesheet">
     
-    <title>Escafe - Login</title>
+    <title>Escafe - <?php echo $_SESSION['username']; ?> 's Cart</title>
 </head>
 <body>
 
@@ -25,6 +28,10 @@
         <h1> Shopping Cart </h1>
         <div class="shopping-cart">
             <div class="table-rec-cart">
+            <?php if (!isset($_SESSION['orders']) || (count($_SESSION['orders']) === 0)): ?>
+                <h2>There's nothing in cart!</h2>
+                <a href="#">Shop Now!</a>
+            <?php else: ?>
             <table>
                 <thead>
                     <tr>
@@ -35,21 +42,28 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1232131321</td>
-                        <td>asdasdad</td>
-                        <td>3zxc</td>
-                        <td>asdasd</td>
-                    </tr>
+                    <?php foreach ($_SESSION['orders'] as $order): ?>
+                        <tr>
+                            <td><?php echo $order['productName']; ?></td>
+                            <td><?php echo $order['quantity']; ?></td>
+                            <td><?php echo $order['totalPrice']; ?></td>
+                            <td><a href="../connect/deleteCartItem.php?deleteId=<?php echo $initialArray ?>" class="btn delete-btn">Delete</a></td>
+                            <?php
+                                $totalPrice += $order['totalPrice'];
+                                $totalItems += $order['quantity'];
+                            ?>
+                        </tr>
+                        <?php $initialArray++; ?>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
+            <?php endif; ?>
             </div>
             
             <div class="cart-checkout-btn">
-                <p>Total Item & Price: <span>0 (0 Items)</span></p>
-                <button class="cart-btn"> Check out </button>
+                <p>Total Item & Price: Php. <span><?php echo $totalPrice. " (" . $totalItems . " Items)";?></span></p>
+                <a href="../connect/checkoutCart.php" class="cart-btn"> Check out </a>
             </div>
-            
         </div>
     </main>
 
