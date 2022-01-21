@@ -9,7 +9,7 @@
     $productDescription	= $_POST['prodDesc'];
     $expirationDate	= $_POST['prodExpDate'];
 
-    $checkerProdName= $pdo -> prepare("SELECT productName FROM products WHERE productName = :checker");
+    $checkerProdName = $pdo -> prepare("SELECT productName FROM products WHERE productName = :checker");
     $checkerProdName -> bindValue(':checker',$productName);
     $checkerProdName -> execute();
 

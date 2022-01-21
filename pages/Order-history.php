@@ -1,5 +1,13 @@
 <?php
     include '../connect/session.php';
+    require_once '../connect/config.php';
+
+    $statement = $pdo -> prepare("SELECT * FROM salesHistory WHERE buyerUsername = :username");
+    $statement -> execute([
+        'username' => $_SESSION['username']
+    ]);
+
+    $orders = $statement -> fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +22,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poor+Story&family=Roboto:wght@300&family=Satisfy&display=swap" rel="stylesheet">
     
-    <title>Escafe - Login</title>
+    <title>Escafe - Order History</title>
 </head>
 <body>
 
@@ -24,29 +32,39 @@
     
     <main>
 
-    <h1> Ordering History </h1>
+    <h1> Order History </h1>
 
         <div class="table-rec">
         <table>
             <thead>
                 <tr>
-                <th>Product Name </th>
-                <th>Price </th>
-                <th>Quantity </th>
-                <th>Total Price </th>
-                <th>Status </th>
-                <th>Actions </th>
+                <th>Product Name</th>
+                <th>Date Bought</th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+                <th>Status</th>
+                <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-                <td>5</td>
-                <td>6</td>
-            </tr>
+                <?php foreach ($orders as $order): ?>
+                    <tr>
+                        <td><?php echo $order['productName'] ?></td>
+                        <td><?php echo $order['dateBought'] ?></td>
+                        <td><?php echo $order['quantity'] ?></td>
+                        <td><?php echo $order['totalPrice'] ?></td>
+                        <td><?php echo $order['status'] ?></td>
+                        <td>
+
+                        <?php if ($order['status'] === 'Shipping'): ?>    
+                            <a href="#" class="btn view-btn">Complete</a><a href="#" class="btn delete-btn">Return</a></td>
+                        <?php elseif ($order['status'] === 'Complete'): ?>
+                            <a href="#" class="btn view-btn">Order Again</a></td>
+                        <?php elseif ($order['status'] === 'Returned'): ?>
+                            <a href="#" class="btn view-btn" disabled>Wait for action</a></td>
+                        <?php endif; ?>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
         </div>

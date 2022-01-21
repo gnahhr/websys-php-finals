@@ -7,6 +7,10 @@
         $image = "../img/users/blank.png";
     }
     
+    if (!isset($_SESSION['orders'])) {
+        $_SESSION['orders'] = array();
+    }
+
     // $username = $_SESSION['username'];
     // $password = $_SESSION['password'];
     // $fname = $_SESSION['firstName'];

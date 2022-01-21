@@ -1,14 +1,17 @@
 <?php
-    include '../connect/config.php';
-
     session_start();
+    include '../connect/config.php';
+    
     $id = $_SESSION['id'];
     $profilePic = $_SESSION['profilePic'];
     $firstName = $_SESSION['firstName'];
     $lastName = $_SESSION['lastName'];
     $email = $_SESSION['email'];
     $address = $_SESSION['address'];
-    $username = $_SESSION['username'];
+
+    $statement = $pdo -> prepare ("SELECT * FROM userInfo WHERE username = :username");
+    $statement -> execute([':username' => $username]);
+    $user = $statement -> fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>

@@ -61,15 +61,15 @@
          productDescription = :productDescription, 
          expirationDate = :expirationDate WHERE productID = :id");
     
-        $statement -> bindValue(':productImage', $imagePath);
-        $statement -> bindValue(':productName', $productName);
-        $statement -> bindValue(':productPrice', $productPrice);
-        $statement -> bindValue(':quantity', $quantity);
-        $statement -> bindValue(':supplierName', $supplierName);
-        $statement -> bindValue(':productDescription', $productDescription);
-        $statement -> bindValue(':expirationDate', $expirationDate);
-        $statement -> bindValue(':id', $id);
-        $statement ->execute();
+        // $statement -> bindValue(':productImage', $imagePath);
+        // $statement -> bindValue(':productName', $productName);
+        // $statement -> bindValue(':productPrice', $productPrice);
+        // $statement -> bindValue(':quantity', $quantity);
+        // $statement -> bindValue(':supplierName', $supplierName);
+        // $statement -> bindValue(':productDescription', $productDescription);
+        // $statement -> bindValue(':expirationDate', $expirationDate);
+        // $statement -> bindValue(':id', $id);
+        // $statement ->execute();
 
         header("Location: ../pages/admin-dashboard-inv-manage.php");
         exit();

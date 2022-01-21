@@ -2,12 +2,17 @@
     include '../connect/session.php';
     require_once '../connect/config.php';
 
-    $statement = $pdo -> prepare("SELECT * FROM products");
-    $statement ->execute();
-    $products = $statement -> fetchAll(PDO::FETCH_ASSOC);
-
+    if (!isset($_GET['search']) || ($_GET['search'] === '')) {
+        $statement = $pdo -> prepare("SELECT * FROM products");
+        $statement ->execute();
+        $products = $statement -> fetchAll(PDO::FETCH_ASSOC);
+    } else {
+        $statement = $pdo -> prepare("SELECT * FROM products WHERE productName LIKE ?");
+        $statement -> execute([$_GET['search']]);
+        $products = $statement -> fetchAll(PDO::FETCH_ASSOC);
+    }
     // echo '<pre>';
-    // echo var_dump($products);
+    // echo var_dump($products[0]['productImage']);
     // echo '</pre>';
 ?>
 
@@ -23,7 +28,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poor+Story&family=Roboto:wght@300&family=Satisfy&display=swap" rel="stylesheet">
     
-    <title>Shop</title>
+    <title>Escafe - Shop</title>
 </head>
 <body>
 
@@ -32,32 +37,23 @@
     
     <main>
         <div class="shop-main">
-            <form action="POST">
-                <input type="text" name="searchProd" id="searchProd" placeholder="Search">
+            <form action="shop.php?>">
+                <input type="text" name="search" id="search" placeholder="Search">
                 <input type="submit" value="Search">
             </form>
             <div class="shop-items">
-                <div class="shop-item">
-                    <img src=<?php echo '../connect/'.$products[0]['productImage'] ?> alt="item1">
-                    <h2><?php echo $products[0]['productName'] ?></h2>
-                    <button type="submit">Add to Cart</button>
-                </div>
-                <div class="shop-item">
-                    <img src=<?php echo '../connect/'.$products[1]['productImage'] ?> alt="item1">
-                    <h2><?php echo $products[1]['productName'] ?></h2>
-                    <button type="submit">Add to Cart</button>
-                </div>
-                <div class="shop-item">
-                    <img src=<?php echo '../connect/'.$products[2]['productImage'] ?> alt="item1">
-                    <h2><?php echo $products[2]['productName'] ?></h2>
-                    <button type="submit">Add to Cart</button>
-                </div>
-                <div class="shop-item">
-                    <img src=<?php echo '../connect/'.$products[3]['productImage'] ?> alt="item1">
-                    <h2><?php echo $products[3]['productName'] ?></h2>
-                    <button type="submit">Add to Cart</button>
-                </div>
+                <?php foreach ($products as $product): ?>
+                    <div class="shop-item">
+                        <img src=<?php echo '../connect/'.$product['productImage'] ?> alt="item1">
+                        <h2><?php echo $product['productName'] ?></h2>
+                        <p>Price: <?php echo $product['productPrice'] ?></p>
+                        <a href="product-page.php?productID=<?php echo $product['productID']?>"
+                        class = "btn view-btn"
+                        >View Product</a>
+                    </div>
+                <?php endforeach; ?>
             </div>
+            
             <div class="pages">
                 <a href="#">1</a>
                 <a href="#">2</a>
