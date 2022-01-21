@@ -20,6 +20,8 @@
     } 
     else {
         // Get data for SESSION
+        $_SESSION['id'] = $user['id'];
+        $_SESSION['profilePic'] = $user['profilePic'];
         $_SESSION['username'] = $user['username'];
         $_SESSION['password'] = $user['password'];
         $_SESSION['firstName'] = $user['firstName'];
@@ -38,7 +40,7 @@
 
             // pass on user id for indentification on user profile
             else if ($user['accessLevel'] === 'user'){
-                header('Location: ../pages/index.php?id='.$user['id']);
+                header('Location: ../pages/user-profile.php');
             }
 
             $statement = $pdo -> prepare ("INSERT INTO userLog (id, username, action, dateTime) VALUES(:id, :username, :action,:logDateAndTime)");

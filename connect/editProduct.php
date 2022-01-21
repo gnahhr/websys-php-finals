@@ -17,15 +17,12 @@
     $expirationDate	= $_POST['prodExpDate'];
 
     //select all product name excepet the current product name
-    $checkerProdName= $pdo -> prepare("SELECT productName FROM products WHERE NOT productName = :checker");
+    $checkerProdName= $pdo -> prepare("SELECT productName FROM products WHERE productName = :checker AND productID != :id");
     $checkerProdName -> bindValue(':checker',$productName);
+    $checkerProdName -> bindValue(':id',$id);
     $checkerProdName -> execute();
 
-    // echo '<pre>';
-    // echo var_dump($product);
-    // echo '</pre>';
-
-    //refresh current page kapag yung bagong product name may kapareho, nyeta naubusan ako ng ingles HHAHAHA
+  //refresh current page kapag yung bagong product name may kapareho, nyeta naubusan ako ng ingles HHAHAHA
     //Shen Xioating <3
     if($checkerProdName -> rowCount() > 0 ) {
         echo "Existing";
