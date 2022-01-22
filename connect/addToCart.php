@@ -9,20 +9,20 @@
         'productID' => $_GET['productID']
     ]);
     $product = $statement -> fetch(0);
-
+    
     if (isset($_POST['quantity'])){
         if(isset($_SESSION['orders']) && !checkDupes($product['productID'], $_SESSION['orders'])){
             array_push($_SESSION['orders'], array(
                 'productID' => $product['productID'],
                 'productName' => $product['productName'],
-                'quantity' => $_POST['quantity'],
-                'totalPrice' => $_POST['quantity'] * $product['productPrice']
+                'quantity' => (int)$_POST['quantity'],
+                'totalPrice' => (int)$_POST['quantity'] * floatval($product['productPrice'])
             ));
         } else {
             foreach ($_SESSION['orders'] as $sessProduct) {
                 if ($sessProduct['productID'] == $_GET['productID']) {
-                    $totalQty = $sessProduct['quantity'] + $_POST['quantity'];
-                    $sessProduct['quantity'] = $totalQty;
+                    $totalQty = (int)$sessProduct['quantity'] + (int)$_POST['quantity'];
+                    $sessProduct['quantity'] = (int)$totalQty;
                 }
             }
         }

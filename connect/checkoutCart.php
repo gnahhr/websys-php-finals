@@ -3,14 +3,14 @@
     require_once './config.php';
 
     foreach ($_SESSION['orders'] as $order){
-        $statement = $pdo -> prepare ("INSERT INTO salesHistory(productID, productName, quantity, totalPrice, dateBought, buyerUsername, status)
+        $statement = $pdo -> prepare ("INSERT INTO salesHistory(productID, productName, quantity, totalPrice, dateBought, buyerID, status)
         VALUES (
             :productID,
             :productName,
             :quantity,
             :totalPrice,
             current_timestamp(),
-            :buyerUsername,
+            :buyerID,
             'Shipping'
         )");
 
@@ -19,7 +19,7 @@
             ':productName' => $order['productName'],
             ':quantity' => $order['quantity'],
             ':totalPrice' => $order['totalPrice'],
-            ':buyerUsername' => $_SESSION['username']
+            ':buyerID' => $_SESSION['id']
         ]);
     }
 

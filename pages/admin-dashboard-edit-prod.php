@@ -59,7 +59,7 @@
                     </div>
 
                     <label for="prodName">Product Name</label> <br>
-                    <input type="text" name="prodName" value=<?php echo $product[0]['productName']?> id="prodName" required><br>
+                    <input type="text" name="prodName" value="<?php echo $product[0]['productName']?>" id="prodName" required><br>
 
                     <label for="prodPrice">Price</label> <br>
                     <input type="number" name="prodPrice" value=<?php echo $product[0]['productPrice']?> id="prodPrice" required><br>
@@ -68,7 +68,7 @@
                     <input type="number" name="prodQuantity" value=<?php echo $product[0]['quantity']?> id="prodQuantity" required><br>
 
                     <label for="prodSupplier">Supplier</label> <br>
-                    <input type="text" name="prodSupplier" value=<?php echo $product[0]['supplierName']?> id="prodSupplier" required> <br>
+                    <input type="text" name="prodSupplier" value="<?php echo $product[0]['supplierName']?>" id="prodSupplier" required> <br>
 
                     <label for="prodDesc">Description</label> <br>
                     <input type="text" name="prodDesc" value="<?php echo $product[0]['productDescription']?>" id="prodDesc" required><br>
