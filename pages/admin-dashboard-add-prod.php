@@ -1,4 +1,11 @@
-<?php include '../connect/session.php'; ?>
+<?php
+    include '../connect/session.php';
+    require_once '../connect/config.php';
+
+    $statement = $pdo -> prepare ("SELECT * FROM categories");
+    $statement -> execute();
+    $categories = $statement -> fetchAll(PDO::FETCH_ASSOC);
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,14 +40,14 @@
             </div>
     
             <div class="dashboard-sub">
-                <h1>INVENTORY - PRODUCT NAME</h1>
+                <h1>INVENTORY</h1>
                 <h2>ADD PRODUCT</h2>
                 
                 <form action="../connect/inputProduct.php" method="POST" enctype="multipart/form-data">
-                    <div class="inv-pic">
+                <div class="inv-pic">
                         <div class="inv-content">
-                            <label for="productImage">Product Image</label> <br>
-                            <input type="file" name="productImage" id="productImage" required> <br>
+                            <img src="../connect/images/blank.png" alt="product pic">
+                            <input type="file" name="productImage" id="productImage" class="btn change-btn">
                         </div>
                     </div>
 
@@ -53,8 +60,15 @@
                     <label for="prodQuantity">Quantity</label> <br>
                     <input type="number" name="prodQuantity" id="prodQuantity" required><br>
 
+                    <label for="prodCategory">Category </label> <br>
+                    <select name="prodCategory" id="prodCategory">
+                        <?php foreach ($categories as $category): ?>
+                            <option value="<?php echo $category['categoryName']; ?>"><?php echo $category['categoryName']; ?></option>
+                        <?php endforeach; ?>
+                    </select> <br>
+
                     <label for="prodSupplier">Supplier</label> <br>
-                    <input type="text" name="prodSupplier" id="prodSupplier" required>  <br>
+                    <input type="text" name="prodSupplier" id="prodSupplier" required><br>
 
                     <label for="prodDesc">Description</label> <br>
                     <input type="text" name="prodDesc" id="prodDesc" required><br>
@@ -64,7 +78,7 @@
                     
                     <div class="action-buttons">
                         <input type="submit" value="Confirm" class="view-btn btn">
-                        <a href="#" class="delete-btn btn">Cancel</a>
+                        <a href="./admin-dashboard-inv-manage.php" class="delete-btn btn">Cancel</a>
                     </div>
                 </form>
                 

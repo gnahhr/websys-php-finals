@@ -10,19 +10,20 @@
             <ul>
                 <h2><a href="./admin-dashboard.php">HOME</a></h2>
                 <li>
-                    <h2>INVENTORY</h2>
+                    <h2>MANAGE</h2>
                     <ul>
                         <li> <a href="./admin-dashboard-inv-supplier.php">SUPPLIER</a></li>
-                        <li> <a href="./admin-dashboard-inv-manage.php">MANAGE</a></li>
+                        <li> <a href="./admin-dashboard-inv-manage.php">INVENTORY</a></li>
+                        <li> <a href="./admin-dashboard-inv-category.php">CATEGORY</a></li>
                     </ul>
                 </li>
                 <li>
                     <h2>POINT OF SALE</h2>
                     <ul>
-                        <li> <a href="#">ORDER ITEMS</a></li>
-                        <li> <a href="#">PLACEHOLDER</a></li>
-                        <li> <a href="#">PLACEHOLDER</a></li>
-                        <li> <a href="#">PLACEHOLDER</a></li>
+                        <li> <a href="./admin-dashboard-order-status.php">ORDERS</a></li>
+                        <li> <a href="./admin-dashboard-payments.php">PAYMENTS</a></li>
+                        <li> <a href="#">DISCOUNTS</a></li>
+                        <li> <a href="#">BUNDLES</a></li>
                     </ul>
                 </li>
                 <li>
@@ -30,8 +31,7 @@
                     <ul>
                         <li> <a href="./admin-dashboard-sales-history.php">SALES HISTORY</a></li>
                         <li> <a href="#">PRODUCT</a></li>
-                        <li> <a href="#">PLACEHOLDER</a></li>
-                        <li> <a href="#">PLACEHOLDER</a></li>
+                        <li> <a href="#">EXPORT CSV</a></li>
                     </ul>
                 </li>
 
@@ -41,7 +41,7 @@
                         <li> <a href="#">SET BALANCE</a></li>
                         <li> <a href="#">UPDATE SITE</a></li>
                         <li> <a href="#">ADD POST</a></li>
-                        <li> <a href="#">CONTENT</a></li>
+                        <li> <a href="./admin-dashboard-user-manage.php">MANAGE USERS</a></li>
                     </ul>
                 </li>
             </ul>

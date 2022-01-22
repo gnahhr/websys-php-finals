@@ -22,7 +22,7 @@
                     <a href="../connect/logout.php">Logout</a>
                 </div>
                 <div class="user-image">
-                    <img src='<?php echo '../connect/'.$_SESSION['profilePic']?>' alt="Profile Pic">
+                    <img src="<?php echo '../connect/'.$_SESSION['profilePic']?>" alt="Profile Pic">
                 </div>
             </div>
 

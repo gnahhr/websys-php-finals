@@ -42,19 +42,16 @@
             <div class="dashboard-sub">
                 <h1>SALES HISTORY</h1>
                 
-                <form action="POST">
-                    <input type="radio" name="salesHist" id="perTransaction" value="perTransaction">
-                    <label for="perTransaction">Per Transaction</label>
-                    <input type="radio" name="salesHist" id="perDay" value="perDay">
-                    <label for="perTransaction">Per Day</label>
-                    <input type="radio" name="salesHist" id="perWeek" value="perWeek">
-                    <label for="perTransaction">Per Week</label>
-                    <input type="radio" name="salesHist" id="perMonth" value="perMonth">
-                    <label for="perTransaction">Per Month</label>
-                    <input type="radio" name="salesHist" id="perYear" value="perYear">
-                    <label for="perTransaction">Per Year</label>
+                <form action="../connect/sortSales.php" method="GET">
+                    <select name="saleSort" id="saleSort">
+                        <option value="perTrans">Per Transaction</option>
+                        <option value="perDay">Per Day</option>
+                        <option value="perWeek">Per Week</option>
+                        <option value="perMonth">Per Month</option>
+                        <option value="perYear">Per Year</option>
+                    </select>
 
-                    <input type="submit" value="Sort">
+                    <input type="submit" value="Sort" class="view-btn btn">
                 </form>
 
                 <div class="table-rec">

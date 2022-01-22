@@ -50,9 +50,9 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>PRODUCT ID</th>
                                 <th>PRODUCT IMAGE</th>
                                 <th>PRODUCT NAME</th>
+                                <th>PRODUCT CATEGORY</th>
                                 <th>PRODUCT PRICE</th>
                                 <th>QTY</th>
                                 <th>SUPPLIER</th>
@@ -64,11 +64,11 @@
 
                             <?php foreach($products as $products){ ?>
                                 <tr>
-                                    <th><?php echo $products['productID'] ?></th>
                                     <td>
                                         <img src=<?php echo '../connect/'.$products['productImage']?> class="inv-image">
                                     </td>
                                     <td><?php echo $products['productName'] ?></td>
+                                    <td><?php echo $products['productCategory'] ?></td>
                                     <td><?php echo $products['productPrice'] ?></td>
                                     <td><?php echo $products['quantity'] ?></td>
                                     <td><?php echo $products['supplierName'] ?></td>

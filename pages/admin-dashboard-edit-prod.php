@@ -8,8 +8,16 @@
     $statement ->bindValue(':id',$id);
     $statement -> execute();
     $product = $statement -> fetchAll(PDO::FETCH_ASSOC);
+
+    $statement = $pdo -> prepare ("SELECT * FROM products");
+    $statement -> execute();
+    $products = $statement -> fetchAll(PDO::FETCH_ASSOC);
+
+    $statement = $pdo -> prepare ("SELECT * FROM categories");
+    $statement -> execute();
+    $categories = $statement -> fetchAll(PDO::FETCH_ASSOC);
     // echo '<pre>';
-    // var_dump($product);
+    // var_dump($product[0]['bundledWith']);
     // echo '</pre>';
     // echo $product[0]["productName"];
 ?>
@@ -47,7 +55,7 @@
             </div>
     
             <div class="dashboard-sub">
-                <h1>INVENTORY - PRODUCT NAME</h1>
+                <h1>INVENTORY - <?php echo $product[0]['productName'];?></h1>
                 <h2>EDIT</h2>
                 
                 <form action="../connect/editProduct.php?id=<?php echo $id?>" method="POST" enctype="multipart/form-data">
@@ -61,8 +69,34 @@
                     <label for="prodName">Product Name</label> <br>
                     <input type="text" name="prodName" value="<?php echo $product[0]['productName']?>" id="prodName" required><br>
 
+                    <label for="prodCat">Category </label> <br>
+                    <select name="prodCat" id="prodCat">
+                        <?php foreach ($categories as $category): ?>
+                            <?php if (($category['categoryName'] == $product[0]['productCategory'])): ?>
+                                <option value="<?php echo $category['categoryName']; ?>" selected><?php echo $category['categoryName']; ?></option>
+                            <?php else: ?>
+                                <option value="<?php echo $category['categoryName']; ?>"><?php echo $category['categoryName']; ?></option>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </select> <br>
+
                     <label for="prodPrice">Price</label> <br>
                     <input type="number" name="prodPrice" value=<?php echo $product[0]['productPrice']?> id="prodPrice" required><br>
+
+                    <label for="discount">Discount</label> <br>
+                    <input type="number" name="discount" value=<?php echo $product[0]['discount']?> id="discount" min="0" max="80" required><br>
+
+                    <label for="bundledWith">Bundled with: </label> <br>
+                    <select name="bundledWith" id="bundledWith">
+                        <option value="NULL">NONE</option>
+                        <?php foreach ($products as $optionProd): ?>
+                            <?php if (isset($product[0]['bundledWith']) && ($optionProd['productID'] == $product[0]['bundledWith'])): ?>
+                                <option value="<?php echo $optionProd['productID']; ?>>" selected><?php echo $optionProd['productName']; ?></option>
+                            <?php else: ?>
+                                <option value="<?php echo $optionProd['productID']; ?>>"><?php echo $optionProd['productName']; ?></option>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </select> <br>
 
                     <label for="prodQuantity">Qty</label> <br>
                     <input type="number" name="prodQuantity" value=<?php echo $product[0]['quantity']?> id="prodQuantity" required><br>

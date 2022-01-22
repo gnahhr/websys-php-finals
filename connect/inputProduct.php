@@ -8,6 +8,8 @@
     $supplierName = $_POST['prodSupplier'];
     $productDescription	= $_POST['prodDesc'];
     $expirationDate	= $_POST['prodExpDate'];
+    $productCategory	= $_POST['prodCategory'];
+
 
     $checkerProdName = $pdo -> prepare("SELECT productName FROM products WHERE productName = :checker");
     $checkerProdName -> execute([
@@ -35,11 +37,12 @@
             move_uploaded_file($productImage['tmp_name'],$imagePath);
         }
     
-        $statement = $pdo -> prepare ("INSERT INTO products (productImage,productName, productPrice, quantity, supplierName, productDescription, expirationDate) VALUES(:productImage, :productName, :productPrice, :quantity, :supplierName, :productDescription, :expirationDate)");
+        $statement = $pdo -> prepare ("INSERT INTO products (productImage, productName, productCategory, productPrice, quantity, supplierName, productDescription, expirationDate) VALUES(:productImage, :productName, :productCategory, :productPrice, :quantity, :supplierName, :productDescription, :expirationDate)");
         
         $statement -> execute([
             ':productImage' => $imagePath,
             ':productName' => $productName,
+            ':productCategory' => $productCategory,
             ':productPrice' => $productPrice,
             ':quantity' => $quantity,
             ':supplierName' => $supplierName,
