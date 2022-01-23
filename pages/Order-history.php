@@ -55,11 +55,15 @@
                         <td>
                         <?php if ($order['status'] === 'Shipping'): ?>    
                             <a href="../connect/userUpdateOrder.php?action=Complete&orderID=<?php echo $order['orderID']; ?>" class="btn view-btn">Complete</a>
+
                             <a href="../connect/userUpdateOrder.php?action=Returning&orderID=<?php echo $order['orderID']; ?>" class="btn delete-btn">Return</a>
+
                         <?php elseif ($order['status'] === 'Complete'): ?>
                             <a href="./shop.php" class="btn view-btn">Order Again</a>
+
                         <?php elseif ($order['status'] === 'Returned' || $order['status'] === 'Returning'): ?>
                             <a href="#" class="btn view-btn" disabled>Wait for action</a>
+                            
                         <?php endif; ?>
                         </td>
                     </tr>
