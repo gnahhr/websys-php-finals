@@ -2,7 +2,7 @@
     include '../connect/session.php';
     require_once '../connect/config.php';
 
-    $statement = $pdo -> prepare ("SELECT orderID, productName, status FROM saleshistory WHERE status = ?");
+    $statement = $pdo -> prepare ("SELECT transactionID, status FROM transactionlog WHERE status = ? ORDER BY transactionID DESC");
     $statement -> execute(['Returning']);
     $orders = $statement -> fetchAll();
 ?>
@@ -51,7 +51,7 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Product</th>
+                                    <th>Transaction ID</th>
                                     <th>Status</th>
                                     <th>Activity</th>
                                 </tr>
@@ -59,11 +59,11 @@
                             <tbody>
                                 <?php foreach ($orders as $order): ?>
                                     <tr>
-                                        <td><?php echo $order['productName']; ?></td>
+                                        <td><?php echo $order['transactionID']; ?></td>
                                         <td><?php echo $order['status']; ?></td>
                                         <td>
-                                            <a href="../connect/returnProduct.php?action='accept'&orderID=<?php echo $order['orderID']; ?>" class="btn view-btn">Accept</a>
-                                            <a href="../connect/returnProduct.php?action='decline'&orderID=<?php echo $order['orderID']; ?>" class="btn delete-btn">Cancel</a>
+                                            <a href="../connect/returnProduct.php?action='accept'&transactionID=<?php echo $order['transactionID']; ?>" class="btn view-btn">Accept</a>
+                                            <a href="../connect/returnProduct.php?action='decline'&transactionID=<?php echo $order['transactionID']; ?>" class="btn delete-btn">Cancel</a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

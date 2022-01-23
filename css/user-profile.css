@@ -177,7 +177,11 @@ main .shopping-cart {
 }
 
 main .cart-checkout-btn {
-    display: flex;
+    display: block;
+}
+
+.total-button {
+    display:flex;
     justify-content: flex-end;
 }
 
@@ -190,6 +194,21 @@ main .cart-checkout-btn p span {
 main .order-table {
     display: block;
     margin: auto 10%;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.cart-p{
+    font-family: 'Roboto', sans-serif;
+    color: #556052;
+    text-align: right;
+    margin-right: 12%;
+}
+
+.cart-p span{
+    font-family: 'Roboto', sans-serif;
+    color: #556052;
+    font-weight: bolder;
 }
 
 /* Table-order-history */
@@ -226,7 +245,7 @@ main .order-table {
 /* table cart */
 
 .table-rec-cart {
-    background-color: rgba(184, 158, 136, 0.19);
+    /* background-color: rgba(184, 158, 136, 0.19); */
     text-align: center;
     border-radius: 25px;
     margin: 1rem auto;
@@ -242,10 +261,10 @@ main .order-table {
     margin-top: 1rem;
 }
 
-.table-rec-cart table thead tr th:nth-child(n):not(:last-child),
+/* .table-rec-cart table thead tr th:nth-child(n):not(:last-child),
 .table-rec-cart table tbody tr td:nth-child(n):not(:last-child){
     border-right: 1px solid var(--main-color);
-}
+} */
 
 .table-rec-cart table thead tr th,
 .table-rec-cart table tbody tr td {
@@ -254,6 +273,27 @@ main .order-table {
     padding: .75rem;
     margin: .75rem;
 }
+
+.table-rec-cart table tbody tr td img {
+    height: 100px;
+    width: 100px;
+    border-radius: 15px;
+}
+
+.table-rec-cart .bundled-row {
+    font-size: .8rem;
+}
+
+.table-rec-cart td span {
+    color:gray;
+    text-decoration: line-through;
+}
+
+.table-rec-cart .bundled-row td img {
+    height: 70px;
+    width: 70px;
+}
+
 
 /* user button */
 

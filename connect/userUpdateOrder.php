@@ -2,10 +2,10 @@
     include './session.php';
     require_once './config.php';
 
-    $statement = $pdo -> prepare ("UPDATE salesHistory SET status = :status WHERE orderID = :orderID");
+    $statement = $pdo -> prepare ("UPDATE transactionlog SET status = :status WHERE transactionID = :transactionID");
     $statement -> execute([
         ':status' => $_GET['action'],
-        ':orderID' => $_GET['orderID']
+        ':transactionID' => $_GET['transactionID']
     ]);
 
     // If action = complete add totalPrice to owner's balance.

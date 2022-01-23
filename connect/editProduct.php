@@ -15,8 +15,13 @@
     $productCategory	= $_POST['prodCat'];
     $productDescription	= $_POST['prodDesc'];
     $expirationDate	= $_POST['prodExpDate'];
-    $bundledWith	= $_POST['bundledWith'];
     $discount	= $_POST['discount'];
+
+    if ($_POST['bundledWith'] == 0){
+        $bundledWith	= NULL;
+    } else {
+        $bundledWith	= $_POST['bundledWith'];
+    }
 
     //select all product name excepet the current product name
     $checkerProdName = $pdo -> prepare("SELECT productName FROM products WHERE productName = :checker AND productID != :id");

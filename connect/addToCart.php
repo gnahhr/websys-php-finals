@@ -12,12 +12,52 @@
     
     if (isset($_POST['quantity'])){
         if(isset($_SESSION['orders']) && !checkDupes($product['productID'], $_SESSION['orders'])){
-            array_push($_SESSION['orders'], array(
-                'productID' => $product['productID'],
-                'productName' => $product['productName'],
-                'quantity' => (int)$_POST['quantity'],
-                'totalPrice' => (int)$_POST['quantity'] * floatval($product['productPrice'])
-            ));
+            if ($product['bundledWith'] > 0 || $product['bundledWith'] != NULL){
+                $bundled = getBundled($product['bundledWith'], $pdo);
+                if($bundled['quantity'] >= (int)$_POST['quantity']){
+                    array_push($_SESSION['orders'], array(
+                        // Initial
+                        'productImage' => $product['productImage'],
+                        'productID' => $product['productID'],
+                        'productName' => $product['productName'],
+                        'productPrice' => $product['productPrice'],
+                        'discount' => $product['discount'],
+                        // Bundled
+                        'bundledWith' => $product['bundledWith'],
+                        'bundledImage' => $bundled['productImage'],
+                        'bundledName' => $bundled['productName'],
+                        'bundledPrice' => $bundled['productPrice'],
+                        'quantity' => (int)$_POST['quantity'],
+                        'totalPrice' => computeTotal($product['productPrice'], $product['discount'], $_POST['quantity'], $bundled['productPrice'])
+                    ));
+                } else {
+                    array_push($_SESSION['orders'], array(
+                        // Initial
+                        'productImage' => $product['productImage'],
+                        'productID' => $product['productID'],
+                        'productName' => $product['productName'],
+                        'productPrice' => $product['productPrice'],
+                        'bundledWith' => 0,
+                        'discount' => $product['discount'],
+                        'quantity' => (int)$_POST['quantity'],
+                        'totalPrice' => ($product['productPrice'] - ($product['productPrice'] * ($product['discount']/100))) * (int)$_POST['quantity']
+                    ));
+                }
+                
+            } else {
+                array_push($_SESSION['orders'], array(
+                    // Initial
+                    'productImage' => $product['productImage'],
+                    'productID' => $product['productID'],
+                    'productName' => $product['productName'],
+                    'productPrice' => $product['productPrice'],
+                    'bundledWith' => $product['bundledWith'],
+                    'discount' => $product['discount'],
+                    'quantity' => (int)$_POST['quantity'],
+                    'totalPrice' => ($product['productPrice'] - ($product['productPrice'] * ($product['discount']/100))) * (int)$_POST['quantity']
+                ));
+            }
+            
         } else {
             foreach ($_SESSION['orders'] as &$sessProduct) {
                 if ($sessProduct['productID'] == $_GET['productID']) {
@@ -38,5 +78,20 @@
         }
 
         return false;
+    }
+
+    function getBundled($productID, $pdo){
+
+        $stmt = $pdo -> prepare("SELECT * FROM products WHERE productID = :productID");
+        $stmt -> execute([
+            ':productID' => $productID,
+        ]);
+        return $stmt->fetch(0);
+    }
+
+    function computeTotal($prodPrice, $prodDiscount, $qty, $bundlePrice){
+        $totalProdPrice = ($prodPrice - ($prodPrice * ($prodDiscount/100))) * $qty;
+        $totalBundlePrice = ($bundlePrice - ($bundlePrice * .1)) * $qty;
+        return $totalProdPrice + $totalBundlePrice;
     }
 ?>

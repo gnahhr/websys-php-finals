@@ -2,7 +2,7 @@
     include '../connect/session.php';
     require_once '../connect/config.php';
 
-    $statement = $pdo -> prepare("SELECT * FROM salesHistory WHERE buyerID = :id ORDER BY dateBought DESC");
+    $statement = $pdo -> prepare("SELECT * FROM transactionlog WHERE buyerID = :id ORDER BY dateBought DESC");
     $statement -> execute([
         'id' => $_SESSION['id']
     ]);
@@ -35,10 +35,10 @@
             <table>
                 <thead>
                     <tr>
-                    <th>Product Name</th>
-                    <th>Date Bought</th>
-                    <th>Quantity</th>
+                    <th>Transaction ID</th>
+                    <th>Products Bought</th>
                     <th>Total Price</th>
+                    <th>Date</th>
                     <th>Status</th>
                     <th>Actions</th>
                     </tr>
@@ -46,23 +46,24 @@
                 <tbody>
                     <?php foreach ($orders as $order): ?>
                         <tr>
-                            <td><?php echo $order['productName'] ?></td>
-                            <td><?php echo $order['dateBought'] ?></td>
-                            <td><?php echo $order['quantity'] ?></td>
+                            <td><?php echo $order['transactionID'] ?></td>
+                            <td>
+                                <?php foreach(formatProducts($order['productsBought']) as $product){
+                                        echo $product . "<br>";
+                                    }
+                                ?>
+                            </td>
                             <td><?php echo $order['totalPrice'] ?></td>
+                            <td><?php echo $order['dateBought'] ?></td>
                             <td><?php echo $order['status'] ?></td>
                             <td>
                             <?php if ($order['status'] === 'Shipping'): ?>    
-                                <a href="../connect/userUpdateOrder.php?action=Complete&orderID=<?php echo $order['orderID']; ?>" class="btn view-btn">Complete</a>
-
-                                <a href="../connect/userUpdateOrder.php?action=Returning&orderID=<?php echo $order['orderID']; ?>" class="btn delete-btn">Return</a>
-
+                                <a href="../connect/userUpdateOrder.php?action=Complete&transactionID=<?php echo $order['transactionID']; ?>" class="btn view-btn">Complete</a>
+                                <a href="../connect/userUpdateOrder.php?action=Returning&transactionID=<?php echo $order['transactionID']; ?>" class="btn delete-btn">Return</a>
                             <?php elseif ($order['status'] === 'Complete' || $order['status'] === 'Refunded'): ?>
                                 <a href="./shop.php" class="btn view-btn">Order Again</a>
-
                             <?php elseif ($order['status'] === 'Returned' || $order['status'] === 'Returning'): ?>
                                 <a href="#" class="btn view-btn" disabled>Wait for action</a>
-                                
                             <?php endif; ?>
                             </td>
                         </tr>
@@ -74,8 +75,21 @@
     </main>
 
     <!-- FOOTER -->
-    <footer>
-        <p>&copy; 2022</p>
-    </footer>
+    <?php include './footer.php'; ?>
+
+    <!-- FUNCTIONS -->
+    <?php
+        function formatProducts($product){
+                $perRow = explode(',', $product);
+                $productsBought = array();
+                foreach ($perRow as $row){
+                    $latter = explode('-', $row);
+                    $pushString = $latter[1] . " (" . $latter[2] . " pcs.)";
+                    array_push($productsBought, $pushString);
+                }
+                
+                return $productsBought;
+        }
+    ?>
 </body>
 </html>
