@@ -28,7 +28,7 @@
         }
     }
 
-    Header('Location: ../pages\product-page.php?productID='.$productID);
+    Header('Location: ../pages\shop.php');
 
     function checkDupes($productID, $prodArray) {
         foreach ($prodArray as $product) {

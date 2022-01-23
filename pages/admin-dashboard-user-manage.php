@@ -67,15 +67,15 @@
                                     <td><?php echo $user['username'] ?></td>
                                     <td><?php echo $user['accessLevel'] ?></td>
                                     <td>
-                                        <a href="#" class="btn edit-btn">EDIT</a>
-                                        <a href="#" class="btn delete-btn">DELETE</a>
+                                        <a href="admin-dashboard-edit-user.php?id=<?php echo $user['id']?>" class="btn edit-btn">EDIT</a>
+                                        <a href="../connect\admin-deleteUser.php?id=<?php echo $user['id']?>"class="btn delete-btn">DELETE</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
-                <a href="#" class="btn view-btn add-prod">ADD USER</a>
+                <a href="admin-dashboard-add-user.php" class="btn view-btn add-prod">ADD USER</a>
             </div>
         </div>
     </main>

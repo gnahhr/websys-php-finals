@@ -25,5 +25,5 @@
 
     unset($_SESSION['orders']);
 
-    Header("Location: confirmItem.php");
+    Header("Location: ../pages/shop.php");
 ?>

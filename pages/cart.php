@@ -62,7 +62,7 @@
             
             <div class="cart-checkout-btn">
                 <p>Total Item & Price: Php. <span><?php echo $totalPrice. " (" . $totalItems . " Items)";?></span></p>
-                <a href="../connect/checkoutCart.php" class="cart-btn"> Check out </a>
+                <a href="checkOut.php" class="cart-btn"> Check out </a>
             </div>
         </div>
     </main>

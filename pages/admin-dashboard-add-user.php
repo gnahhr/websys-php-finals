@@ -2,17 +2,12 @@
     include '../connect/session.php';
     include_once '../connect/config.php';
 
-    $id = $_GET['id'];
+    // $id = $_GET['id'];
 
-    $statement = $pdo -> prepare ("SELECT * FROM userinfo WHERE id = :id ");
-    $statement ->bindValue(':id',$id);
-    $statement -> execute();
-    $user = $statement -> fetch(0);
-
-    // echo '<pre>';
-    // var_dump($product[0]['bundledWith']);
-    // echo '</pre>';
-    // echo $product[0]["productName"];
+    // $statement = $pdo -> prepare ("SELECT * FROM userinfo WHERE id = :id ");
+    // $statement ->bindValue(':id',$id);
+    // $statement -> execute();
+    // $user = $statement -> fetch(0);
 ?>
 
 <!DOCTYPE html>
@@ -50,25 +45,25 @@
             <div class="dashboard-sub">
                 <h1>ADD USER</h1>
                 
-                <form action="#" method="POST" enctype="multipart/form-data">
+                <form action="../connect\admin-addUser.php" method="POST" >
 
                     <label for="firstName">First Name:</label> <br>
-                    <input type="text" name="firstName" id="firstName"> <br>
+                    <input type="text" name="firstName" id="firstName" required> <br>
 
                     <label for="lastName">Last Name:</label> <br>
-                    <input type="text" name="firstName" id="firstName"> <br>
+                    <input type="text" name="lastName" id="lastName" required> <br>
 
-                    <label for="e-mail">E-mail:</label> <br>
-                    <input type="text" name="e-mail" id="e-mail"> <br>
+                    <label for="email">E-mail:</label> <br>
+                    <input type="text" name="email" id="email" required> <br>
 
                     <label for="address">Address:</label> <br>
-                    <input type="text" name="address" id="address"> <br>
+                    <input type="text" name="address" id="address" required> <br>
 
                     <label for="username">Username:</label> <br> 
-                    <input type="text" name="username" id="username"> <br>
+                    <input type="text" name="username" id="username" required> <br>
 
                     <label for="accessLevel">Access Level:</label> <br>
-                    <select name="accessLevel" id="accessLevel">
+                    <select name="accessLevel" id="accessLevel" required>
                         <option value="user">User</option>
                         <option value="employee">Employee</option>
                         <option value="admin">Admin</option>

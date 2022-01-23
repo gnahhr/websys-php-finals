@@ -7,10 +7,9 @@
     $statement = $pdo -> prepare ("SELECT * FROM userinfo WHERE id = :id ");
     $statement ->bindValue(':id',$id);
     $statement -> execute();
-    $user = $statement -> fetch(0);
-
+    $user = $statement -> fetchAll(PDO::FETCH_ASSOC);
     // echo '<pre>';
-    // var_dump($product[0]['bundledWith']);
+    // var_dump($user);
     // echo '</pre>';
     // echo $product[0]["productName"];
 ?>
@@ -40,7 +39,7 @@
             <div class="user">  
                 <div class="user-text">
                     <p>Hi, <?php echo $_SESSION['username']?></p>
-                    <a href="logout.php">Logout</a>
+                    <a href="../connect/logout.php">Logout</a>
                 </div>
                 <div class="user-image">
                     <img src="../img/users/blank.png" alt="user profile">
@@ -50,28 +49,33 @@
             <div class="dashboard-sub">
                 <h1>EDIT USER</h1>
                 
-                <form action="" method="POST" enctype="multipart/form-data">
+                <form action="../connect/admin-editUser.php?id=<?php echo $id?>" method="POST" enctype="multipart/form-data">
                     <div class="inv-pic">
                         <div class="inv-content">
-                            <img src=<?php echo '../connect/'.$user['profilePic']?> alt="user pic">
+                            <img src='<?php
+                                    if($user[0]['profilePic'] != null)
+                                        echo '../connect/'.$user[0]['profilePic'];
+                                    else
+                                        echo '../img/users/blank.png';
+                              ?>' alt="user pic">
                             <input type="file" name="profilePic" id="profilePic">
                         </div>
                     </div>
 
                     <label for="firstName">First Name:</label> <br>
-                    <input type="text" name="firstName" id="firstName"> <br>
+                    <input type="text" name="firstName" id="firstName" value ="<?php echo $user[0]['firstName']; ?>" required> <br>
 
                     <label for="lastName">Last Name:</label> <br>
-                    <input type="text" name="firstName" id="firstName"> <br>
+                    <input type="text" name="lastName" id="lastName" value ="<?php echo $user[0]['lastName']; ?>" required> <br>
 
-                    <label for="e-mail">E-mail:</label> <br>
-                    <input type="text" name="e-mail" id="e-mail"> <br>
+                    <label for="email">E-mail:</label> <br>
+                    <input type="text" name="email" id="email" value ="<?php echo $user[0]['email']; ?>" required> <br>
 
                     <label for="address">Address:</label> <br>
-                    <input type="text" name="address" id="address"> <br>
+                    <input type="text" name="address" id="address" value ="<?php echo $user[0]['address']; ?>" required> <br>
 
                     <label for="username">Username:</label> <br> 
-                    <input type="text" name="username" id="username"> <br>
+                    <input type="text" name="username" id="username" value ="<?php echo $user[0]['username']; ?>" required> <br>
 
                     <label for="accessLevel">Access Level:</label> <br>
                     <select name="accessLevel" id="accessLevel">
@@ -82,7 +86,7 @@
                     
                     <div class="action-buttons">
                         <input type="submit" value="Confirm" class="view-btn btn">
-                        <a href="./admin-dashboard-inv-manage.php" class="delete-btn btn">Cancel</a>
+                        <a href="admin-dashboard-user-manage.php" class="delete-btn btn">Cancel</a>
                     </div>
                 </form>
                 

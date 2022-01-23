@@ -46,8 +46,8 @@
         //this function will only run if there is a new image.
         if($userPic && $userPic['tmp_name']){
             //delete previous image
-            if($user['productImage']){
-                unlink($user['productImage']);
+            if($user['profilePic']){
+                unlink($user['profilePic']);
             }
             //input shit.
             $imagePath = 'images/'.$userPic['name'];
