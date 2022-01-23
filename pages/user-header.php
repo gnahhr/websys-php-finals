@@ -1,4 +1,7 @@
 <!-- HEADER -->
+<?php
+    $pic = $_SESSION['profilePic'] ?? null;
+?>
 <header>
     <div class="logo-name">
         <div class="logo-head"><img src="../img/index/logo.png" alt="logo"></div>
@@ -22,7 +25,13 @@
                     <a href="../connect/logout.php">Logout</a>
                 </div>
                 <div class="user-image">
-                    <img src='<?php echo '../connect/'.$_SESSION['profilePic']?>' alt="Profile Pic">
+                    <img src='<?php
+                                    if($pic != null)
+                                        echo '../connect/'.$pic;
+                                    else
+                                        echo '../img/users/blank.png';
+                                    
+                              ?>' alt="Profile Pic">
                 </div>
             </div>
 

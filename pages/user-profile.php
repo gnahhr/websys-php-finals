@@ -3,7 +3,7 @@
     include '../connect/config.php';
     
     $id = $_SESSION['id'];
-    $profilePic = $_SESSION['profilePic'];
+    $profilePic = $_SESSION['profilePic'] ?? null;
     $firstName = $_SESSION['firstName'];
     $lastName = $_SESSION['lastName'];
     $email = $_SESSION['email'];
@@ -39,7 +39,13 @@
 
             <div class="user-img">
                 <div class="user-img-content">
-                    <img src='<?php echo '../connect/'.$profilePic?>' alt="Profile Pic">
+                    <img src='<?php
+                                    if($pic != null)
+                                        echo '../connect/'.$pic;
+                                    else
+                                        echo '../img/users/blank.png';
+                                    
+                              ?>' alt="Profile Pic">
                     <input type="file" name="userPic" id="userPic" class="btn change-btn"> <br>
                 </div>
             </div>

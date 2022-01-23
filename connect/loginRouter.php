@@ -21,7 +21,7 @@
     else {
         // Get data for SESSION
         $_SESSION['id'] = $user['id'];
-        $_SESSION['profilePic'] = $user['profilePic'];
+        $_SESSION['profilePic'] = $user['profilePic'] ?? null;
         $_SESSION['username'] = $user['username'];
         $_SESSION['password'] = $user['password'];
         $_SESSION['firstName'] = $user['firstName'];

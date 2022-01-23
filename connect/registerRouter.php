@@ -27,7 +27,7 @@
     }
 
     else{
-        $statement = $pdo -> prepare ("INSERT INTO userInfo (firstName,lastName, email, address, username, password, user) VALUES(:firstName, :lastName, :email, :address, :username, :password, :userLevel)");
+        $statement = $pdo -> prepare ("INSERT INTO userInfo (firstName,lastName, email, address, username, password, accessLevel) VALUES(:firstName, :lastName, :email, :address, :username, :password, :userLevel)");
         $statement->execute([
             'firstName' => $firstName,
             'lastName' => $lastName,
