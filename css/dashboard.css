@@ -229,7 +229,7 @@ main .main-wrapper .dashboard-sub form .inv-pic .inv-content img {
     border-radius: 25px;
 }
 
-main .main-wrapper .dashboard-sub form .inv-pic .inv-content button {
+main .main-wrapper .dashboard-sub form .inv-pic .inv-content input[type=file] {
     align-self: center;
 }
 
@@ -239,13 +239,16 @@ main .main-wrapper .dashboard-sub form label {
 }
 
 .inv-image {
-    height: 100px;
-    width: 100px;
+    height: 85px;
+    width: 85px;
+    border-radius: 15px;
 }
 
 main .main-wrapper .dashboard-sub form input[type=text],
 main .main-wrapper .dashboard-sub form input[type=number],
-main .main-wrapper .dashboard-sub form input[type=date] {
+main .main-wrapper .dashboard-sub form input[type=date],
+main .main-wrapper .dashboard-sub form input[type=select],
+main .main-wrapper .dashboard-sub form option {
     color: var(--text-color);
     background-color: var(--link-dark-box);
     border: none;
@@ -260,6 +263,15 @@ main .main-wrapper .dashboard-sub form input[type=date] {
 }
 
 /* GENERAL DESIGNS */
+.no-pending {
+    display:block;
+    margin: 6rem auto;
+    color:  #FFDAB9;
+    background-color: var(--dark-box);
+    padding: 2rem;
+    border-radius: 15px;
+}
+
 
 /* ROUNDED CORNER TABLES */
 .table-round {

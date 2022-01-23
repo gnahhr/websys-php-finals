@@ -47,6 +47,7 @@
                     <input type="text" name="location" id="location"> <br>
                     <label for="contactNumber">Contact Number</label> <br>
                     <input type="text" name="contactNumber" id="contactNumber"><br>
+
                     
                     <div class="action-buttons">
                         <input type="submit" value="Confirm" class="view-btn btn">

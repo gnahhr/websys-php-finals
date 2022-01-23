@@ -1,10 +1,10 @@
 <?php
     session_start();
     
-    if (isset($_SESSION['image'])){
-        $image = $_SESSION['image'];
+    if (isset($_SESSION['profilePic'])){
+        $profilePic = $_SESSION['profilePic'];
     } else {
-        $image = "../img/users/blank.png";
+        $_SESSION['profilePic'] = "\images\blank.png";
     }
     
     if (!isset($_SESSION['orders'])) {

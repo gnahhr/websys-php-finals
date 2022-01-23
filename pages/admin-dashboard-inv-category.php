@@ -2,9 +2,9 @@
     include '../connect/session.php';
     require_once '../connect/config.php';
 
-    $statement = $pdo -> prepare ("SELECT * FROM products ORDER BY expirationDate DESC");
+    $statement = $pdo -> prepare ("SELECT * FROM categories");
     $statement -> execute();
-    $products = $statement -> fetchAll(PDO::FETCH_ASSOC);
+    $categories = $statement -> fetchAll(PDO::FETCH_ASSOC);
     // echo '<pre>';
     // var_dump($productsHolder);
     // echo '</pre>';
@@ -50,32 +50,19 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>PRODUCT IMAGE</th>
-                                <th>PRODUCT NAME</th>
-                                <th>PRODUCT CATEGORY</th>
-                                <th>PRODUCT PRICE</th>
-                                <th>QTY</th>
-                                <th>SUPPLIER</th>
-                                <th>EXPIRY DATE</th>
-                                <th>ACTIONS</th>
+                                <th>CATEGORY ID</th>
+                                <th>CATEGORY NAME</th>
+                                <th>ACTION</th>
                             </tr>
                         </thead>
                         <tbody>
 
-                            <?php foreach($products as $products){ ?>
+                            <?php foreach($categories as $category){ ?>
                                 <tr>
+                                    <td><?php echo $category['categoryID'] ?></td>
+                                    <td><?php echo $category['categoryName'] ?></td>
                                     <td>
-                                        <img src=<?php echo '../connect/'.$products['productImage']?> class="inv-image">
-                                    </td>
-                                    <td><?php echo $products['productName'] ?></td>
-                                    <td><?php echo $products['productCategory'] ?></td>
-                                    <td><?php echo $products['productPrice'] ?></td>
-                                    <td><?php echo $products['quantity'] ?></td>
-                                    <td><?php echo $products['supplierName'] ?></td>
-                                    <td><?php echo $products['expirationDate'] ?></td>
-                                    <td>
-                                        <a href="admin-dashboard-edit-prod.php?id=<?php echo $products['productID']?>" class="edit-btn btn">Edit</a>
-                                        <a href="../connect/deleteProduct.php?id=<?php echo $products['productID']?>" class="delete-btn btn">Delete</a>
+                                        <a href="../connect/deleteCategory.php?id=<?php echo $category['categoryID']?>" class="delete-btn btn">Delete</a>
                                     </td>
                                 </tr>
                             <?php }?>
@@ -83,8 +70,13 @@
                         </tbody>
                     </table>
                 </div>
-
-                <a href="./admin-dashboard-add-prod.php" class="view-btn btn add-prod">Add Product</a>
+                
+                <form action="../connect/addCategory.php" method="post">
+                    <label for="categoryName">Category Name: </label><br>
+                    <input type="text" name="categoryName" id="categoryName">
+                    <input type="submit" value="Add Category" class="btn view-btn add-prod">
+                </form>
+                <!-- <a href="./admin-dashboard-add-prod.php" class="view-btn btn add-prod">Add Category</a> -->
             </div>
         </div>
     </main>

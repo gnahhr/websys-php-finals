@@ -32,6 +32,7 @@
                                         echo '../img/users/blank.png';
                                     
                               ?>' alt="Profile Pic">
+                    <img src="<?php echo '../connect/'.$_SESSION['profilePic']?>" alt="Profile Pic">
                 </div>
             </div>
 

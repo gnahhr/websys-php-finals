@@ -2,7 +2,7 @@
     include '../connect/session.php';
     require_once '../connect/config.php';
 
-    $statement = $pdo -> prepare ("SELECT * FROM saleshistory");
+    $statement = $pdo -> prepare ("SELECT * FROM saleshistory WHERE status = 'Complete'");
     $statement -> execute();
     $sales = $statement -> fetchAll();
 ?>
@@ -19,7 +19,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poor+Story&family=Roboto:wght@300&family=Satisfy&display=swap" rel="stylesheet">
     
-    <title>Escafe - Sales History</title>
+    <title>Escafe - Payments</title>
 </head>
 <body>
 
@@ -40,7 +40,7 @@
             </div>
     
             <div class="dashboard-sub">
-                <h1>SALES HISTORY</h1>
+                <h1>PAYMENTS</h1>
                 
                 <form action="../connect/sortSales.php" method="GET">
                     <select name="saleSort" id="saleSort">
@@ -59,7 +59,7 @@
                         <thead>
                             <tr>
                                 <th>ORDER ID</th>
-                                <th>USERNAME</th>
+                                <th>BUYER ID</th>
                                 <th>PRODUCTS</th>
                                 <th>QUANTITY</th>
                                 <th>TOTAL PRICE</th>

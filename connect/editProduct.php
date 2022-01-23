@@ -12,8 +12,11 @@
     $productPrice = $_POST['prodPrice'];
     $quantity = $_POST['prodQuantity'];
     $supplierName = $_POST['prodSupplier'];
+    $productCategory	= $_POST['prodCat'];
     $productDescription	= $_POST['prodDesc'];
     $expirationDate	= $_POST['prodExpDate'];
+    $bundledWith	= $_POST['bundledWith'];
+    $discount	= $_POST['discount'];
 
     //select all product name excepet the current product name
     $checkerProdName = $pdo -> prepare("SELECT productName FROM products WHERE productName = :checker AND productID != :id");
@@ -53,19 +56,26 @@
             move_uploaded_file($productImage['tmp_name'],$imagePath);
         }
     
-        $statement = $pdo -> prepare ("UPDATE products SET productImage = :productImage,
-         productName = :productName, 
-         productPrice = :productPrice, 
-         quantity = :quantity ,
-         supplierName = :supplierName, 
-         productDescription = :productDescription, 
-         expirationDate = :expirationDate WHERE productID = :id");
+        $statement = $pdo -> prepare ("UPDATE products SET
+            productImage = :productImage,
+            productName = :productName, 
+            productCategory = :productCategory,
+            productPrice = :productPrice, 
+            quantity = :quantity,
+            bundledWith = :bundledWith,
+            discount = :discount,
+            supplierName = :supplierName, 
+            productDescription = :productDescription, 
+            expirationDate = :expirationDate WHERE productID = :id");
 
         $statement -> execute([
             ':productImage' => $imagePath,
             ':productName' => $productName,
+            ':productCategory' => $productCategory,
             ':productPrice' => $productPrice,
             ':quantity' => $quantity,
+            ':bundledWith' => $bundledWith,
+            ':discount' => $discount,
             ':supplierName' => $supplierName,
             ':productDescription' => $productDescription,
             ':expirationDate' => $expirationDate,
