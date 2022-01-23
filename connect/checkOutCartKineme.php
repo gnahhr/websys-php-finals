@@ -74,6 +74,8 @@
         ':buyerID' => $_SESSION['id']
     ]);
     
+    $statement = $pdo -> prepare ("");
+
     unset($_SESSION['orders']);
 
     Header("Location: ../pages/shop.php");

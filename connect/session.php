@@ -3,6 +3,7 @@
     
     if (isset($_SESSION['profilePic'])){
         $profilePic = $_SESSION['profilePic'];
+        $pic = $_SESSION['profilePic'];
     } else {
         $_SESSION['profilePic'] = "\images\blank.png";
     }

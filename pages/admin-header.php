@@ -22,7 +22,6 @@
                     <ul>
                         <li> <a href="./admin-dashboard-order-status.php">ORDERS</a></li>
                         <li> <a href="./admin-dashboard-payments.php">PAYMENTS</a></li>
-                        <li> <a href="#">DISCOUNTS</a></li>
                         <li> <a href="#">BUNDLES</a></li>
                     </ul>
                 </li>

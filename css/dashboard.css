@@ -122,6 +122,7 @@ main .main-wrapper .user .user-text {
 
 main .main-wrapper .user .user-image img {
     height: 50px;
+    width: 50px;
     border-radius: 50%;
     margin-left: 2rem;
 }
@@ -187,21 +188,6 @@ main .main-wrapper .dashboard-main .main-sales .balance {
 
 .dashboard-main .inventory-summary h3 {
     text-align: center;
-}
-
-/* ORDER */
-
-.dashboard-main .main-orders {
-    display: flex;
-    justify-content: space-around;
-}
-
-.dashboard-main .main-orders h3 {
-    text-align: center;
-}
-
-.dashboard-main .main-orders {
-    display: flex;
 }
 
 /* INVENTORY */
@@ -311,6 +297,8 @@ main .main-wrapper .dashboard-sub form input[type=date] {
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    max-height: 70vh;
+    overflow-y: scroll;
 }
 
 .table-rec table {

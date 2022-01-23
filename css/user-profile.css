@@ -76,6 +76,7 @@ header nav ul li a{
 
 .user .user-image img{
     height: 50px;
+    width: 50px;
     border-radius: 100%;
 }
 
@@ -161,6 +162,7 @@ main .login-form form .user-img .user-img-content{
 
 main .login-form form .user-img .user-img-content img{
     width: 150px;
+    height: 150px;
     border-radius: 100%;
 }
 
@@ -183,6 +185,11 @@ main .cart-checkout-btn p,
 main .cart-checkout-btn p span {
     align-self: center;
     color: var(--main-color);
+}
+
+main .order-table {
+    display: block;
+    margin: auto 10%;
 }
 
 /* Table-order-history */
@@ -290,6 +297,7 @@ main .cart-checkout-btn p span {
 .change-btn {
     background-color: rgba(143, 68, 38, 0.5);
 }
+
 .cart-btn {
     font-size: 1.2rem;
     padding: .35rem 1rem;
@@ -298,6 +306,22 @@ main .cart-checkout-btn p span {
     background-color:var(--main-color) ;
     color: var(--text-color);
     margin: 0 1.25rem;
+}
+
+.shopping-cart h2{
+    display: block;
+    text-align: center;
+    padding-top: 4rem;
+    color: var(--main-color);
+    font-size: 3rem;
+}
+
+.cart-shop {
+    position: absolute;
+    margin: 1rem auto;
+    left: 45%;
+    top: 60%;
+    font-size: 2rem;
 }
 
 /* FOOTER */

@@ -1,5 +1,6 @@
 <?php
     include '../connect/session.php';
+    include '../connect/dashSales.php';
 
     if (isset($_SESSION['access']) && ($_SESSION['access'] === 'user')){
         header("Location: ../pages/index.php");
@@ -34,7 +35,13 @@
                     <a href="../connect/logout.php">Logout</a>
                 </div>
                 <div class="user-image">
-                    <img src="../img/users/blank.png" alt="user profile">
+                    <img src='<?php
+                                    if($pic != null)
+                                        echo '../connect/'.$pic;
+                                    else
+                                        echo '../img/users/blank.png';
+                                    
+                              ?>' alt="Profile Pic">
                 </div>
             </div>
     
@@ -45,20 +52,20 @@
                 <h2>SALES</h2>
                 <div class="main-sales">
                     <div class="sales-cont total-income">
-                        <h3>Total Income</h3>
-                        <p>Php. 60,000.00</p>
+                        <h3>Income Today</h3>
+                        <p><?php echo "Php.".$salesToday ;?></p>
                     </div>
                     <div class="sales-cont total-expenses">
-                        <h3>Total Expenses</h3>
-                        <p>Php. 30, 000.00</p>
+                        <h3>Income This Month</h3>
+                        <p><?php echo "Php.".$salesThisMonth ;?></p>
                     </div>
                     <div class="sales-cont net-profit">
-                        <h3>Net Profit</h3>
-                        <p>Php. 30,000.00</p>
+                        <h3>Income This Year</h3>
+                        <p><?php echo "Php.".$salesThisYear ;?></p>
                     </div>
                     <div class="sales-cont balance">
                         <h3>Balance</h3>
-                        <p>Php. 100,000.00</p>
+                        <p><?php echo "Php.".$site['balance'] ;?></p>
                     </div>
                 </div>
     
@@ -93,32 +100,6 @@
                         </div>
                     </div>
     
-                    </div>
-                </div>
-    
-                <!-- ORDERS -->
-                <h2>ORDERS</h2>
-                <div class="main-orders">
-    
-                    <div class="on-return">
-                        <h3>REQUEST ON RETURNS</h3>
-                        <div class="table-round">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Item</th>
-                                        <th>Reason</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- FOREACH LOOP OF SALES HIST WITH RETURNING STATUS -->
-                                    <tr>
-
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
                     </div>
                 </div>
             </div>

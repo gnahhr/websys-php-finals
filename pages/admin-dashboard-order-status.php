@@ -19,7 +19,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poor+Story&family=Roboto:wght@300&family=Satisfy&display=swap" rel="stylesheet">
     
-    <title>Escafe - Sales History</title>
+    <title>Escafe - Order Status</title>
 </head>
 <body>
     <!-- HEADER -->
@@ -34,7 +34,13 @@
                     <a href="../connect/logout.php">Logout</a>
                 </div>
                 <div class="user-image">
-                    <img src="../img/users/blank.png" alt="user profile">
+                    <img src='<?php
+                                    if($pic != null)
+                                        echo '../connect/'.$pic;
+                                    else
+                                        echo '../img/users/blank.png';
+                                    
+                              ?>' alt="Profile Pic">
                 </div>
             </div>
     

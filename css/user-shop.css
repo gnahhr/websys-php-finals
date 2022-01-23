@@ -76,6 +76,7 @@ header nav ul li a{
 
 .user .user-image img{
     height: 50px;
+    width: 50px;
     border-radius: 100%;
 }
 
@@ -123,6 +124,7 @@ main .shop-main {
     width: 100%;
     min-height: 70vh;
     padding-bottom: 5vh;
+    overflow-y: auto;
 }
 
 main .shop-main .shop-items {
@@ -243,7 +245,6 @@ main .product-main .product-text form input[type=Submit] {
 main .product-main .product-text form input[type=Submit]:hover {
     background-color: #64755f;
 }
-
 
 /* user button */
 

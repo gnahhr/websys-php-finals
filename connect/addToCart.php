@@ -19,10 +19,10 @@
                 'totalPrice' => (int)$_POST['quantity'] * floatval($product['productPrice'])
             ));
         } else {
-            foreach ($_SESSION['orders'] as $sessProduct) {
+            foreach ($_SESSION['orders'] as &$sessProduct) {
                 if ($sessProduct['productID'] == $_GET['productID']) {
-                    $totalQty = (int)$sessProduct['quantity'] + (int)$_POST['quantity'];
-                    $sessProduct['quantity'] = (int)$totalQty;
+                    $sessProduct['quantity'] = (int)$sessProduct['quantity'] + (int)$_POST['quantity'];
+                    $sessProduct['totalPrice'] = (int)$sessProduct['totalPrice'] + ((int)$_POST['quantity'] * floatval($product['productPrice']));
                 }
             }
         }

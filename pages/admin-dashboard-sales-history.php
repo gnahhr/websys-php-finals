@@ -2,7 +2,7 @@
     include '../connect/session.php';
     require_once '../connect/config.php';
 
-    $statement = $pdo -> prepare ("SELECT * FROM saleshistory");
+    $statement = $pdo -> prepare ("SELECT * FROM saleshistory ORDER BY orderID DESC");
     $statement -> execute();
     $sales = $statement -> fetchAll();
 ?>
@@ -35,24 +35,18 @@
                     <a href="../connect/logout.php">Logout</a>
                 </div>
                 <div class="user-image">
-                    <img src="../img/users/blank.png" alt="user profile">
+                    <img src='<?php
+                                    if($pic != null)
+                                        echo '../connect/'.$pic;
+                                    else
+                                        echo '../img/users/blank.png';
+                                    
+                              ?>' alt="Profile Pic">
                 </div>
             </div>
     
             <div class="dashboard-sub">
                 <h1>SALES HISTORY</h1>
-                
-                <form action="../connect/sortSales.php" method="GET">
-                    <select name="saleSort" id="saleSort">
-                        <option value="perTrans">Per Transaction</option>
-                        <option value="perDay">Per Day</option>
-                        <option value="perWeek">Per Week</option>
-                        <option value="perMonth">Per Month</option>
-                        <option value="perYear">Per Year</option>
-                    </select>
-
-                    <input type="submit" value="Sort" class="view-btn btn">
-                </form>
 
                 <div class="table-rec">
                     <table>
@@ -64,17 +58,19 @@
                                 <th>QUANTITY</th>
                                 <th>TOTAL PRICE</th>
                                 <th>DATE</th>
+                                <th>STATUS</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach ($sales as $sale): ?>
                                 <tr>
-                                    <td><?php echo $sale['productID'] ?></td>
+                                    <td><?php echo $sale['orderID'] ?></td>
                                     <td><?php echo $sale['buyerID'] ?></td>
                                     <td><?php echo $sale['productName'] ?></td>
                                     <td><?php echo $sale['quantity'] ?></td>
                                     <td><?php echo $sale['totalPrice'] ?></td>
                                     <td><?php echo $sale['dateBought'] ?></td>
+                                    <td><?php echo $sale['status'] ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

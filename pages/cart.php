@@ -27,11 +27,12 @@
     <main>
         <h1> Shopping Cart </h1>
         <div class="shopping-cart">
-            <div class="table-rec-cart">
             <?php if (!isset($_SESSION['orders']) || (count($_SESSION['orders']) === 0)): ?>
                 <h2>There's nothing in cart!</h2>
-                <a href="#">Shop Now!</a>
+                <a href="./shop.php" class="btn view-btn cart-shop">Shop Now!</a>
+                </div>
             <?php else: ?>
+            <div class="table-rec-cart">
             <table>
                 <thead>
                     <tr>
@@ -57,13 +58,14 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
-            <?php endif; ?>
+            
             </div>
             
             <div class="cart-checkout-btn">
                 <p>Total Item & Price: Php. <span><?php echo $totalPrice. " (" . $totalItems . " Items)";?></span></p>
-                <a href="checkOut.php" class="cart-btn"> Check out </a>
+                <a href="../connect/checkoutCart.php" class="cart-btn"> Check out </a>
             </div>
+            <?php endif; ?>
         </div>
     </main>
 

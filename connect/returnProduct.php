@@ -4,7 +4,7 @@
     $orderStatus = 'hello';
 
     if (strcmp($_GET['action'], 'accept')) {
-        $orderStatus = "Returned";
+        $orderStatus = "Refunded";
     }else if (strcmp($_GET['action'], 'decline')){
         $orderStatus = "Shipping";
     }

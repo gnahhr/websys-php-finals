@@ -7,8 +7,9 @@
         $statement ->execute();
         $products = $statement -> fetchAll(PDO::FETCH_ASSOC);
     } else {
-        $statement = $pdo -> prepare("SELECT * FROM products WHERE productName LIKE ?");
-        $statement -> execute([$_GET['search']]);
+        $search = $_GET['search'];
+        $statement = $pdo -> prepare("SELECT * FROM products WHERE productName LIKE '%$search%' OR productCategory LIKE '%$search%'");
+        $statement -> execute();
         $products = $statement -> fetchAll(PDO::FETCH_ASSOC);
     }
     // echo '<pre>';
