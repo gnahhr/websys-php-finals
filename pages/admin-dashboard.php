@@ -93,37 +93,6 @@
                         </div>
                     </div>
     
-                    <div class="arrival">
-                        <h3>ARRIVAL OF GOODS</h3>
-                        <div class="table-round">
-                            <table>
-                                <tr>
-                                    <th>Item</th>
-                                    <th>Supplier</th>
-                                    <th>ETA</th>
-                                </tr>
-                                <tr>
-                                    <td>Something 1</td>
-                                    <td>Supplier 1</td>
-                                    <td>January 20, 2022</td>
-                                </tr>
-                                <tr>
-                                    <td>Something 2</td>
-                                    <td>Supplier 2</td>
-                                    <td>January 20, 2022</td>
-                                </tr>
-                                <tr>
-                                    <td>Something 3</td>
-                                    <td>Supplier 3</td>
-                                    <td>January 20, 2022</td>
-                                </tr>
-                                <tr>
-                                    <td>Something 4</td>
-                                    <td>Supplier 4</td>
-                                    <td>January 20, 2022</td>
-                                </tr>
-                            </table>
-                        </div>
                     </div>
                 </div>
     

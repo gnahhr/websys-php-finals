@@ -73,7 +73,7 @@
                             <?php foreach ($sales as $sale): ?>
                                 <tr>
                                     <td><?php echo $sale['productID'] ?></td>
-                                    <td><?php echo $sale['buyerUsername'] ?></td>
+                                    <td><?php echo $sale['buyerID'] ?></td>
                                     <td><?php echo $sale['productName'] ?></td>
                                     <td><?php echo $sale['quantity'] ?></td>
                                     <td><?php echo $sale['totalPrice'] ?></td>
