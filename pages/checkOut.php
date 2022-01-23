@@ -1,26 +1,25 @@
 <?php
-    
-    include '../connect/session.php';
+    session_start();
     $product = $_SESSION['orders'];
     $totalShit = 0;
     $totalItems = 0;
     $productsBought='';
 
-    echo '<pre>';
-    echo var_dump($product);
-    echo $_SESSION['id'];
-    echo '</pre>';
+    // echo '<pre>';
+    // echo var_dump($product);
+    // echo $_SESSION['id'];
+    // echo '</pre>';
     foreach ( $product as $order) {
-        echo $order['totalPrice'].'<br>';
+        //echo $order['totalPrice'].'<br>';
         $totalShit += $order['totalPrice'];
         $productsBought .= (string)$order['productID'] . ' - ' . (string)$order['productName'] . ' - ' . (string)$order['quantity'] . ', ';
         $totalItems += $order['quantity'];
     }
-    echo $totalShit.'<br>';
+    // echo $totalShit.'<br>';
     $totalShit += floatval($totalShit * 0.12) + 50;
-    echo $totalShit.'<br>';
+    // echo $totalShit.'<br>';
     $productsBought = substr($productsBought,0,-2);
-    echo $productsBought;
+    //echo $productsBought;
 
 ?>
 <!DOCTYPE html>
