@@ -87,10 +87,10 @@
                     </select> <br>
 
                     <label for="prodPrice">Price</label> <br>
-                    <input type="number" name="prodPrice" value=<?php echo $product[0]['productPrice']?> id="prodPrice" required><br>
+                    <input type="number" name="prodPrice" value=<?php echo $product[0]['productPrice']?> id="prodPrice" min="0" required><br>
 
                     <label for="discount">Discount</label> <br>
-                    <input type="number" name="discount" value=<?php echo $product[0]['discount']?> id="discount" min="0" max="80" required><br>
+                    <input type="number" name="discount" value=<?php echo $product[0]['discount']?> id="discount" min="0" max="80" value="0" required><br>
 
                     <label for="bundledWith">Bundled with: </label> <br>
                     <select name="bundledWith" id="bundledWith">

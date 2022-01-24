@@ -256,6 +256,20 @@
                 
                 return $productsBought;
         }
+
+        function exportCSV($csvData, $action = "perTrans") {
+            if ($action === "perTrans"){
+
+            } elseif ($action === "perDay") {
+
+            } elseif ($action === "perWeek") {
+                
+            } elseif ($action === "perMonth") {
+                
+            } elseif ($action === "perYear") {
+                
+            }
+        }
     ?>
 </body>
 </html>

@@ -61,7 +61,7 @@
                     <input type="text" name="prodName" id="prodName" required> <br>
 
                     <label for="prodPrice">Price</label> <br>
-                    <input type="number" name="prodPrice" id="prodPrice" required><br>
+                    <input type="number" name="prodPrice" id="prodPrice" min="0" required><br>
 
                     <label for="prodQuantity">Quantity</label> <br>
                     <input type="number" name="prodQuantity" id="prodQuantity" required><br>
