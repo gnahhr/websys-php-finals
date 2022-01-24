@@ -138,16 +138,20 @@ main .main-wrapper .dashboard-main h2 {
 /* SALES */
 
 main .main-wrapper .dashboard-main .main-sales{
-    display: flex;
+    display:grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-template-rows: repeat(2,1fr);
+    width:100%;
+    /* display: flex;
     justify-content: space-around;
     flex-direction: row;
     flex-wrap: wrap;
-    align-content: space-around;
+    align-content: space-around; */
 }
 
 main .main-wrapper .dashboard-main .main-sales .sales-cont{
     background-color: var(--dark-box);
-    padding: 2rem 3rem;
+    padding: 2rem 5rem;
     margin: 2rem 3rem;
     border-radius: 25px;
     text-align: center;

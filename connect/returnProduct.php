@@ -9,10 +9,10 @@
         $orderStatus = "Shipping";
     }
 
-    $statement = $pdo -> prepare("UPDATE saleshistory SET status = :status WHERE orderID = :orderID");
+    $statement = $pdo -> prepare("UPDATE transactionlog SET status = :status WHERE transactionID = :transactionID");
     $statement -> execute([
         ':status' => $orderStatus, 
-        ':orderID' => $_GET['orderID']
+        ':transactionID' => $_GET['transactionID']
     ]);
 
     Header("Location: ../pages/admin-dashboard-order-status.php");

@@ -2,7 +2,7 @@
     include '../connect/session.php';
     require_once '../connect/config.php';
 
-    $statement = $pdo -> prepare ("SELECT * FROM saleshistory ORDER BY orderID DESC");
+    $statement = $pdo -> prepare ("SELECT * FROM transactionlog sale ORDER BY transactionID DESC");
     $statement -> execute();
     $sales = $statement -> fetchAll();
 ?>
@@ -52,10 +52,10 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>ORDER ID</th>
-                                <th>USERNAME</th>
+                                <th>TRANSACTION ID</th>
+                                <th>BUYER ID</th>
                                 <th>PRODUCTS</th>
-                                <th>QUANTITY</th>
+                                <th>TOTAL ITEMS</th>
                                 <th>TOTAL PRICE</th>
                                 <th>DATE</th>
                                 <th>STATUS</th>
@@ -64,10 +64,16 @@
                         <tbody>
                             <?php foreach ($sales as $sale): ?>
                                 <tr>
-                                    <td><?php echo $sale['orderID'] ?></td>
+                                    <td><?php echo $sale['transactionID'] ?></td>
+                                    
                                     <td><?php echo $sale['buyerID'] ?></td>
-                                    <td><?php echo $sale['productName'] ?></td>
-                                    <td><?php echo $sale['quantity'] ?></td>
+                                    <td>
+                                        <?php foreach(formatProducts($sale['productsBought']) as $product){
+                                                echo $product . "<br>";
+                                            }
+                                        ?>
+                                    </td>
+                                    <td><?php echo $sale['totalItems'] ?></td>
                                     <td><?php echo $sale['totalPrice'] ?></td>
                                     <td><?php echo $sale['dateBought'] ?></td>
                                     <td><?php echo $sale['status'] ?></td>
@@ -82,8 +88,21 @@
 
 
     <!-- FOOTER -->
-    <footer>
-        <p>&copy; 2022</p>
-    </footer>
+    <?php include './footer.php'; ?>
+
+    <!-- FUNCTIONS -->
+    <?php
+        function formatProducts($product){
+                $perRow = explode(',', $product);
+                $productsBought = array();
+                foreach ($perRow as $row){
+                    $latter = explode('-', $row);
+                    $pushString = $latter[1] . " (" . $latter[2] . " pcs.)";
+                    array_push($productsBought, $pushString);
+                }
+                
+                return $productsBought;
+        }
+    ?>
 </body>
 </html>

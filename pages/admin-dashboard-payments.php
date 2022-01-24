@@ -1,7 +1,7 @@
 <?php
     include '../connect/session.php';
     require_once '../connect/config.php';
-    $statement = $pdo -> prepare("SELECT * FROM saleshistory WHERE status='Complete' ORDER BY dateBought DESC");
+    $statement = $pdo -> prepare("SELECT * FROM transactionlog WHERE status='Complete' ORDER BY dateBought DESC");
     $statement -> execute();
     $sales = $statement -> fetchAll();
 
@@ -22,11 +22,13 @@
                 foreach ($filteredResults as &$filtSale) {
                     if ($filtSale['Date'] == $curQuery){
                         $filtSale['Total Sales'] = $filtSale['Total Sales'] + $sale['totalPrice'];
+                        $filtSale['Total Items'] = $filtSale['Total Items'] + $sale['totalItems'];
                     }
                 }
             } else {
                 array_push($filteredResults, [
                     'Date' => $curQuery,
+                    'Total Items' => $sale['totalItems'],
                     'Total Sales' => $sale['totalPrice']
                 ]);
                 $curSaleItem = $curQuery;
@@ -40,12 +42,14 @@
                 foreach ($filteredResults as &$filtSale) {
                     if ($filtSale['Week Number'] == $curQuery){
                         $filtSale['Total Sales'] = $filtSale['Total Sales'] + $sale['totalPrice'];
+                        $filtSale['Total Items'] = $filtSale['Total Items'] + $sale['totalItems'];
                     }
                 }
             } else {
                 array_push($filteredResults, [
                     'Week Number' => $curQuery,
-                    'Total Sales' => $sale['totalPrice']
+                    'Total Sales' => $sale['totalPrice'],
+                    'Total Items' => $sale['totalItems']
                 ]);
                 $curSaleItem = $curQuery;
             }
@@ -58,12 +62,14 @@
                 foreach ($filteredResults as &$filtSale) {
                     if ($filtSale['Month'] == $curQuery){
                         $filtSale['Total Sales'] = $filtSale['Total Sales'] + $sale['totalPrice'];
+                        $filtSale['Total Items'] = $filtSale['Total Items'] + $sale['totalItems'];
                     }
                 }
             } else {
                 array_push($filteredResults, [
                     'Month' => $curQuery,
-                    'Total Sales' => $sale['totalPrice']
+                    'Total Sales' => $sale['totalPrice'],
+                    'Total Items' => $sale['totalItems']
                 ]);
                 $curSaleItem = $curQuery;
             }
@@ -76,12 +82,14 @@
                 foreach ($filteredResults as &$filtSale) {
                     if ($filtSale['Year'] == $curQuery){
                         $filtSale['Total Sales'] = $filtSale['Total Sales'] + $sale['totalPrice'];
+                        $filtSale['Total Items'] = $filtSale['Total Items'] + $sale['totalItems'];
                     }
                 }
             } else {
                 array_push($filteredResults, [
                     'Year' => $curQuery,
-                    'Total Sales' => $sale['totalPrice']
+                    'Total Sales' => $sale['totalPrice'],
+                    'Total Items' => $sale['totalItems']
                 ]);
                 $curSaleItem = $curQuery;
             }
@@ -142,29 +150,33 @@
                             <?php if ($saleSort === "perDay"): ?>
                                 <tr>
                                     <th>DAY</th>
+                                    <th>TOTAL ITEMS</th>
                                     <th>TOTAL SALES</th>
                                 </tr>
                             <?php elseif ($saleSort === "perWeek"): ?>
                                 <tr>
                                     <th>WEEK NUMBER</th>
+                                    <th>TOTAL ITEMS</th>
                                     <th>TOTAL SALES</th>
                                 </tr>
                             <?php elseif ($saleSort === "perMonth"): ?>
                                 <tr>
                                     <th>MONTH</th>
+                                    <th>TOTAL ITEMS</th>
                                     <th>TOTAL SALES</th>
                                 </tr>
                             <?php elseif ($saleSort === "perYear"): ?>
                                 <tr>
                                     <th>YEAR</th>
+                                    <th>TOTAL ITEMS</th>
                                     <th>TOTAL SALES</th>
                                 </tr>
                             <?php else: ?>
                                 <tr>
-                                    <th>ORDER ID</th>
+                                    <th>TRANSACTION ID</th>
                                     <th>BUYER ID</th>
                                     <th>PRODUCTS</th>
-                                    <th>QUANTITY</th>
+                                    <th>TOTAL ITEMS</th>
                                     <th>TOTAL PRICE</th>
                                     <th>DATE</th>
                                 </tr>
@@ -175,6 +187,7 @@
                                 <?php foreach ($filteredResults as $filtRes): ?>
                                     <tr>
                                         <td><?php echo $filtRes["Date"];?></td>
+                                        <td><?php echo $filtRes["Total Items"];?></td>
                                         <td><?php echo $filtRes["Total Sales"];?></td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -182,6 +195,7 @@
                                 <?php foreach ($filteredResults as $filtRes): ?>
                                     <tr>
                                         <td><?php echo $filtRes["Week Number"];?></td>
+                                        <td><?php echo $filtRes["Total Items"];?></td>
                                         <td><?php echo $filtRes["Total Sales"];?></td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -189,6 +203,7 @@
                                 <?php foreach ($filteredResults as $filtRes): ?>
                                     <tr>
                                         <td><?php echo $filtRes["Month"];?></td>
+                                        <td><?php echo $filtRes["Total Items"];?></td>
                                         <td><?php echo $filtRes["Total Sales"];?></td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -196,16 +211,22 @@
                                 <?php foreach ($filteredResults as $filtRes): ?>
                                     <tr>
                                         <td><?php echo $filtRes["Year"];?></td>
+                                        <td><?php echo $filtRes["Total Items"];?></td>
                                         <td><?php echo $filtRes["Total Sales"];?></td>
                                     </tr>
                                 <?php endforeach; ?>
                             <?php else: ?>
                                 <?php foreach ($sales as $sale): ?>
                                     <tr>
-                                        <td><?php echo $sale['orderID'] ?></td>
+                                        <td><?php echo $sale['transactionID'] ?></td>
                                         <td><?php echo $sale['buyerID'] ?></td>
-                                        <td><?php echo $sale['productName'] ?></td>
-                                        <td><?php echo $sale['quantity'] ?></td>
+                                        <td>
+                                            <?php foreach(formatProducts($sale['productsBought']) as $product){
+                                                    echo $product . "<br>";
+                                                }
+                                            ?>
+                                        </td>
+                                        <td><?php echo $sale['totalItems'] ?></td>
                                         <td><?php echo $sale['totalPrice'] ?></td>
                                         <td><?php echo $sale['dateBought'] ?></td>
                                     </tr>
@@ -220,8 +241,21 @@
 
 
     <!-- FOOTER -->
-    <footer>
-        <p>&copy; 2022</p>
-    </footer>
+    <?php include './footer.php'; ?>
+
+    <!-- FUNCTIONS -->
+    <?php
+        function formatProducts($product){
+                $perRow = explode(',', $product);
+                $productsBought = array();
+                foreach ($perRow as $row){
+                    $latter = explode('-', $row);
+                    $pushString = $latter[1] . " (" . $latter[2] . " pcs.)";
+                    array_push($productsBought, $pushString);
+                }
+                
+                return $productsBought;
+        }
+    ?>
 </body>
 </html>
