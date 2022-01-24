@@ -35,7 +35,7 @@
     
     <main>
         <div class="login-form">
-        <form action="../connect/editUser.php?id=<?php echo $id?>" method="post" enctype="multipart/form-data">
+        <form action="../connect/editUser.php" method="post" enctype="multipart/form-data">
 
             <div class="user-img">
                 <div class="user-img-content">
@@ -49,8 +49,6 @@
                     <input type="file" name="userPic" id="userPic" class="btn change-btn"> <br>
                 </div>
             </div>
-
-
             <label for="firstName">First name:</label><br>
             <input type="text" id="firstName" name="firstName" value=<?php echo $firstName?> required><br>
 
@@ -67,15 +65,14 @@
             <input type="text" id="username" name="username" value=<?php echo $username?> required><br>
 
             
-            <!-- <label for="oldPassword">Old Password:</label><br>
-            <input type="password" id="oldPassword" name="oldPassword" required><br>
+            <label for="currentPassword">Current Password:</label><br>
+            <input type="password" id="currentPassword" name="currentPassword" required><br>
             
             <label for="newPassword">New Password:</label><br>
-            <input type="password" id="newPassword" name="newPassword"  required><br>  -->
+            <input type="password" id="newPassword" name="newPassword"  ><br> 
 
             <div class="user-btn1">       
             <button type="submit"class="user-btn">Edit</button>
-            
             </div>       
 
         </form>
