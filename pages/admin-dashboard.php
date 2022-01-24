@@ -1,10 +1,14 @@
 <?php
     include '../connect/session.php';
     include '../connect/dashSales.php';
+    include '../connect/config.php';
 
     if (isset($_SESSION['access']) && ($_SESSION['access'] === 'user')){
         header("Location: ../pages/index.php");
     }
+    $statement = $pdo -> prepare ("SELECT * FROM products ORDER BY expirationDate DESC");
+    $statement -> execute();
+    $products = $statement -> fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -75,28 +79,29 @@
                     <div class="current-stocks">
                         <h3>CURRENT STOCKS</h3>
                         <div class="table-round">
-                            <table>
+                        <table>
+                        <thead>
+                            <tr>
+                                <th>PRODUCT NAME</th>
+                                <th>QTY</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <?php foreach($products as $products){ ?>
                                 <tr>
-                                    <th>Item</th>
-                                    <th>Qty</th>
+                                    
+                                    <td><?php echo $products['productName'] ?></td>
+                                    <td><?php echo $products['quantity'];
+                                            if($products['quantity'] <= 10)
+                                                echo '<h4> Low </h4>';   
+                                        ?></td>
+                                    
                                 </tr>
-                                <tr>
-                                    <td>Something 1</td>
-                                    <td>60</td>
-                                </tr>
-                                <tr>
-                                    <td>Something 2</td>
-                                    <td>9</td>
-                                </tr>
-                                <tr>
-                                    <td>Something 3</td>
-                                    <td>4</td>
-                                </tr>
-                                <tr>
-                                    <td>Something 4</td>
-                                    <td>20</td>
-                                </tr>
-                            </table>
+                            <?php }?>
+                            
+                        </tbody>
+                    </table>
                         </div>
                     </div>
     
