@@ -26,7 +26,7 @@
         <div class="hero">
             <div class="backdrop">
                 <div class="hero-content">
-                    <h1>Escafé</h1>
+                    <h1><?php echo $siteName; ?></h1>
                     <p>Escape through your coffee.</p>
                     <a href="./shop.php">Shop Now!</a>
                 </div>

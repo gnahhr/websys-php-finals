@@ -135,10 +135,12 @@
                 <form action="./admin-dashboard-payments.php" method="GET">
                     <select name="saleSort" id="saleSort">
                         <option value="perTrans" <?php if ($saleSort === "perTrans"): echo "selected"; endif;?>>Per Transaction</option>
-                        <option value="perDay" <?php if ($saleSort === "perDay"): echo "selected"; endif;?>>Per Day</option>
-                        <option value="perWeek" <?php if ($saleSort === "perWeek"): echo "selected"; endif;?>>Per Week</option>
-                        <option value="perMonth" <?php if ($saleSort === "perMonth"): echo "selected"; endif;?>>Per Month</option>
-                        <option value="perYear" <?php if ($saleSort === "perYear"): echo "selected"; endif;?>>Per Year</option>
+                        <?php if ($_SESSION['access'] === "admin"): ?>
+                            <option value="perDay" <?php if ($saleSort === "perDay"): echo "selected"; endif;?>>Per Day</option>
+                            <option value="perWeek" <?php if ($saleSort === "perWeek"): echo "selected"; endif;?>>Per Week</option>
+                            <option value="perMonth" <?php if ($saleSort === "perMonth"): echo "selected"; endif;?>>Per Month</option>
+                            <option value="perYear" <?php if ($saleSort === "perYear"): echo "selected"; endif;?>>Per Year</option>
+                        <?php endif; ?>
                     </select>
 
                     <input type="submit" value="Sort" class="view-btn btn">
@@ -255,20 +257,6 @@
                 }
                 
                 return $productsBought;
-        }
-
-        function exportCSV($csvData, $action = "perTrans") {
-            if ($action === "perTrans"){
-
-            } elseif ($action === "perDay") {
-
-            } elseif ($action === "perWeek") {
-                
-            } elseif ($action === "perMonth") {
-                
-            } elseif ($action === "perYear") {
-                
-            }
         }
     ?>
 </body>

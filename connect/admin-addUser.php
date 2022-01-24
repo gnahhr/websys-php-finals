@@ -6,6 +6,7 @@
     $email = $_POST['email'];
     $address = $_POST['address'];
     $username =$_POST['username'];
+    $accessLevel =$_POST['accessLevel'];
     $password = "password";
 
     $password = password_hash($password, PASSWORD_BCRYPT, array("cost" => 12));
@@ -35,10 +36,10 @@
             'address' => $address,
             'username' => $username,
             'password' => $password,
-            'userLevel' => "user"
+            'userLevel' => $accessLevel
         ]);
         
      
-        header("Location: ../pages/login.php");
+        header("Location: ../pages/admin-dashboard-user-manage.php");
     }
 ?>

@@ -7,9 +7,9 @@
 
      $statement = $pdo -> prepare ("SELECT * FROM sitesettings");
      $statement -> execute([]);
-     $site = $statement -> fetchAll(PDO::FETCH_ASSOC);
+     $site = $statement -> fetch(0);
 
-     $siteName = $site[0]['siteName'];
-     $siteLogo = $site[0]['siteLogo'];
-     $balance = $site[0]['beginningBalance'];
+     $siteName = $site['siteName'];
+     $siteLogo = $site['siteLogo'];
+     $balance = $site['balance'];
 ?>

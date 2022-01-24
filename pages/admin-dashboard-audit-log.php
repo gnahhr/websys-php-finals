@@ -2,9 +2,10 @@
     include '../connect/session.php';
     require_once '../connect/config.php';
 
-    $statement = $pdo -> prepare ("SELECT * FROM saleshistory ORDER BY orderID DESC");
+    $statement = $pdo -> prepare ("SELECT * FROM userlog ORDER BY dateTime DESC");
     $statement -> execute();
-    $sales = $statement -> fetchAll();
+    $logs = $statement -> fetchAll();
+
 ?>
 
 <!DOCTYPE html>
@@ -48,33 +49,33 @@
             <div class="dashboard-sub">
                 <h1>AUDIT LOG</h1>
 
-                <form action="./admin-dashboard-payments.php" method="GET">
-                    <select name="saleSort" id="saleSort">
+                <!-- <form action="./admin-dashboard-auditlog.php" method="GET">
+                    <select name="log-sort" id="log-sort">
                         <option value="perTrans" <?php if ($saleSort === "perTrans"): echo "selected"; endif;?>>USERS:</option>
                         <option value="perDay" <?php if ($saleSort === "perDay"): echo "selected"; endif;?>>EMPLOYEE:</option>
                         <option value="perWeek" <?php if ($saleSort === "perWeek"): echo "selected"; endif;?>>ADMIN:</option>
                     </select>
 
                     <input type="submit" value="Sort" class="view-btn btn">
-                </form>
+                </form> -->
 
                 <div class="table-rec">
                     <table>
                         <thead>
                             <tr>
                                 <th>USER ID</th>
-                                <th>USER LEVEL</th>
+                                <th>USERNAME</th>
                                 <th>ACTION</th>
                                 <th>DATE</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($sales as $sale): ?>
+                            <?php foreach ($logs as $log): ?>
                                 <tr>
-                                    <td><?php echo $sale['orderID'] ?></td>
-                                    <td><?php echo $sale['buyerID'] ?></td>
-                                    <td><?php echo $sale['status'] ?></td>
-                                    <td><?php echo $sale['quantity'] ?></td>
+                                    <td><?php echo $log['id'] ?></td>
+                                    <td><?php echo $log['username'] ?></td>
+                                    <td><?php echo $log['action'] ?></td>
+                                    <td><?php echo $log['dateTime'] ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

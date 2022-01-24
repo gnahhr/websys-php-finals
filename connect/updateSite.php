@@ -30,7 +30,7 @@
     $statement = $pdo -> prepare ("UPDATE sitesettings SET
         siteName = :siteName,
         siteLogo = :siteLogo, 
-        beginningBalance = :beginningBalance");
+        balance = :beginningBalance");
             
     $statement -> execute([
             ':siteName' => $siteName,
@@ -38,6 +38,5 @@
             ':beginningBalance' => $balance
     ]);
     
-        header("Location: ../pages/admin-dashboard-update-site.php")
-
+    header("Location: ../pages/admin-dashboard-update-site.php")
 ?>

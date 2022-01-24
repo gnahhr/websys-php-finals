@@ -71,7 +71,7 @@ nav ul li ul {
 
 nav ul li ul li {
     text-indent: 1rem;
-    margin: 0 1.25rem;
+    margin: 0 .5rem;
 }
 
 nav ul li ul li a,
@@ -244,6 +244,7 @@ main .main-wrapper .dashboard-sub form input[type=text],
 main .main-wrapper .dashboard-sub form input[type=number],
 main .main-wrapper .dashboard-sub form input[type=date],
 main .main-wrapper .dashboard-sub form input[type=select],
+main .main-wrapper .dashboard-sub form textarea,
 main .main-wrapper .dashboard-sub form option {
     color: var(--text-color);
     background-color: var(--link-dark-box);

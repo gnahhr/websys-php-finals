@@ -16,6 +16,10 @@
     $statement = $pdo -> prepare ("SELECT * FROM categories");
     $statement -> execute();
     $categories = $statement -> fetchAll(PDO::FETCH_ASSOC);
+
+    $statement = $pdo -> prepare ("SELECT * FROM supplier");
+    $statement -> execute();
+    $suppliers = $statement -> fetchAll(PDO::FETCH_ASSOC);
     // echo '<pre>';
     // var_dump($product[0]['bundledWith']);
     // echo '</pre>';
@@ -106,9 +110,15 @@
 
                     <label for="prodQuantity">Qty</label> <br>
                     <input type="number" name="prodQuantity" value=<?php echo $product[0]['quantity']?> id="prodQuantity" required><br>
-
+                    
                     <label for="prodSupplier">Supplier</label> <br>
-                    <input type="text" name="prodSupplier" value="<?php echo $product[0]['supplierName']?>" id="prodSupplier" required> <br>
+                    <select name="prodSupplier" id="prodSupplier">
+                        <?php foreach ($suppliers as $supplier): ?>
+                            <option value="<?php echo $supplier['supplierName']; ?>" <?php if($product[0]['supplierName'] === $supplier['supplierName']) echo "selected"; ?>>
+                                <?php echo $supplier['supplierName']; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select> <br>
 
                     <label for="prodDesc">Description</label> <br>
                     <input type="text" name="prodDesc" value="<?php echo $product[0]['productDescription']?>" id="prodDesc" required><br>

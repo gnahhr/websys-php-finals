@@ -2,7 +2,10 @@
     include '../connect/session.php';
     require_once '../connect/config.php';
 
-    $statement = $pdo -> prepare ("SELECT * FROM products ORDER BY expirationDate DESC");
+    $statement = $pdo -> prepare ("SELECT * FROM products
+        WHERE quantity < 20
+        OR expirationDate < NOW()
+    ");
     $statement -> execute();
     $products = $statement -> fetchAll(PDO::FETCH_ASSOC);
     // echo '<pre>';
@@ -58,21 +61,30 @@
                             <tr>
                                 <th>PRODUCT</th>
                                 <th>EXPIRY DATE</th>
+                                <th>QUANTITY</th>
+                                <th>NOTES</th>
                                 <th>ACTIONS</th>
                             </tr>
                         </thead>
                         <tbody>
 
-                            <?php foreach($products as $products){ ?>
-                                <tr>
-                                    <td><?php echo $products['productName'] ?>  </td>
-                                    <td><?php echo $products['expirationDate'] ?>  </td>
-                                    <td>
-                                        <a href="admin-dashboard-edit-prod.php?id=<?php echo $products['productID']?>" class="edit-btn btn">Edit</a>
-                                        <a href="../connect/deleteProduct.php?id=<?php echo $products['productID']?>" class="delete-btn btn">Delete</a>
-                                    </td>
-                                </tr>
-                            <?php }?>
+                            <?php foreach($products as $products): ?>
+                                <?php if ($products['expirationDate'] === "0000-00-00"): ?>
+                                <?php else: ?>
+                                    <tr>
+                                        <td><?php echo $products['productName'] ?>  </td>
+                                        <td><?php echo $products['expirationDate'] ?>  </td>
+                                        <td><?php echo $products['quantity'] ?>  </td>
+                                        <?php if($products['expirationDate'] < date("Y-m-d")): ?>
+                                            <td>Expired</td>
+                                            <td><a href="../connect/deleteProduct.php?id=<?php echo $products['productID']?>" class="delete-btn btn">Dispose</a></td>
+                                        <?php elseif($products['quantity'] < 20): ?>
+                                            <td>Low on stock</td>
+                                            <td><a href="admin-dashboard-edit-prod.php?id=<?php echo $products['productID']?>" class="view-btn btn">Restock</a></td>
+                                        <?php endif; ?>
+                                    </tr>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
                             
                         </tbody>
                     </table>
