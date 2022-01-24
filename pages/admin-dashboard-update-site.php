@@ -45,11 +45,11 @@
                 <h1>UPDATE SITE</h1>
                 
 
-                <form action="../connect/updateSite.php>" method="POST" enctype="multipart/form-data">
+                <form action="../connect/updateSite.php" method="POST" enctype="multipart/form-data">
                     <h3>SELECT NEW LOGO: </h3>
                     <div class="inv-pic">
                         <div class="inv-content">
-                            <img src="../img/index/logo.png" alt="user pic">
+                            <img src='<?php echo $siteLogo?>' alt="user pic">
                             <input type="file" name="siteImage" id="siteImage">
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                     <br>
 
                     <label for="balance">SET USER BALANCE:</label> <br>
-                    <input type="number" name="balance" value=<?php echo $site['balance']?> id="prodQuantity" required><br>
+                    <input type="number" name="balance" value=<?php echo $balance?> id="prodQuantity" required><br>
 
                     <div class="action-buttons">
                         <input type="submit" value="Confirm" class="view-btn btn">

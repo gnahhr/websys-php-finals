@@ -38,7 +38,7 @@
                     <h2>SYSTEM SETTINGS</h2>
                     <ul>
                         <li> <a href="#">SET BALANCE</a></li>
-                        <li> <a href="#">UPDATE SITE</a></li>
+                        <li> <a href="admin-dashboard-update-site.php">UPDATE SITE</a></li>
                         <li> <a href="#">ADD POST</a></li>
                         <li> <a href="./admin-dashboard-user-manage.php">MANAGE USERS</a></li>
                     </ul>

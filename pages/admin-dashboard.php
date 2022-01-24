@@ -69,7 +69,7 @@
                     </div>
                     <div class="sales-cont balance">
                         <h3>Balance</h3>
-                        <p><?php echo "Php.".$site['balance'] ;?></p>
+                        <p><?php echo "Php.".$balance ;?></p>
                     </div>
                 </div>
     

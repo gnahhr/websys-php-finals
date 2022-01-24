@@ -1,11 +1,13 @@
 <!-- HEADER -->
 <?php
+    include '../connect/config.php';
     $pic = $_SESSION['profilePic'] ?? null;
 ?>
 <header>
+    <!-- escafé -->
     <div class="logo-name">
-        <div class="logo-head"><img src="../img/index/logo.png" alt="logo"></div>
-        <div class="name-head"><p>escafé<p></div>
+        <div class="logo-head"><img src='<?php echo $siteLogo ?>' alt="logo"></div>
+        <div class="name-head"><p><?php echo $siteName ?><p></div>
     </div>
 
 
