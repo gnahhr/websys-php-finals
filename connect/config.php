@@ -8,4 +8,7 @@
      $statement = $pdo -> prepare ("SELECT * FROM sitesettings");
      $statement -> execute([]);
      $site = $statement -> fetch(0);
+
+     $siteName = $site['siteName'];
+     $siteLogo = $site['siteLogo'];
 ?>

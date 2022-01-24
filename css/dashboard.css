@@ -204,6 +204,11 @@ main .main-wrapper .dashboard-sub h2{
     margin-bottom: 3rem;
 }
 
+main .main-wrapper .dashboard-sub h3{
+    margin-top: 1.5rem;
+}
+
+
 /* ADD/EDIT PRODUCT */
 main .main-wrapper .dashboard-sub form .inv-pic {
     margin-left: 25vw;
