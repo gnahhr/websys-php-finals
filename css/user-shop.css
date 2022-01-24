@@ -128,9 +128,8 @@ main .shop-main {
 }
 
 main .shop-main .shop-items {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
 }
 
 main .shop-main .shop-items .shop-item {
@@ -138,26 +137,38 @@ main .shop-main .shop-items .shop-item {
     padding: 2rem;
     border-radius: 25px;
     margin: 2rem;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
 }
 
 main .shop-main .shop-items .shop-item img{
     width: 150px;
     height: 150px;
     border-radius: 25px;
+    align-self: center;
+    margin-bottom: 1rem;
 }
 
 main .shop-main .shop-items .shop-item h2 {
     color: var(--main-color);
     text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 2rem;
 }
 
 main .shop-main .shop-items .shop-item p{
     color: var(--main-color); 
     text-align: center;
+    justify-self: flex-end;
 }
 
 main .shop-main .shop-items .shop-item a {
     color: var(--text-color);
+    justify-self: flex-end;
     background-color: var(--main-color);
     padding: .25rem 1rem;
     display: block;

@@ -45,7 +45,7 @@
             <div class="shop-items">
                 <?php foreach ($products as $product): ?>
                     <div class="shop-item">
-                        <img src=<?php echo '../connect/'.$product['productImage'] ?> alt="item1">
+                        <img src='<?php echo '../connect/'.$product['productImage'] ?>' alt="item1">
                         <h2><?php echo $product['productName'] ?></h2>
                         <p>Price: <?php echo $product['productPrice'] ?></p>
                         <a href="product-page.php?productID=<?php echo $product['productID']?>"

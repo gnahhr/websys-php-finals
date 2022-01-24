@@ -80,7 +80,7 @@
                     <input type="text" name="prodDesc" id="prodDesc" required><br>
 
                     <label for="prodExpDate">Expiry Date</label> <br>
-                    <input type="date" name="prodExpDate" id="prodExpDate" required><br>
+                    <input type="date" name="prodExpDate" id="prodExpDate" ><br>
                     
                     <div class="action-buttons">
                         <input type="submit" value="Confirm" class="view-btn btn">

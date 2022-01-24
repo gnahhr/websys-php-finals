@@ -49,19 +49,14 @@
             </div>
     
             <div class="dashboard-sub">
-                <h1>INVENTORY</h1>
-                <h2>MANAGE</h2>
+                <h1>PRODUCT</h1>
+                <h2>STATUS</h2>
                 
                 <div class="table-rec">
                     <table>
                         <thead>
                             <tr>
-                                <th>PRODUCT IMAGE</th>
-                                <th>PRODUCT NAME</th>
-                                <th>PRODUCT CATEGORY</th>
-                                <th>PRODUCT PRICE</th>
-                                <th>QTY</th>
-                                <th>SUPPLIER</th>
+                                <th>PRODUCT</th>
                                 <th>EXPIRY DATE</th>
                                 <th>ACTIONS</th>
                             </tr>
@@ -70,15 +65,8 @@
 
                             <?php foreach($products as $products){ ?>
                                 <tr>
-                                    <td>
-                                        <img src='<?php echo '../connect/'.$products['productImage']?>' class="inv-image">
-                                    </td>
-                                    <td><?php echo $products['productName'] ?></td>
-                                    <td><?php echo $products['productCategory'] ?></td>
-                                    <td><?php echo $products['productPrice'] ?></td>
-                                    <td><?php echo $products['quantity'] ?></td>
-                                    <td><?php echo $products['supplierName'] ?></td>
-                                    <td><?php echo $products['expirationDate'] ?></td>
+                                    <td><?php echo $products['productName'] ?>  </td>
+                                    <td><?php echo $products['expirationDate'] ?>  </td>
                                     <td>
                                         <a href="admin-dashboard-edit-prod.php?id=<?php echo $products['productID']?>" class="edit-btn btn">Edit</a>
                                         <a href="../connect/deleteProduct.php?id=<?php echo $products['productID']?>" class="delete-btn btn">Delete</a>
@@ -90,7 +78,6 @@
                     </table>
                 </div>
 
-                <a href="./admin-dashboard-add-prod.php" class="view-btn btn add-prod">Add Product</a>
             </div>
         </div>
     </main>
