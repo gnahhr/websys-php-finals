@@ -1,10 +1,14 @@
 <?php
     include '../connect/session.php';
     require_once '../connect/config.php';
+    require '../vendor/autoload.php';
 
     $statement = $pdo -> prepare ("SELECT * FROM products ORDER BY expirationDate DESC");
     $statement -> execute();
     $products = $statement -> fetchAll(PDO::FETCH_ASSOC);
+
+    //Used to generate barcode
+    $generator = new Picqer\Barcode\BarcodeGeneratorHTML();
 ?>
 
 <!DOCTYPE html>
@@ -55,6 +59,7 @@
                             <tr>
                                 <th>PRODUCT IMAGE</th>
                                 <th>PRODUCT NAME</th>
+                                <th>BARCODE</th>
                                 <th>PRODUCT CATEGORY</th>
                                 <th>PRODUCT PRICE</th>
                                 <th>QTY</th>
@@ -70,14 +75,16 @@
                                         <img src='<?php echo '../connect/'.$products['productImage']?>' class="inv-image">
                                     </td>
                                     <td><?php echo $products['productName'] ?></td>
+                                    <td><?php echo $generator -> getBarcode($products['productID'], Picqer\Barcode\BarcodeGeneratorSVG::TYPE_UPC_A); ?></td>
                                     <td><?php echo $products['productCategory'] ?></td>
                                     <td><?php echo $products['productPrice'] ?></td>
                                     <td><?php echo $products['quantity'] ?></td>
                                     <td><?php echo $products['supplierName'] ?></td>
                                     <td><?php echo $products['expirationDate'] ?></td>
-                                    <td>
+                                    <td class="actions-col">
                                         <a href="admin-dashboard-edit-prod.php?id=<?php echo $products['productID']?>" class="edit-btn btn">Edit</a>
                                         <a href="../connect/deleteProduct.php?id=<?php echo $products['productID']?>" class="delete-btn btn">Delete</a>
+                                        <a href="../connect/saveBarcode.php?id=<?php echo $products['productID']?>&name=<?php echo $products['productName']; ?>" class="view-btn btn">Save Barcode</a>
                                     </td>
                                 </tr>
                             <?php }?>

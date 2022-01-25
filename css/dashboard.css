@@ -303,7 +303,7 @@ main .main-wrapper .dashboard-sub form input[type=date] {
     text-align: center;
     padding: 1rem;
     margin: 1rem 2rem;
-    width: 70vw;
+    min-width: 70vw;
     min-height: 50vh;
     display: flex;
     justify-content: center;
@@ -328,6 +328,10 @@ main .main-wrapper .dashboard-sub form input[type=date] {
     margin: .75rem;
 }
 
+.actions-col a{
+    display:block;
+}
+
 .btn {
     font-family: 'Roboto', sans-serif;
     font-size: 1rem;
@@ -339,6 +343,7 @@ main .main-wrapper .dashboard-sub form input[type=date] {
     margin: .25rem .25rem;
     border: none;
 }
+
 
 .edit-btn {
     background-color: rgba(38, 91, 192, 0.69);
