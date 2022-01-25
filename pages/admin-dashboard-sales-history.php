@@ -93,6 +93,7 @@
     <!-- FUNCTIONS -->
     <?php
         function formatProducts($product){
+                //Split the string between commas
                 $perRow = explode(',', $product);
                 $productsBought = array();
                 foreach ($perRow as $row){

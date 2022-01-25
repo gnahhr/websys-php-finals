@@ -6,7 +6,9 @@
     if (isset($_SESSION['access']) && ($_SESSION['access'] === 'user')){
         header("Location: ../pages/index.php");
     }
-    $statement = $pdo -> prepare ("SELECT * FROM products ORDER BY expirationDate DESC");
+
+    //GET PRODUCTS
+    $statement = $pdo -> prepare ("SELECT * FROM products ORDER BY expirationDate DESC LIMIT 5");
     $statement -> execute();
     $products = $statement -> fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -90,19 +92,14 @@
                             </tr>
                         </thead>
                         <tbody>
-
-                            <?php foreach($products as $products){ ?>
+                            <?php foreach($products as $products): ?>
                                 <tr>
-                                    
-                                    <td><?php echo $products['productName'] ?></td>
-                                    <td><?php echo $products['quantity'];
-                                            if($products['quantity'] <= 10)
-                                                echo '<h4> Low </h4>';   
-                                        ?></td>
-                                    
+                                    <td> <?php if($products['quantity'] <= 20)
+                                                echo '<span style="color:red; font-weight:bold;"> [Low] </span>';
+                                        ?><?php echo $products['productName'] ?> </td>
+                                    <td> <?php echo $products['quantity']; ?> </td>
                                 </tr>
-                            <?php }?>
-                            
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                         </div>

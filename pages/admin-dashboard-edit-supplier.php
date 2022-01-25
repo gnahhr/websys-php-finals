@@ -3,6 +3,7 @@
     include '../connect/session.php';
     require_once '../connect/config.php';
 
+    //Get supplier with the id of the passed supplierID
     $statement = $pdo -> prepare("SELECT * FROM supplier WHERE supplierID = :id");
     $statement -> execute([
         ':id' => $_GET['supplierID']

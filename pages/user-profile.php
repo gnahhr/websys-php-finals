@@ -9,7 +9,7 @@
     $email = $_SESSION['email'];
     $address = $_SESSION['address'];
     $username = $_SESSION['username'];
-
+    
     $statement = $pdo -> prepare ("SELECT * FROM userInfo WHERE username = :username");
     $statement -> execute([':username' => $username]);
     $user = $statement -> fetchAll(PDO::FETCH_ASSOC);
@@ -27,7 +27,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poor+Story&family=Roboto:wght@300&family=Satisfy&display=swap" rel="stylesheet">
     
-    <title>Escafe - Login</title>
+    <title>Escafe - User Profile</title>
 </head>
 <body>
 

@@ -8,9 +8,6 @@
     ");
     $statement -> execute();
     $products = $statement -> fetchAll(PDO::FETCH_ASSOC);
-    // echo '<pre>';
-    // var_dump($productsHolder);
-    // echo '</pre>';
 ?>
 
 <!DOCTYPE html>

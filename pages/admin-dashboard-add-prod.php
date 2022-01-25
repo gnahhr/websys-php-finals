@@ -69,7 +69,7 @@
                     <input type="number" name="prodPrice" id="prodPrice" min="0" required><br>
 
                     <label for="prodQuantity">Quantity</label> <br>
-                    <input type="number" name="prodQuantity" id="prodQuantity" required><br>
+                    <input type="number" name="prodQuantity" id="prodQuantity" min="0" required><br>
 
                     <label for="prodCategory">Category </label> <br>
                     <select name="prodCategory" id="prodCategory">

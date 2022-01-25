@@ -8,21 +8,16 @@
     $siteName = $_POST['siteName'];
     $balance = $_POST['balance'];
 
-    echo '<pre>';
-    echo var_dump($_POST);
-    echo '</pre>';
-    echo var_dump($siteLogo);
-
     $siteLogo = $_FILES['siteImage'] ?? null; 
     $imagePath=$site[0]['siteLogo'];
 
-        //this function will only run if there is a new image.
+    //this function will only run if there is a new image.
     if($siteLogo && $siteLogo['tmp_name']){
          //delete previous image
         if($user['profilePic']){
             unlink($user['profilePic']);
         }
-        //input shit.
+        //input image
         $imagePath = '../img/index/'.$siteLogo['name'];
         mkdir(dirname($imagePath));
         move_uploaded_file($siteLogo['tmp_name'],$imagePath);

@@ -7,9 +7,6 @@
         'productID' => $_GET['productID']
     ]);
     $product = $statement -> fetch(0);
-    // echo '<pre>';
-    // echo var_dump($products[0]['productImage']);
-    // echo '</pre>';
 ?>
 
 <!DOCTYPE html>

@@ -28,7 +28,6 @@
                             <li> <a href="./admin-dashboard-order-status.php">ORDERS</a></li>
                         <?php endif; ?>
                         <li> <a href="./admin-dashboard-payments.php">PAYMENTS</a></li>
-                        <li> <a href="#">BUNDLES</a></li>
                     </ul>
                 </li>
                 <?php if ($_SESSION['access'] === "admin"): ?>

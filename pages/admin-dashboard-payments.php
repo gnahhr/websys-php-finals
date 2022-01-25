@@ -1,12 +1,16 @@
 <?php
     include '../connect/session.php';
     require_once '../connect/config.php';
+
+    //GET SALES WITH COMPLETE STATUS
     $statement = $pdo -> prepare("SELECT * FROM transactionlog WHERE status='Complete' ORDER BY dateBought DESC");
     $statement -> execute();
     $sales = $statement -> fetchAll();
 
     $filteredResults = array();
+    //Date checker
     $curSaleItem = "";
+
     //SORT PER DAY
     if (!isset($_GET['saleSort'])) {
         $saleSort = "perTrans";
@@ -16,16 +20,23 @@
 
     if ($saleSort === "perDay") {
         foreach ($sales as $sale) {
+            //Get the date of the current iteration
             $curSale = new DateTime($sale['dateBought']);
             $curQuery = $curSale -> format('Y-m-d');
+
+            //Check if the current date iteration and the current date is the same
             if ($curQuery == $curSaleItem){
+                //Loop through the filtered result
                 foreach ($filteredResults as &$filtSale) {
+                    //If the filtered result date is the same as the current date iteration
+                    //Add the total sales and price of the current iteration to the whole
                     if ($filtSale['Date'] == $curQuery){
                         $filtSale['Total Sales'] = $filtSale['Total Sales'] + $sale['totalPrice'];
                         $filtSale['Total Items'] = $filtSale['Total Items'] + $sale['totalItems'];
                     }
                 }
             } else {
+                //Make a new array with a different date to separate the days in the data
                 array_push($filteredResults, [
                     'Date' => $curQuery,
                     'Total Items' => $sale['totalItems'],

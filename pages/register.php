@@ -18,7 +18,6 @@
     <!-- HEADER -->
     <?php include 'user-header.php' ?>
 
-    
     <main>
         <div class="login-form">
             <!-- "../connect/registerRouter.php" -->

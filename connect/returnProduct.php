@@ -1,10 +1,8 @@
 <?php
     require_once './config.php';
 
-    $orderStatus = 'hello';
-
     if (strcmp($_GET['action'], 'accept')) {
-        $orderStatus = "Refunded";
+        $orderStatus = "Returned";
     }else if (strcmp($_GET['action'], 'decline')){
         $orderStatus = "Shipping";
     }

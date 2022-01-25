@@ -23,29 +23,29 @@
         $bundledWith	= $_POST['bundledWith'];
     }
 
-    //select all product name excepet the current product name
+    //select all product name except the current product name
+    //So that the product item would not overlap
     $checkerProdName = $pdo -> prepare("SELECT productName FROM products WHERE productName = :checker AND productID != :id");
     $checkerProdName -> execute([
         ':checker' => $productName,
         ':id' => $id
     ]);
 
-  //refresh current page kapag yung bagong product name may kapareho, nyeta naubusan ako ng ingles HHAHAHA
+    //Refresh current page if there is already an existing product
     //Shen Xioating <3
     if($checkerProdName -> rowCount() > 0 ) {
-        echo "Existing";
         header('Location: ../pages\admin-dashboard-edit-prod.php?id='.$id);
         exit();
     }
-
     else{
-
         //create images folder if the folder does not exist. Bongga diba?
         if(!is_dir('images')){
             mkdir('images');
         }
 
-        //basically if the current pic is not replaced, value that is passed from the form is null so $imagepath will retain the current $productImage value. Follow Shen Xiaoting for a better life.
+        //basically if the current pic is not replaced, value that is passed from the form
+        //is null so $imagepath will retain the current $productImage value.
+        //Follow Shen Xiaoting for a better life.
         $productImage = $_FILES['productImage'] ?? null; 
         $imagePath=$product[0]['productImage'];
 
@@ -55,7 +55,7 @@
             if($product['productImage']){
                 unlink($product['productImage']);
             }
-            //input shit.
+            //input new image
             $imagePath = 'images/'.$productImage['name'];
             mkdir(dirname($imagePath));
             move_uploaded_file($productImage['tmp_name'],$imagePath);
@@ -91,16 +91,4 @@
         exit();
         }
         //I love Shen Xiaoting, sana ikaw din.
-        
-    //     function randomString($n){
-    //         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    //         $str = '';
-    
-    //         for($i = 0; $i < $n; $i++){
-    //             $index = rand(0, strlen($characters)-1);
-    //             $str .= $characters[$index];
-    //         }
-    
-    //         return $str;
-    // }
 ?>

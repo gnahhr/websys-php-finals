@@ -2,6 +2,7 @@
     include '../connect/session.php';
     require_once '../connect/config.php';
 
+    //Get all data from supplier
     $statement = $pdo -> prepare ("SELECT * FROM supplier");
     $statement -> execute();
     $suppliers = $statement -> fetchAll();
@@ -62,16 +63,16 @@
                         </thead>
                         <tbody>
                             <?php foreach ($suppliers as $supplier): ?>
-                            <tr>
-                                <td><?php echo $supplier['supplierName']; ?></td>
-                                <td><?php echo $supplier['itemSupplied']; ?></td>
-                                <td><?php echo $supplier['location']; ?></td>
-                                <td><?php echo $supplier['contactNumber']; ?></td>
-                                <td>
-                                    <a href="./admin-dashboard-edit-supplier.php?supplierID=<?php echo $supplier['supplierID']; ?>" class="edit-btn btn">Edit</a>
-                                    <a href="../connect/deleteSupplier.php?supplierID=<?php echo $supplier['supplierID']; ?>" class="delete-btn btn">Delete</a>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td><?php echo $supplier['supplierName']; ?></td>
+                                    <td><?php echo $supplier['itemSupplied']; ?></td>
+                                    <td><?php echo $supplier['location']; ?></td>
+                                    <td><?php echo $supplier['contactNumber']; ?></td>
+                                    <td>
+                                        <a href="./admin-dashboard-edit-supplier.php?supplierID=<?php echo $supplier['supplierID']; ?>" class="edit-btn btn">Edit</a>
+                                        <a href="../connect/deleteSupplier.php?supplierID=<?php echo $supplier['supplierID']; ?>" class="delete-btn btn">Delete</a>
+                                    </td>
+                                </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>

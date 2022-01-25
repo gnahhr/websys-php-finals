@@ -5,9 +5,6 @@
     $statement = $pdo -> prepare ("SELECT * FROM products ORDER BY expirationDate DESC");
     $statement -> execute();
     $products = $statement -> fetchAll(PDO::FETCH_ASSOC);
-    // echo '<pre>';
-    // var_dump($productsHolder);
-    // echo '</pre>';
 ?>
 
 <!DOCTYPE html>
@@ -67,7 +64,6 @@
                             </tr>
                         </thead>
                         <tbody>
-
                             <?php foreach($products as $products){ ?>
                                 <tr>
                                     <td>

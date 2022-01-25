@@ -3,8 +3,6 @@
     $totalItems = 0;
     $totalPrice = 0;
     $initialArray = 0;
-
-    // var_dump($_SESSION['orders']);
 ?>
 
 <!DOCTYPE html>
@@ -109,7 +107,9 @@
             
             
             <div class="cart-checkout-btn">
+                <!-- Tax is constant 12% -->
                 <p class="cart-p"><span>Tax:</span> Php. <?php echo $totalPrice *.12; ?><br>
+                <!-- Shipping fee is a constant 50 pesos -->
                 <p class="cart-p"><span>Shipping Fee:</span> Php. 50</p><br>
                 <div class="total-button">
                     <p>Total Item & Price: Php. <span><?php echo $totalPrice + 50 . " (" . $totalItems . " Items)";?></span></p>

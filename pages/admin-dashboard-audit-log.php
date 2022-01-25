@@ -48,17 +48,6 @@
     
             <div class="dashboard-sub">
                 <h1>AUDIT LOG</h1>
-
-                <!-- <form action="./admin-dashboard-auditlog.php" method="GET">
-                    <select name="log-sort" id="log-sort">
-                        <option value="perTrans" <?php if ($saleSort === "perTrans"): echo "selected"; endif;?>>USERS:</option>
-                        <option value="perDay" <?php if ($saleSort === "perDay"): echo "selected"; endif;?>>EMPLOYEE:</option>
-                        <option value="perWeek" <?php if ($saleSort === "perWeek"): echo "selected"; endif;?>>ADMIN:</option>
-                    </select>
-
-                    <input type="submit" value="Sort" class="view-btn btn">
-                </form> -->
-
                 <div class="table-rec">
                     <table>
                         <thead>
@@ -82,6 +71,7 @@
                     </table>
                 </div>
             </div>
+            
         </div>
     </main>
 

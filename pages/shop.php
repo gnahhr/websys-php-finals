@@ -2,19 +2,18 @@
     include '../connect/session.php';
     require_once '../connect/config.php';
 
+    //If not set, get all products from query
     if (!isset($_GET['search']) || ($_GET['search'] === '')) {
         $statement = $pdo -> prepare("SELECT * FROM products");
         $statement ->execute();
         $products = $statement -> fetchAll(PDO::FETCH_ASSOC);
     } else {
+        //Get products with the same productName or productCategory as the $search variable
         $search = $_GET['search'];
         $statement = $pdo -> prepare("SELECT * FROM products WHERE productName LIKE '%$search%' OR productCategory LIKE '%$search%'");
         $statement -> execute();
         $products = $statement -> fetchAll(PDO::FETCH_ASSOC);
     }
-    // echo '<pre>';
-    // echo var_dump($products[0]['productImage']);
-    // echo '</pre>';
 ?>
 
 <!DOCTYPE html>
@@ -53,12 +52,6 @@
                         >View Product</a>
                     </div>
                 <?php endforeach; ?>
-            </div>
-            
-            <div class="pages">
-                <a href="#">1</a>
-                <a href="#">2</a>
-                <a href="#">3</a>
             </div>
         </div>
     </main>

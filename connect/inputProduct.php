@@ -1,7 +1,8 @@
 <?php
     require_once './config.php';
 
-    //refer nalang sa mga comments ko sa editProduct, basta ang importang, We love Shen Xiaoting <3.
+    //refer nalang sa mga comments ko sa editProduct, basta ang importang
+    //We love Shen Xiaoting <3.
     $productName = $_POST['prodName'];
     $productPrice = $_POST['prodPrice'];
     $quantity = $_POST['prodQuantity'];
@@ -53,16 +54,4 @@
 
         header("Location: ../pages\admin-dashboard-inv-manage.php");
         exit();
-        
-    //     function randomString($n){
-    //         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    //         $str = '';
-    
-    //         for($i = 0; $i < $n; $i++){
-    //             $index = rand(0, strlen($characters)-1);
-    //             $str .= $characters[$index];
-    //         }
-    
-    //         return $str;
-    // }
 ?>

@@ -2,18 +2,23 @@
     session_start();
     require_once './config.php';
     
+    //Store Variables
     $username = $_POST['username'];
     $password = $_POST['password'];
     $dateTime = date('Y-m-d H:i:s');
 
+    //Start MySQL
     $statement = $pdo -> prepare("SELECT * FROM userInfo WHERE username = :checker");
     
+    //Execute Query
     $statement -> execute([
         'checker' => $username,
     ]);
 
+    //Get the first index of the query
     $user = $statement->fetch(PDO::FETCH_ASSOC);
 
+    //Check if user exists
     if ($user === false) {
         $_SESSION['message'] = "User not found.";
         header("Location: ../pages/login.php");
@@ -30,14 +35,16 @@
         $_SESSION['address'] = $user['address'];
         $_SESSION['access'] = $user['accessLevel'];
         
+        //Very hashed password
         $validPassword = password_verify($password, $user['password']);
         
         if ($validPassword){
+            //If Admin redirect to dashboard
             if($user['accessLevel'] === "admin") {
                 header("Location: ../pages/admin-dashboard.php");
             }
 
-            // pass on user id for indentification on user profile
+            //If User redirect to shop
             else if ($user['accessLevel'] === 'user'){
                 header('Location: ../pages/shop.php');
             }
