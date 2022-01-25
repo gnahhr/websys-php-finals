@@ -1,4 +1,10 @@
 "Transaction ID","Products Bought","Total Items","Total Price","Date Bought","Buyer ID",Status
+22,"29-Sagada Blend-2",2,1050,"2022-01-26 02:36:27",1005,Shipping
+21,13-munyanyo-2,2,296,"2022-01-25 19:24:39",1005,Complete
+20,"14-Shen Shawty-2",2,346,"2022-01-25 19:24:05",1005,Refunded
+19,"14-Shen Shawty-3,12-Intact Bangs-2",5,25184,"2022-01-25 18:45:04",1005,Refunded
+17,"14-Shen Shawty-3,12-Intact Bangs-2",5,25184,"2022-01-25 18:44:39",1005,Refunded
+18,"14-Shen Shawty-3,12-Intact Bangs-2",5,25184,"2022-01-25 18:44:39",1005,Refunded
 16,13-munyanyo-2,2,296,"2022-01-25 17:45:51",1005,Refunded
 15,"14-Shen Shawty-2,12-Intact Bangs-1",3,12849,"2022-01-24 07:38:30",1005,Complete
 14,13-munyanyo-1,1,173,"2022-01-24 07:21:33",1005,Complete
