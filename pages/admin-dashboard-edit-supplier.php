@@ -69,7 +69,7 @@
                     <label for="location">Location</label> <br>
                     <input type="text" name="location" id="location" value="<?php echo $supplier['location']; ?>"> <br>
                     <label for="contactNumber">Contact Number</label> <br>
-                    <input type="text" name="contactNumber" id="contactNumber" value="<?php echo $supplier['contactNumber']; ?>"><br>
+                    <input type="text" name="contactNumber" id="contactNumber" value="<?php echo $supplier['contactNumber']; ?>" maxlength=12;><br>
                     
                     <div class="action-buttons">
                         <input type="submit" value="Confirm" class="view-btn btn">

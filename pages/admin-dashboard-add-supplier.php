@@ -61,7 +61,8 @@
                     <label for="location">Location</label> <br>
                     <input type="text" name="location" id="location"> <br>
                     <label for="contactNumber">Contact Number</label> <br>
-                    <input type="text" name="contactNumber" id="contactNumber"><br>
+                    <input type="text" name="contactNumber" id="contactNumber" maxlength=12;><br>
+
 
                     
                     <div class="action-buttons">
