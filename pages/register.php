@@ -1,4 +1,6 @@
-
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,8 +22,11 @@
 
     <main>
         <div class="login-form">
-            <!-- "../connect/registerRouter.php" -->
             <form action="../connect/registerRouter.php" method="POST">
+                <?php if (isset($_SESSION['message'])){
+                        echo '<p class="error">' . $_SESSION['message'] . '</p>';
+                        unset($_SESSION['message']);
+                }?>
                 <label for="firstName">First Name</label>
                 <input type="text" name="firstName" id="firstName" required> <br>
                 <label for="lastName">Last Name</label>

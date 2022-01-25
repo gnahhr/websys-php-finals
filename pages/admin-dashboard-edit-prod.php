@@ -2,6 +2,10 @@
     include '../connect/session.php';
     include_once '../connect/config.php';
 
+    if(isset($_SESSION['access']) && ($_SESSION['access'] === "user") || !isset($_SESSION['access'])){
+        Header("Location: ../pages/index.php");
+    }
+
     $id = $_GET['id'];
 
     $statement = $pdo -> prepare ("SELECT * FROM products WHERE productID = :id ");
@@ -20,10 +24,6 @@
     $statement = $pdo -> prepare ("SELECT * FROM supplier");
     $statement -> execute();
     $suppliers = $statement -> fetchAll(PDO::FETCH_ASSOC);
-    // echo '<pre>';
-    // var_dump($product[0]['bundledWith']);
-    // echo '</pre>';
-    // echo $product[0]["productName"];
 ?>
 
 <!DOCTYPE html>

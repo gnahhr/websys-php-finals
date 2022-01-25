@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require_once './config.php';
 
     //Assign POST data in variables
@@ -29,7 +30,6 @@
         $_SESSION['message'] = "Username/Email already taken";
         //If taken redirect to register
         header("Location: ../pages/register.php ");
-        exit();
     }
     else{
         //Insert values into database
@@ -45,6 +45,5 @@
         ]);
 
         header("Location: ../pages/login.php");
-        exit();
     }
 ?>

@@ -1,7 +1,6 @@
 <!-- HEADER -->
 <?php
     include '../connect/config.php';
-    $pic = $_SESSION['profilePic'] ?? null;
 ?>
 <header>
     <!-- escafé -->

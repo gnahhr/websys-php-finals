@@ -21,5 +21,5 @@
     // $email = $_SESSION['email'];
     // $userlevel = $_SESSION['access'];
     // $address = $_SESSION['address'];
-    $_SESSION['message'] = NULL;
+    // $_SESSION['message'] = NULL;
 ?>

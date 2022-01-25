@@ -3,6 +3,12 @@
     $totalItems = 0;
     $totalPrice = 0;
     $initialArray = 0;
+
+    if(!isset($_SESSION['access'])){
+        Header("Location: ../pages/login.php");
+    } else if (isset($_SESSION['access']) && ($_SESSION['access'] != "user")){
+        Header("Location: ../pages/admin-dashboard.php");
+    }
 ?>
 
 <!DOCTYPE html>

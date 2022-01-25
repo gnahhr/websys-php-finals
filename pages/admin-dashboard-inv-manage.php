@@ -3,6 +3,10 @@
     require_once '../connect/config.php';
     require '../vendor/autoload.php';
 
+    if(isset($_SESSION['access']) && ($_SESSION['access'] === "user") || !isset($_SESSION['access'])){
+        Header("Location: ../pages/index.php");
+    }
+
     $statement = $pdo -> prepare ("SELECT * FROM products ORDER BY expirationDate DESC");
     $statement -> execute();
     $products = $statement -> fetchAll(PDO::FETCH_ASSOC);

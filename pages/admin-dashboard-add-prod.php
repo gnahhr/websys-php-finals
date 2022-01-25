@@ -1,6 +1,10 @@
 <?php
     include '../connect/session.php';
     require_once '../connect/config.php';
+    
+    if(isset($_SESSION['access']) && ($_SESSION['access'] === "user") || !isset($_SESSION['access'])){
+        Header("Location: ../pages/index.php");
+    }
 
     $statement = $pdo -> prepare ("SELECT * FROM categories");
     $statement -> execute();

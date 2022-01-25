@@ -1,6 +1,12 @@
 <?php
     include '../connect/session.php';
     include_once '../connect/config.php';
+
+    if(isset($_SESSION['access']) && ($_SESSION['access'] === "user") || !isset($_SESSION['access'])){
+        Header("Location: ../pages/index.php");
+    } else if ($_SESSION['access'] === "employee") {
+        Header("Location: ../pages/admin-dashboard.php");
+    }
 ?>
 
 <!DOCTYPE html>

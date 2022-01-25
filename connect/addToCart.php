@@ -2,6 +2,11 @@
     include './session.php';
     require_once './config.php';
 
+    if(!isset($_SESSION['access'])){
+        Header("Location: ../pages/login.php");
+        exit();
+    }
+
     $productID = $_GET['productID'];
 
     //Select product

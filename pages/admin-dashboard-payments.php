@@ -2,6 +2,10 @@
     include '../connect/session.php';
     require_once '../connect/config.php';
 
+    if(isset($_SESSION['access']) && ($_SESSION['access'] === "user") || !isset($_SESSION['access'])){
+        Header("Location: ../pages/index.php");
+    }
+
     //GET SALES WITH COMPLETE STATUS
     $statement = $pdo -> prepare("SELECT * FROM transactionlog WHERE status='Complete' ORDER BY dateBought DESC");
     $statement -> execute();

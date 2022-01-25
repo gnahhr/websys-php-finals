@@ -3,6 +3,12 @@
     include '../connect/session.php';
     require_once '../connect/config.php';
 
+    if(isset($_SESSION['access']) && ($_SESSION['access'] === "user") || !isset($_SESSION['access'])){
+        Header("Location: ../pages/index.php");
+    } else if ($_SESSION['access'] === "employee") {
+        Header("Location: ../pages/admin-dashboard.php");
+    }
+
     $statement = $pdo -> prepare("SELECT * FROM products WHERE productID = :id");
     $statement -> execute([
         ':id' => $_GET['productID']

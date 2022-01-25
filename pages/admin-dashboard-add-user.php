@@ -1,13 +1,12 @@
 <?php
     include '../connect/session.php';
     include_once '../connect/config.php';
-
-    // $id = $_GET['id'];
-
-    // $statement = $pdo -> prepare ("SELECT * FROM userinfo WHERE id = :id ");
-    // $statement ->bindValue(':id',$id);
-    // $statement -> execute();
-    // $user = $statement -> fetch(0);
+    
+    if(isset($_SESSION['access']) && ($_SESSION['access'] === "user") || !isset($_SESSION['access'])){
+        Header("Location: ../pages/index.php");
+    } else if ($_SESSION['access'] === "employee") {
+        Header("Location: ../pages/admin-dashboard.php");
+    }
 ?>
 
 <!DOCTYPE html>

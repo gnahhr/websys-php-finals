@@ -2,6 +2,12 @@
     include '../connect/session.php';
     require_once '../connect/config.php';
 
+    if(!isset($_SESSION['access'])){
+        Header("Location: ../pages/login.php");
+    } else if (isset($_SESSION['access']) && ($_SESSION['access'] != "user")){
+        Header("Location: ../pages/admin-dashboard.php");
+    }
+
     $statement = $pdo -> prepare("SELECT * FROM transactionlog WHERE buyerID = :id ORDER BY dateBought DESC");
     $statement -> execute([
         'id' => $_SESSION['id']

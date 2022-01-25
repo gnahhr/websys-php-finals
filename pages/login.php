@@ -1,3 +1,7 @@
+<?php
+    include '../connect/session.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,6 +24,10 @@
     <main>
         <div class="login-form">
             <form action="../connect/loginRouter.php" method="POST">
+                <?php if (isset($_SESSION['message'])){
+                        echo '<p class="error">' . $_SESSION['message'] . '</p>';
+                        unset($_SESSION['message']);
+                }?>
                 <label for="username">Username</label>
                 <input type="text" name="username" id="username" required> <br>
                 <label for="password">Password</label>

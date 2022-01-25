@@ -3,6 +3,12 @@
     include '../connect/session.php';
     require_once '../connect/config.php';
 
+    if(isset($_SESSION['access']) && ($_SESSION['access'] === "user") || !isset($_SESSION['access'])){
+        Header("Location: ../pages/index.php");
+    } else if ($_SESSION['access'] === "employee") {
+        Header("Location: ../pages/admin-dashboard.php");
+    }
+
     //Get supplier with the id of the passed supplierID
     $statement = $pdo -> prepare("SELECT * FROM supplier WHERE supplierID = :id");
     $statement -> execute([

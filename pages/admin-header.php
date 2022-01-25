@@ -1,7 +1,7 @@
 <header>
         <div class="logo-name">
             <div class="logo-head"><img src="../img/dashboard/logo-green-trim.png" alt="logo"></div>
-            <div class="name-head"><p>escafé<p></div>
+            <div class="name-head"><p><?php echo $siteName ?><p><p></div>
         </div>
 
         <h1>ADMIN</h1>
@@ -44,7 +44,6 @@
                     <h2>SYSTEM SETTINGS</h2>
                     <ul>
                         <li> <a href="./admin-dashboard-update-site.php">UPDATE SITE</a></li>
-                        <li> <a href="./admin-dashboard-add-post.php">ADD POST</a></li>
                         <li> <a href="./admin-dashboard-user-manage.php">MANAGE USERS</a></li>
                         <li> <a href="./admin-dashboard-audit-log.php">AUDIT LOG</a></li>
                     </ul>

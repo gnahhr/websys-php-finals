@@ -24,23 +24,22 @@
         header("Location: ../pages/login.php");
     } 
     else {
-        // Get data for SESSION
-        $_SESSION['id'] = $user['id'];
-        $_SESSION['profilePic'] = $user['profilePic'] ?? null;
-        $_SESSION['username'] = $user['username'];
-        $_SESSION['password'] = $user['password'];
-        $_SESSION['firstName'] = $user['firstName'];
-        $_SESSION['lastName'] = $user['lastName'];
-        $_SESSION['email'] = $user['email'];
-        $_SESSION['address'] = $user['address'];
-        $_SESSION['access'] = $user['accessLevel'];
-        
         //Very hashed password
         $validPassword = password_verify($password, $user['password']);
         
         if ($validPassword){
             //If Admin redirect to dashboard
-            if($user['accessLevel'] === "admin") {
+            // Get data for SESSION
+            $_SESSION['id'] = $user['id'];
+            $_SESSION['profilePic'] = $user['profilePic'] ?? null;
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['password'] = $user['password'];
+            $_SESSION['firstName'] = $user['firstName'];
+            $_SESSION['lastName'] = $user['lastName'];
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['address'] = $user['address'];
+            $_SESSION['access'] = $user['accessLevel'];
+            if($user['accessLevel'] === "admin" || $user['accessLevel'] === 'employee') {
                 header("Location: ../pages/admin-dashboard.php");
             }
 

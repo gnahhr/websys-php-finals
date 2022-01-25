@@ -136,6 +136,11 @@ main .login-form form input[type=submit]:hover {
     background-color: rgba(143, 68, 38, .80);
 }
 
+.error {
+    color: red;
+    font-weight: bold;
+}
+
 /* FOOTER */
 
 footer {
