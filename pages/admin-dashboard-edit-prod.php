@@ -71,7 +71,7 @@
                 <form action="../connect/editProduct.php?id=<?php echo $id?>" method="POST" enctype="multipart/form-data">
                     <div class="inv-pic">
                         <div class="inv-content">
-                            <img src=<?php echo '../connect/'.$product[0]['productImage']?> alt="user pic">
+                            <img src="<?php echo '../connect/'.$product[0]['productImage']?>" alt="user pic">
                             <input type="file" name="productImage" id="productImage">
                         </div>
                     </div>

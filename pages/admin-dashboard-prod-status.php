@@ -71,6 +71,15 @@
 
                             <?php foreach($products as $products): ?>
                                 <?php if ($products['expirationDate'] === "0000-00-00"): ?>
+                                    <?php if ($products['quantity'] < 20): ?>
+                                        <tr>
+                                        <td><?php echo $products['productName'] ?>  </td>
+                                        <td><?php echo $products['expirationDate'] ?>  </td>
+                                        <td><?php echo $products['quantity'] ?>  </td>
+                                        <td>Low on stock</td>
+                                        <td><a href="admin-dashboard-edit-prod.php?id=<?php echo $products['productID']?>" class="view-btn btn">Restock</a></td>
+                                        </tr>
+                                    <?php endif; ?>
                                 <?php else: ?>
                                     <tr>
                                         <td><?php echo $products['productName'] ?>  </td>
