@@ -1,3 +1,7 @@
+<?php
+    include '../connect/session.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,24 +19,16 @@
 <body>
 
     <!-- HEADER -->
-    <header>
-        <div class="logo-name">
-            <div class="logo-head"><img src="../img/index/logo.png" alt="logo"></div>
-            <div class="name-head"><p>escafé<p></div>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#">Login</a></li>
-                <li><a href="#">Register</a></li>
-            </ul>
-        </nav>
-    </header>
-
+    <?php include 'user-header.php' ?>
     
     <main>
         <div class="login-form">
-            <form action="#" method="post">
-                <label for="username">Email/Username</label>
+            <form action="../connect/loginRouter.php" method="POST">
+                <?php if (isset($_SESSION['message'])){
+                        echo '<p class="error">' . $_SESSION['message'] . '</p>';
+                        unset($_SESSION['message']);
+                }?>
+                <label for="username">Username</label>
                 <input type="text" name="username" id="username" required> <br>
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password" required>
@@ -43,8 +39,6 @@
     </main>
 
     <!-- FOOTER -->
-    <footer>
-        <p>&copy; 2022</p>
-    </footer>
+    <?php include "./footer.php"; ?>
 </body>
 </html>

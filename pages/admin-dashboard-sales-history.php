@@ -1,3 +1,18 @@
+<?php
+    include '../connect/session.php';
+    require_once '../connect/config.php';
+
+    if(isset($_SESSION['access']) && ($_SESSION['access'] === "user") || !isset($_SESSION['access'])){
+        Header("Location: ../pages/index.php");
+    } else if ($_SESSION['access'] === "employee") {
+        Header("Location: ../pages/admin-dashboard.php");
+    }
+
+    $statement = $pdo -> prepare ("SELECT * FROM transactionlog sale ORDER BY transactionID DESC");
+    $statement -> execute();
+    $sales = $statement -> fetchAll();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,119 +25,66 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poor+Story&family=Roboto:wght@300&family=Satisfy&display=swap" rel="stylesheet">
     
-    <title>Escafe - Admin Dashboard</title>
+    <title>Escafe - Sales History</title>
 </head>
 <body>
 
     <!-- HEADER -->
-    <header>
-        <div class="logo-name">
-            <div class="logo-head"><img src="../img/dashboard/logo-green-trim.png" alt="logo"></div>
-            <div class="name-head"><p>escafé<p></div>
-        </div>
-
-        <h1>ADMIN</h1>
-
-        <nav>
-            <ul>
-                <li>
-                    <h2>INVENTORY</h2>
-                    <ul>
-                        <li> <a href="#">SUPPLIER</a></li>
-                        <li> <a href="#">CATEGORIES</a></li>
-                        <li> <a href="#">MANAGE</a></li>
-                        <li> <a href="#">STOCKS</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <h2>POINT OF SALE</h2>
-                    <ul>
-                        <li> <a href="#">ORDER ITEMS</a></li>
-                        <li> <a href="#">PLACEHOLDER</a></li>
-                        <li> <a href="#">PLACEHOLDER</a></li>
-                        <li> <a href="#">PLACEHOLDER</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <h2>REPORTS</h2>
-                    <ul>
-                        <li> <a href="#">SALES</a></li>
-                        <li> <a href="#">PRODUCT</a></li>
-                        <li> <a href="#">PLACEHOLDER</a></li>
-                        <li> <a href="#">PLACEHOLDER</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <h2>SYSTEM SETTINGS</h2>
-                    <ul>
-                        <li> <a href="#">SET BALANCE</a></li>
-                        <li> <a href="#">UPDATE SITE</a></li>
-                        <li> <a href="#">ADD POST</a></li>
-                        <li> <a href="#">CONTENT</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-    </header>
+    <?php include './admin-header.php'; ?>
 
     <!-- MAIN CONTENTS -->
     <main>
         <div class="main-wrapper">
             <div class="user">  
                 <div class="user-text">
-                    <p>Hi, $user</p>
-                    <a href="#">Logout</a>
+                    <p>Hi, <?php echo $_SESSION['username']?></p>
+                    <a href="../connect/logout.php">Logout</a>
                 </div>
                 <div class="user-image">
-                    <img src="../img/users/blank.png" alt="user profile">
+                    <img src='<?php
+                                    if($pic != null)
+                                        echo '../connect/'.$pic;
+                                    else
+                                        echo '../img/users/blank.png';
+                                    
+                              ?>' alt="Profile Pic">
                 </div>
             </div>
     
             <div class="dashboard-sub">
                 <h1>SALES HISTORY</h1>
-                
-                <form action="POST">
-                    <input type="radio" name="salesHist" id="perTransaction" value="perTransaction">
-                    <label for="perTransaction">Per Transaction</label>
-                    <input type="radio" name="salesHist" id="perDay" value="perDay">
-                    <label for="perTransaction">Per Day</label>
-                    <input type="radio" name="salesHist" id="perWeek" value="perWeek">
-                    <label for="perTransaction">Per Week</label>
-                    <input type="radio" name="salesHist" id="perMonth" value="perMonth">
-                    <label for="perTransaction">Per Month</label>
-                    <input type="radio" name="salesHist" id="perYear" value="perYear">
-                    <label for="perTransaction">Per Year</label>
-
-                    <input type="submit" value="Sort">
-                </form>
 
                 <div class="table-rec">
                     <table>
                         <thead>
                             <tr>
-                                <th>ORDER ID</th>
-                                <th>USERNAME</th>
+                                <th>TRANSACTION ID</th>
+                                <th>BUYER ID</th>
                                 <th>PRODUCTS</th>
+                                <th>TOTAL ITEMS</th>
                                 <th>TOTAL PRICE</th>
                                 <th>DATE</th>
+                                <th>STATUS</th>
                             </tr>
                         </thead>
                         <tbody>
-                           <tr>
-                               <td>42069</td>
-                               <td>BARCODE</td>
-                               <td>Arabica</td>
-                               <td>69</td>
-                               <td>January 23, 2022</td>
-                           </tr>
-                           <tr>
-                               <td>42070</td>
-                               <td>BARCODE</td>
-                               <td>Robusca</td>
-                               <td>42</td>
-                               <td>January 13, 2022</td>
-                           </tr>
+                            <?php foreach ($sales as $sale): ?>
+                                <tr>
+                                    <td><?php echo $sale['transactionID'] ?></td>
+                                    
+                                    <td><?php echo $sale['buyerID'] ?></td>
+                                    <td>
+                                        <?php foreach(formatProducts($sale['productsBought']) as $product){
+                                                echo $product . "<br>";
+                                            }
+                                        ?>
+                                    </td>
+                                    <td><?php echo $sale['totalItems'] ?></td>
+                                    <td><?php echo $sale['totalPrice'] ?></td>
+                                    <td><?php echo $sale['dateBought'] ?></td>
+                                    <td><?php echo $sale['status'] ?></td>
+                                </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
@@ -132,8 +94,22 @@
 
 
     <!-- FOOTER -->
-    <footer>
-        <p>&copy; 2022</p>
-    </footer>
+    <?php include './footer.php'; ?>
+
+    <!-- FUNCTIONS -->
+    <?php
+        function formatProducts($product){
+                //Split the string between commas
+                $perRow = explode(',', $product);
+                $productsBought = array();
+                foreach ($perRow as $row){
+                    $latter = explode('-', $row);
+                    $pushString = $latter[1] . " (" . $latter[2] . " pcs.)";
+                    array_push($productsBought, $pushString);
+                }
+                
+                return $productsBought;
+        }
+    ?>
 </body>
 </html>

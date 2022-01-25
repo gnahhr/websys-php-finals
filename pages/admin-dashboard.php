@@ -1,3 +1,18 @@
+<?php
+    include '../connect/session.php';
+    include '../connect/dashSales.php';
+    include '../connect/config.php';
+
+    if (isset($_SESSION['access']) && ($_SESSION['access'] === 'user')){
+        header("Location: ../pages/index.php");
+    }
+
+    //GET PRODUCTS
+    $statement = $pdo -> prepare ("SELECT * FROM products ORDER BY expirationDate DESC LIMIT 5");
+    $statement -> execute();
+    $products = $statement -> fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,67 +30,24 @@
 <body>
 
     <!-- HEADER -->
-    <header>
-        <div class="logo-name">
-            <div class="logo-head"><img src="../img/dashboard/logo-green-trim.png" alt="logo"></div>
-            <div class="name-head"><p>escafé<p></div>
-        </div>
-
-        <h1>ADMIN</h1>
-
-        <nav>
-            <ul>
-                <li>
-                    <h2>INVENTORY</h2>
-                    <ul>
-                        <li> <a href="#">SUPPLIER</a></li>
-                        <li> <a href="#">CATEGORIES</a></li>
-                        <li> <a href="#">MANAGE</a></li>
-                        <li> <a href="#">STOCKS</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <h2>POINT OF SALE</h2>
-                    <ul>
-                        <li> <a href="#">ORDER ITEMS</a></li>
-                        <li> <a href="#">PLACEHOLDER</a></li>
-                        <li> <a href="#">PLACEHOLDER</a></li>
-                        <li> <a href="#">PLACEHOLDER</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <h2>REPORTS</h2>
-                    <ul>
-                        <li> <a href="#">SALES</a></li>
-                        <li> <a href="#">PRODUCT</a></li>
-                        <li> <a href="#">PLACEHOLDER</a></li>
-                        <li> <a href="#">PLACEHOLDER</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <h2>SYSTEM SETTINGS</h2>
-                    <ul>
-                        <li> <a href="#">SET BALANCE</a></li>
-                        <li> <a href="#">UPDATE SITE</a></li>
-                        <li> <a href="#">ADD POST</a></li>
-                        <li> <a href="#">CONTENT</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-    </header>
+    <?php include './admin-header.php'; ?>
 
     <!-- MAIN CONTENTS -->
     <main>
         <div class="main-wrapper">
             <div class="user">  
                 <div class="user-text">
-                    <p>Hi, $user</p>
-                    <a href="#">Logout</a>
+                    <p>Hi, <?php echo $_SESSION['username']?></p>
+                    <a href="../connect/logout.php">Logout</a>
                 </div>
                 <div class="user-image">
-                    <img src="../img/users/blank.png" alt="user profile">
+                    <img src='<?php
+                                    if($pic != null)
+                                        echo '../connect/'.$pic;
+                                    else
+                                        echo '../img/users/blank.png';
+                                    
+                              ?>' alt="Profile Pic">
                 </div>
             </div>
     
@@ -86,21 +58,24 @@
                 <h2>SALES</h2>
                 <div class="main-sales">
                     <div class="sales-cont total-income">
-                        <h3>Total Income</h3>
-                        <p>Php. 60,000.00</p>
+                        <h3>Income Today</h3>
+                        <p><?php echo "Php.".$salesToday ;?></p>
                     </div>
+                    <?php if ($_SESSION['access'] === "admin"): ?>
+
                     <div class="sales-cont total-expenses">
-                        <h3>Total Expenses</h3>
-                        <p>Php. 30, 000.00</p>
+                        <h3>Income This Month</h3>
+                        <p><?php echo "Php.".$salesThisMonth ;?></p>
                     </div>
                     <div class="sales-cont net-profit">
-                        <h3>Net Profit</h3>
-                        <p>Php. 30,000.00</p>
+                        <h3>Income This Year</h3>
+                        <p><?php echo "Php.".$salesThisYear ;?></p>
                     </div>
                     <div class="sales-cont balance">
                         <h3>Balance</h3>
-                        <p>Php. 100,000.00</p>
+                        <p><?php echo "Php.".$balance ;?></p>
                     </div>
+                    <?php endif; ?>
                 </div>
     
                 <!-- INVENTORY SUMMARY -->
@@ -109,132 +84,27 @@
                     <div class="current-stocks">
                         <h3>CURRENT STOCKS</h3>
                         <div class="table-round">
-                            <table>
+                        <table>
+                        <thead>
+                            <tr>
+                                <th>PRODUCT NAME</th>
+                                <th>QTY</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach($products as $products): ?>
                                 <tr>
-                                    <th>Item</th>
-                                    <th>Qty</th>
+                                    <td> <?php if($products['quantity'] <= 20)
+                                                echo '<span style="color:red; font-weight:bold;"> [Low] </span>';
+                                        ?><?php echo $products['productName'] ?> </td>
+                                    <td> <?php echo $products['quantity']; ?> </td>
                                 </tr>
-                                <tr>
-                                    <td>Something 1</td>
-                                    <td>60</td>
-                                </tr>
-                                <tr>
-                                    <td>Something 2</td>
-                                    <td>9</td>
-                                </tr>
-                                <tr>
-                                    <td>Something 3</td>
-                                    <td>4</td>
-                                </tr>
-                                <tr>
-                                    <td>Something 4</td>
-                                    <td>20</td>
-                                </tr>
-                            </table>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
                         </div>
                     </div>
     
-                    <div class="arrival">
-                        <h3>ARRIVAL OF GOODS</h3>
-                        <div class="table-round">
-                            <table>
-                                <tr>
-                                    <th>Item</th>
-                                    <th>Supplier</th>
-                                    <th>ETA</th>
-                                </tr>
-                                <tr>
-                                    <td>Something 1</td>
-                                    <td>Supplier 1</td>
-                                    <td>January 20, 2022</td>
-                                </tr>
-                                <tr>
-                                    <td>Something 2</td>
-                                    <td>Supplier 2</td>
-                                    <td>January 20, 2022</td>
-                                </tr>
-                                <tr>
-                                    <td>Something 3</td>
-                                    <td>Supplier 3</td>
-                                    <td>January 20, 2022</td>
-                                </tr>
-                                <tr>
-                                    <td>Something 4</td>
-                                    <td>Supplier 4</td>
-                                    <td>January 20, 2022</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-    
-                <!-- ORDERS -->
-                <h2>ORDERS</h2>
-                <div class="main-orders">
-                    <div class="preparing">
-                        <h3>PREPARING</h3>
-                        <div class="table-round">
-                            <table>
-                                <tr>
-                                    <th>Item</th>
-                                    <th>Qty</th>
-                                    <th>Action</th>
-                                </tr>
-                                <tr>
-                                    <td>Something 1</td>
-                                    <td>4</td>
-                                    <td><button>Done</button><button>Cancel</button></td>
-                                </tr>
-                                <tr>
-                                    <td>Something 2</td>
-                                    <td>20</td>
-                                    <td><button>Done</button><button>Cancel</button></td>
-                                </tr>
-                                <tr>
-                                    <td>Something 3</td>
-                                    <td>60</td>
-                                    <td><button>Done</button><button>Cancel</button></td>
-                                </tr>
-                                <tr>
-                                    <td>Something 4</td>
-                                    <td>9</td>
-                                    <td><button>Done</button><button>Cancel</button></td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-    
-                    <div class="on-return">
-                        <h3>ON-RETURN</h3>
-                        <div class="table-round">
-                            <table>
-                                <tr>
-                                    <th>Item</th>
-                                    <th>Reason</th>
-                                    <th>ETA</th>
-                                </tr>
-                                <tr>
-                                    <td>Something 1</td>
-                                    <td>Ewan</td>
-                                    <td>January 20, 2022</td>
-                                </tr>
-                                <tr>
-                                    <td>Something 2</td>
-                                    <td>Ewan</td>
-                                    <td>January 20, 2022</td>
-                                </tr>
-                                <tr>
-                                    <td>Something 3</td>
-                                    <td>Ewan</td>
-                                    <td>January 20, 2022</td>
-                                </tr>
-                                <tr>
-                                    <td>Something 4</td>
-                                    <td>Ewan</td>
-                                    <td>January 20, 2022</td>
-                                </tr>
-                            </table>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -243,8 +113,6 @@
 
 
     <!-- FOOTER -->
-    <footer>
-        <p>&copy; 2022</p>
-    </footer>
+    <?php include "./footer.php"; ?>
 </body>
 </html>

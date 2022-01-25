@@ -1,3 +1,20 @@
+<?php
+    session_start();
+    include '../connect/config.php';
+    
+    $id = $_SESSION['id'];
+    $profilePic = $_SESSION['profilePic'] ?? null;
+    $firstName = $_SESSION['firstName'];
+    $lastName = $_SESSION['lastName'];
+    $email = $_SESSION['email'];
+    $address = $_SESSION['address'];
+    $username = $_SESSION['username'];
+    
+    $statement = $pdo -> prepare ("SELECT * FROM userInfo WHERE username = :username");
+    $statement -> execute([':username' => $username]);
+    $user = $statement -> fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,49 +27,52 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poor+Story&family=Roboto:wght@300&family=Satisfy&display=swap" rel="stylesheet">
     
-    <title>Escafe - Login</title>
+    <title>Escafe - User Profile</title>
 </head>
 <body>
 
-    <!-- HEADER -->
-    <header>
-        <div class="logo-name">
-            <div class="logo-head"><img src="../img/index/logo.png" alt="logo"></div>
-            <div class="name-head"><p>escafé<p></div>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#">Login</a></li>
-                <li><a href="#">Register</a></li>
-            </ul>
-        </nav>
-    </header>
-
+    <?php include 'user-header.php' ?>
     
     <main>
         <div class="login-form">
-        <form>
-            <label for="fname">First name:</label><br>
-            <input type="text" id="fname" name="fname"><br>
+        <form action="../connect/editUser.php" method="post" enctype="multipart/form-data">
 
-            <label for="lname">Last name:</label><br>
-            <input type="text" id="lname" name="lname"><br>
+            <div class="user-img">
+                <div class="user-img-content">
+                    <img src='<?php
+                                    if($pic != null)
+                                        echo '../connect/'.$pic;
+                                    else
+                                        echo '../img/users/blank.png';
+                                    
+                              ?>' alt="Profile Pic">
+                    <input type="file" name="userPic" id="userPic" class="btn change-btn"> <br>
+                </div>
+            </div>
+            <label for="firstName">First name:</label><br>
+            <input type="text" id="firstName" name="firstName" value=<?php echo $firstName?> required><br>
+
+            <label for="lastName">Last name:</label><br>
+            <input type="text" id="lastName" name="lastName" value=<?php echo $lastName?>  required><br>
 
             <label for="email">E-mail:</label><br>
-            <input type="text" id="email" name="email"><br>
+            <input type="text" id="email" name="email" value=<?php echo $email?> required><br>
 
             <label for="address">Address:</label><br>
-            <input type="text" id="address" name="address"><br>
+            <input type="text" id="address" name="address" value='<?php echo $address?>'  required><br>
 
             <label for="username">Username:</label><br>
-            <input type="text" id="username" name="username"><br>
+            <input type="text" id="username" name="username" value=<?php echo $username?> required><br>
 
-            <label for="password">Password:</label><br>
-            <input type="text" id="password" name="password"><br>
+            
+            <label for="currentPassword">Current Password:</label><br>
+            <input type="password" id="currentPassword" name="currentPassword" required><br>
+            
+            <label for="newPassword">New Password:</label><br>
+            <input type="password" id="newPassword" name="newPassword"  ><br> 
 
             <div class="user-btn1">       
-            <button class="user-btn">edit</button>
-            <button class="user-btn">save</button>
+            <button type="submit"class="user-btn">Edit</button>
             </div>       
 
         </form>
@@ -60,8 +80,6 @@
     </main>
 
     <!-- FOOTER -->
-    <footer>
-        <p>&copy; 2022</p>
-    </footer>
+    <?php include "./footer.php"; ?>
 </body>
 </html>

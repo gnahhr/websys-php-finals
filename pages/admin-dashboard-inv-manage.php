@@ -1,3 +1,20 @@
+<?php
+    include '../connect/session.php';
+    require_once '../connect/config.php';
+    require '../vendor/autoload.php';
+
+    if(isset($_SESSION['access']) && ($_SESSION['access'] === "user") || !isset($_SESSION['access'])){
+        Header("Location: ../pages/index.php");
+    }
+
+    $statement = $pdo -> prepare ("SELECT * FROM products ORDER BY expirationDate DESC");
+    $statement -> execute();
+    $products = $statement -> fetchAll(PDO::FETCH_ASSOC);
+
+    //Used to generate barcode
+    $generator = new Picqer\Barcode\BarcodeGeneratorHTML();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,72 +27,29 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poor+Story&family=Roboto:wght@300&family=Satisfy&display=swap" rel="stylesheet">
     
-    <title>Escafe - Admin Dashboard</title>
+    <title>Escafe - Inventory Management</title>
 </head>
 <body>
 
     <!-- HEADER -->
-    <header>
-        <div class="logo-name">
-            <div class="logo-head"><img src="../img/dashboard/logo-green-trim.png" alt="logo"></div>
-            <div class="name-head"><p>escafé<p></div>
-        </div>
-
-        <h1>ADMIN</h1>
-
-        <nav>
-            <ul>
-                <li>
-                    <h2>INVENTORY</h2>
-                    <ul>
-                        <li> <a href="#">SUPPLIER</a></li>
-                        <li> <a href="#">CATEGORIES</a></li>
-                        <li> <a href="#">MANAGE</a></li>
-                        <li> <a href="#">STOCKS</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <h2>POINT OF SALE</h2>
-                    <ul>
-                        <li> <a href="#">ORDER ITEMS</a></li>
-                        <li> <a href="#">PLACEHOLDER</a></li>
-                        <li> <a href="#">PLACEHOLDER</a></li>
-                        <li> <a href="#">PLACEHOLDER</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <h2>REPORTS</h2>
-                    <ul>
-                        <li> <a href="#">SALES</a></li>
-                        <li> <a href="#">PRODUCT</a></li>
-                        <li> <a href="#">PLACEHOLDER</a></li>
-                        <li> <a href="#">PLACEHOLDER</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <h2>SYSTEM SETTINGS</h2>
-                    <ul>
-                        <li> <a href="#">SET BALANCE</a></li>
-                        <li> <a href="#">UPDATE SITE</a></li>
-                        <li> <a href="#">ADD POST</a></li>
-                        <li> <a href="#">CONTENT</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-    </header>
+    <?php include './admin-header.php'; ?>
 
     <!-- MAIN CONTENTS -->
     <main>
         <div class="main-wrapper">
             <div class="user">  
                 <div class="user-text">
-                    <p>Hi, $user</p>
-                    <a href="#">Logout</a>
+                    <p>Hi, <?php echo $_SESSION['username']?></p>
+                    <a href="../connect/logout.php">Logout</a>
                 </div>
                 <div class="user-image">
-                    <img src="../img/users/blank.png" alt="user profile">
+                    <img src='<?php
+                                    if($pic != null)
+                                        echo '../connect/'.$pic;
+                                    else
+                                        echo '../img/users/blank.png';
+                                    
+                              ?>' alt="Profile Pic">
                 </div>
             </div>
     
@@ -87,47 +61,49 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>PRODUCT ID</th>
+                                <th>PRODUCT IMAGE</th>
+                                <th>PRODUCT NAME</th>
                                 <th>BARCODE</th>
-                                <th>NAME</th>
+                                <th>PRODUCT CATEGORY</th>
+                                <th>PRODUCT PRICE</th>
                                 <th>QTY</th>
-                                <th>EXPIRY DATE</th>
                                 <th>SUPPLIER</th>
+                                <th>EXPIRY DATE</th>
                                 <th>ACTIONS</th>
                             </tr>
                         </thead>
                         <tbody>
-                           <tr>
-                               <td>42069</td>
-                               <td>BARCODE</td>
-                               <td>Arabica</td>
-                               <td>69</td>
-                               <td>January 23, 2022</td>
-                               <td>FloraTech</td>
-                               <td><a href="#" class="view-btn btn">View</a><a href="#" class="delete-btn btn">Delete</a></td>
-                           </tr>
-                           <tr>
-                               <td>42070</td>
-                               <td>BARCODE</td>
-                               <td>Robusca</td>
-                               <td>42</td>
-                               <td>January 13, 2022</td>
-                               <td>CoBeans Inc.</td>
-                               <td><a href="#" class="view-btn btn">View</a><a href="#" class="delete-btn btn">Delete</a></td>
-                           </tr>
+                            <?php foreach($products as $products){ ?>
+                                <tr>
+                                    <td>
+                                        <img src='<?php echo '../connect/'.$products['productImage']?>' class="inv-image">
+                                    </td>
+                                    <td><?php echo $products['productName'] ?></td>
+                                    <td><?php echo $generator -> getBarcode($products['productID'], Picqer\Barcode\BarcodeGeneratorSVG::TYPE_UPC_A); ?></td>
+                                    <td><?php echo $products['productCategory'] ?></td>
+                                    <td><?php echo $products['productPrice'] ?></td>
+                                    <td><?php echo $products['quantity'] ?></td>
+                                    <td><?php echo $products['supplierName'] ?></td>
+                                    <td><?php echo $products['expirationDate'] ?></td>
+                                    <td class="actions-col">
+                                        <a href="admin-dashboard-edit-prod.php?id=<?php echo $products['productID']?>" class="edit-btn btn">Edit</a>
+                                        <a href="../connect/deleteProduct.php?id=<?php echo $products['productID']?>" class="delete-btn btn">Delete</a>
+                                        <a href="../connect/saveBarcode.php?id=<?php echo $products['productID']?>&name=<?php echo $products['productName']; ?>" class="view-btn btn">Save Barcode</a>
+                                    </td>
+                                </tr>
+                            <?php }?>
+                            
                         </tbody>
                     </table>
                 </div>
 
-                <a href="#" class="view-btn btn add-prod">Add Product</a>
+                <a href="./admin-dashboard-add-prod.php" class="view-btn btn add-prod">Add Product</a>
             </div>
         </div>
     </main>
 
 
     <!-- FOOTER -->
-    <footer>
-        <p>&copy; 2022</p>
-    </footer>
+    <?php include "./footer.php"; ?>
 </body>
 </html>

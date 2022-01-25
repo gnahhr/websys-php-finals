@@ -1,3 +1,16 @@
+<?php
+    include '../connect/session.php';
+    $totalItems = 0;
+    $totalPrice = 0;
+    $initialArray = 0;
+
+    if(!isset($_SESSION['access'])){
+        Header("Location: ../pages/login.php");
+    } else if (isset($_SESSION['access']) && ($_SESSION['access'] != "user")){
+        Header("Location: ../pages/admin-dashboard.php");
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,60 +23,110 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poor+Story&family=Roboto:wght@300&family=Satisfy&display=swap" rel="stylesheet">
     
-    <title>Escafe - Login</title>
+    <title>Escafe - <?php echo $_SESSION['username']; ?>'s Cart</title>
 </head>
 <body>
 
     <!-- HEADER -->
-    <header>
-        <div class="logo-name">
-            <div class="logo-head"><img src="../img/index/logo.png" alt="logo"></div>
-            <div class="name-head"><p>escafé<p></div>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#">Login</a></li>
-                <li><a href="#">Register</a></li>
-            </ul>
-        </nav>
-    </header>
-
+    <?php include 'user-header.php' ?>
     
     <main>
         <h1> Shopping Cart </h1>
         <div class="shopping-cart">
+            <?php if (!isset($_SESSION['orders']) || (count($_SESSION['orders']) === 0)): ?>
+                <h2>There's nothing in cart!</h2>
+                <a href="./shop.php" class="btn view-btn cart-shop">Shop Now!</a>
+                </div>
+            <?php else: ?>
             <div class="table-rec-cart">
             <table>
                 <thead>
                     <tr>
+                        <th>Image</th>
                         <th>Product</th>
+                        <th>Unit Price</th>
                         <th>Quantity</th>
                         <th>Total Price</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1232131321</td>
-                        <td>asdasdad</td>
-                        <td>3zxc</td>
-                        <td>asdasd</td>
-                    </tr>
+                    <?php foreach ($_SESSION['orders'] as $order): ?>
+                        <?php if($order['bundledWith'] != 0): ?>
+                            <div class="bundled-item">
+                                <tr class="initial-item">
+                                    <td><img src="../connect/<?php echo $order['productImage'] ;?>" alt="prodPic"></td>
+                                    <td><?php echo $order['productName']; ?></td>
+                                    <td>
+                                        <?php if ($order['discount'] != 0): ?>
+                                            <?php echo "<span>Php. " . $order['productPrice'] . "</span></br> Php. " .($order['productPrice']-$order['productPrice']*($order['discount']/100). "</span>"); ?>
+                                        <?php else: ?>
+                                            <?php echo $order['productPrice']; ?>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td rowspan=2;><?php echo $order['quantity']; ?></td>
+                                    <td rowspan=2;><?php echo $order['totalPrice']; ?></td>
+                                    <td rowspan=2;><a href="../connect/deleteCartItem.php?deleteId=<?php echo $initialArray ?>" class="btn delete-btn">Delete</a></td>
+                                    <?php
+                                        $totalPrice += $order['totalPrice'];
+                                        $totalItems += $order['quantity'];
+                                    ?>
+                                </tr>
+                                <tr class="bundled-row">
+                                    <td><img src="../connect/<?php echo $order['bundledImage'] ;?>" alt="prodPic"></td>
+                                    <td><?php echo $order['bundledName']; ?></td>
+                                    <td>
+                                    <?php if ($order['discount'] != 0): ?>
+                                            <?php echo "<span>Php. " . $order['bundledPrice'] . "</span></br> Php. " .($order['bundledPrice']-$order['bundledPrice']*(.1) . "</span>"); ?>
+                                        <?php else: ?>
+                                            <?php echo $order['bundledPrice']; ?>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                            </div>
+                        <?php else: ?>
+                            <tr>
+                            <td><img src="../connect/<?php echo $order['productImage'] ;?>" alt="prodPic"></td>
+                                    <td><?php echo $order['productName']; ?></td>
+                                    <td>
+                                        <?php if ($order['discount'] != 0): ?>
+                                            <?php echo "<span>Php. " . $order['productPrice'] . "</span></br> Php. " .($order['productPrice']-$order['productPrice']*($order['discount']/100). "</span>"); ?>
+                                        <?php else: ?>
+                                            <?php echo "Php. " . $order['productPrice']; ?>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td><?php echo $order['quantity']; ?></td>
+                                    <td><?php echo $order['totalPrice']; ?></td>
+                                    <td><a href="../connect/deleteCartItem.php?deleteId=<?php echo $initialArray ?>" class="btn delete-btn">Delete</a></td>
+                                    <?php
+                                        $totalPrice += $order['totalPrice'];
+                                        $totalItems += $order['quantity'];
+                                    ?>
+                            </tr>
+                        <?php endif; ?>
+                        <?php $initialArray++; ?>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
+            
             </div>
+            
             
             <div class="cart-checkout-btn">
-                <p>Total Item & Price: <span>0 (0 Items)</span></p>
-                <button class="cart-btn"> Check out </button>
+                <!-- Tax is constant 12% -->
+                <p class="cart-p"><span>Tax:</span> Php. <?php echo $totalPrice *.12; ?><br>
+                <!-- Shipping fee is a constant 50 pesos -->
+                <p class="cart-p"><span>Shipping Fee:</span> Php. 50</p><br>
+                <div class="total-button">
+                    <p>Total Item & Price: Php. <span><?php echo $totalPrice + 50 . " (" . $totalItems . " Items)";?></span></p>
+                    <a href="../connect/checkout.php" class="cart-btn"> Check out </a>
+                </div>
             </div>
-            
+            <?php endif; ?>
         </div>
     </main>
 
     <!-- FOOTER -->
-    <footer>
-        <p>&copy; 2022</p>
-    </footer>
+    <?php include './footer.php'; ?>
 </body>
 </html>
