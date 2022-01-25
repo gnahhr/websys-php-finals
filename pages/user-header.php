@@ -1,6 +1,7 @@
 <!-- HEADER -->
 <?php
     include '../connect/config.php';
+    $profilePic = $_SESSION['profilePic'] ?? null;
 ?>
 <header>
     <!-- escafé -->
@@ -27,8 +28,8 @@
                 </div>
                 <div class="user-image">
                     <img src='<?php
-                                    if($pic != null)
-                                        echo '../connect/'.$pic;
+                                    if($profilePic != null)
+                                        echo '../connect/'.$profilePic;
                                     else
                                         echo '../img/users/blank.png';
                                     

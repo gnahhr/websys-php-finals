@@ -40,8 +40,8 @@
             <div class="user-img">
                 <div class="user-img-content">
                     <img src='<?php
-                                    if($pic != null)
-                                        echo '../connect/'.$pic;
+                                    if($profilePic != null)
+                                        echo '../connect/'.$profilePic;
                                     else
                                         echo '../img/users/blank.png';
                                     
