@@ -26,7 +26,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poor+Story&family=Roboto:wght@300&family=Satisfy&display=swap" rel="stylesheet">
     
-    <title>Escafe - Inventory Supplier</title>
+    <title>Escafe - Supplier Management</title>
 </head>
 <body>
 
@@ -91,8 +91,6 @@
 
 
     <!-- FOOTER -->
-    <footer>
-        <p>&copy; 2022</p>
-    </footer>
+    <?php include "./footer.php"; ?>
 </body>
 </html>
