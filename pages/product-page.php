@@ -31,7 +31,7 @@
     <main>
         <div class="product-main">
             <div class="product-image">
-            <img src=<?php echo '../connect/'.$product['productImage'] ?> alt="<?php echo $product['productName'] . 'picture '?>">
+            <img src='<?php echo '../connect/'.$product['productImage'] ?>' alt="<?php echo $product['productName'] . 'picture '?>">
             </div>
             <div class="product-text">
                 <div class="product-text-head">
