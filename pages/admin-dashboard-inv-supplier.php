@@ -74,7 +74,7 @@
                                     <td><?php echo $supplier['itemSupplied']; ?></td>
                                     <td><?php echo $supplier['location']; ?></td>
                                     <td><?php echo $supplier['contactNumber']; ?></td>
-                                    <td>
+                                    <td class="actions-col">
                                         <a href="./admin-dashboard-edit-supplier.php?supplierID=<?php echo $supplier['supplierID']; ?>" class="edit-btn btn">Edit</a>
                                         <a href="../connect/deleteSupplier.php?supplierID=<?php echo $supplier['supplierID']; ?>" class="delete-btn btn">Delete</a>
                                     </td>

@@ -78,7 +78,7 @@
                                     <td><?php echo $user['address'] ?></td>
                                     <td><?php echo $user['username'] ?></td>
                                     <td><?php echo $user['accessLevel'] ?></td>
-                                    <td>
+                                    <td class="actions-col">
                                         <a href="admin-dashboard-edit-user.php?id=<?php echo $user['id']?>" class="btn edit-btn">EDIT</a>
                                         <a href="../connect\admin-deleteUser.php?id=<?php echo $user['id']?>"class="btn delete-btn">DELETE</a>
                                     </td>

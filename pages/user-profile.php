@@ -45,7 +45,7 @@
                                     else
                                         echo '../img/users/blank.png';
                                     
-                              ?>" alt="Profile Pic">
+                              ?>' alt="Profile Pic">
                     <input type="file" name="userPic" id="userPic" class="btn change-btn"> <br>
                 </div>
             </div>

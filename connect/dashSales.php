@@ -2,7 +2,7 @@
     require_once '../connect/config.php';
 
     //Get data from salesHistory with Complete status
-    $statement = $pdo -> prepare("SELECT * FROM saleshistory WHERE status='Complete' ORDER BY dateBought DESC");
+    $statement = $pdo -> prepare("SELECT * FROM transactionlog WHERE status='Complete' ORDER BY dateBought DESC");
     $statement -> execute();
     $sales = $statement -> fetchAll();
 
@@ -17,7 +17,6 @@
         $curSale = new DateTime($sale['dateBought']);
         //Get the date today
         $curQuery = $curSale -> format('Y-m-d');
-
         //If the date today and the date of the query is the same
         //Add the total earnings for today
         if ($curQuery == date("Y-m-d")){ //Y = 2022 m = 04 d = 23

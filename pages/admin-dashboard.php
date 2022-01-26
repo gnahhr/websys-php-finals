@@ -43,7 +43,7 @@
                 <div class="user-image">
                     <img src='<?php
                                     if($pic != null)
-                                        echo '../connect/'.$pic;
+                                        echo '../connect/'.$profilePic;
                                     else
                                         echo '../img/users/blank.png';
                                     
@@ -59,21 +59,21 @@
                 <div class="main-sales">
                     <div class="sales-cont total-income">
                         <h3>Income Today</h3>
-                        <p><?php echo "Php.".$salesToday ;?></p>
+                        <p><?php echo "Php. ". $salesToday ;?></p>
                     </div>
                     <?php if ($_SESSION['access'] === "admin"): ?>
 
                     <div class="sales-cont total-expenses">
                         <h3>Income This Month</h3>
-                        <p><?php echo "Php.".$salesThisMonth ;?></p>
+                        <p><?php echo "Php. ".$salesThisMonth ;?></p>
                     </div>
                     <div class="sales-cont net-profit">
                         <h3>Income This Year</h3>
-                        <p><?php echo "Php.".$salesThisYear ;?></p>
+                        <p><?php echo "Php. ".$salesThisYear ;?></p>
                     </div>
                     <div class="sales-cont balance">
                         <h3>Balance</h3>
-                        <p><?php echo "Php.".$balance ;?></p>
+                        <p><?php echo "Php. ".$balance ;?></p>
                     </div>
                     <?php endif; ?>
                 </div>
